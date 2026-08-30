@@ -34,8 +34,8 @@ export default async function MembersPage({
         description="Every elected board member, executive member and committee member of the PPGIT Student Council."
       />
 
-      <form className="mt-8 flex flex-wrap items-center gap-3 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-3">
-        <div className="relative flex-1 min-w-[200px]">
+      <form className="mt-8 grid grid-cols-2 gap-3 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-3 sm:flex sm:flex-wrap sm:items-center">
+        <div className="relative col-span-2 sm:flex-1 sm:min-w-[200px]">
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
           <input
             type="text"
@@ -48,7 +48,7 @@ export default async function MembersPage({
         <select
           name="category"
           defaultValue={params.category ?? ""}
-          className="focus-ring h-10 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm"
+          className="focus-ring h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm sm:w-auto"
         >
           <option value="">All categories</option>
           <option value="board">Board</option>
@@ -58,14 +58,14 @@ export default async function MembersPage({
         <select
           name="department"
           defaultValue={params.department ?? ""}
-          className="focus-ring h-10 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm"
+          className="focus-ring h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm sm:w-auto"
         >
           <option value="">All departments</option>
           {departments.map((d) => (
             <option key={d} value={d}>{d}</option>
           ))}
         </select>
-        <button type="submit" className="focus-ring h-10 rounded-lg bg-brand-600 px-4 text-sm font-medium text-white hover:bg-brand-700">
+        <button type="submit" className="focus-ring col-span-2 h-10 rounded-lg bg-brand-600 px-4 text-sm font-medium text-white hover:bg-brand-700 sm:w-auto">
           Filter
         </button>
       </form>

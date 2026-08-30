@@ -63,9 +63,9 @@ export default async function HomePage() {
             </MotionDiv>
 
             <MotionDiv delay={0.2}>
-              <h1 className="max-w-4xl font-serif text-[clamp(2.75rem,6.5vw,5.25rem)] font-normal leading-[1.06] tracking-tight">
+              <h1 className="max-w-4xl font-serif text-[clamp(2rem,7.5vw,5.25rem)] font-normal leading-[1.08] tracking-tight break-words">
                 PPG Institute of Technology <br />
-                <span className="gold-gradient-text font-serif italic animate-float">Student Council</span>
+                <span className="gold-gradient-text font-serif italic">Student Council</span>
               </h1>
             </MotionDiv>
 
@@ -84,7 +84,7 @@ export default async function HomePage() {
 
             {/* Stats Bar */}
             <MotionDiv delay={0.65} className="mt-20 w-full max-w-4xl">
-              <div className="grid grid-cols-3 gap-4 rounded-3xl border border-amber-500/25 bg-[#121420]/80 backdrop-blur-2xl p-8 shadow-[0_20px_50px_rgba(0,0,0,0.65)]">
+              <div className="grid grid-cols-1 gap-3 rounded-3xl border border-amber-500/25 bg-[#121420]/80 backdrop-blur-2xl p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.65)] min-[400px]:grid-cols-3">
                 <AnimatedStatCard value={`${memberCount}+`} label="Elected Members" delay={0.7} />
                 <AnimatedStatCard value={teamCount} label="Active Committees" delay={0.8} />
                 <AnimatedStatCard value="10" label="Departments" delay={0.9} />

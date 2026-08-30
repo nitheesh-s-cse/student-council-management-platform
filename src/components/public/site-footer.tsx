@@ -14,21 +14,23 @@ export function SiteFooter() {
           </p>
           <p className="mt-4 text-xs text-muted/70">{INSTITUTE_ADDRESS}</p>
         </div>
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-400">Navigation</p>
-          <ul className="mt-4 space-y-2.5 text-sm">
-            <li><Link className="text-muted hover:text-amber-300 transition-colors" href="/about">About Us</Link></li>
-            <li><Link className="text-muted hover:text-amber-300 transition-colors" href="/members">Member Directory</Link></li>
-            <li><Link className="text-muted hover:text-amber-300 transition-colors" href="/events">Council Events</Link></li>
-            <li><Link className="text-muted hover:text-amber-300 transition-colors" href="/announcements">Announcements</Link></li>
-          </ul>
-        </div>
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-400">Council Access</p>
-          <ul className="mt-4 space-y-2.5 text-sm">
-            <li><Link className="text-muted hover:text-amber-300 transition-colors" href="/login">Member Login</Link></li>
-            <li><Link className="text-muted hover:text-amber-300 transition-colors" href="/forgot-password">Reset Password</Link></li>
-          </ul>
+        <div className="grid grid-cols-2 gap-8 sm:max-w-md sm:grid-cols-2 md:col-span-2 md:grid-cols-2">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-400">Navigation</p>
+            <ul className="mt-4 space-y-2.5 text-sm">
+              <li><Link className="text-muted hover:text-amber-300 transition-colors" href="/about">About Us</Link></li>
+              <li><Link className="text-muted hover:text-amber-300 transition-colors" href="/members">Member Directory</Link></li>
+              <li><Link className="text-muted hover:text-amber-300 transition-colors" href="/events">Council Events</Link></li>
+              <li><Link className="text-muted hover:text-amber-300 transition-colors" href="/announcements">Announcements</Link></li>
+            </ul>
+          </div>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-400">Council Access</p>
+            <ul className="mt-4 space-y-2.5 text-sm">
+              <li><Link className="text-muted hover:text-amber-300 transition-colors" href="/login">Member Login</Link></li>
+              <li><Link className="text-muted hover:text-amber-300 transition-colors" href="/forgot-password">Reset Password</Link></li>
+            </ul>
+          </div>
         </div>
       </div>
       <div className="border-t border-amber-500/10 py-6 text-center text-xs text-muted/60">

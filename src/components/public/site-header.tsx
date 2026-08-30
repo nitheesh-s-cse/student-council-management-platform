@@ -22,9 +22,9 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-amber-500/10 bg-[#0d0e14]/85 backdrop-blur-xl transition-all">
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="focus-ring rounded-xl p-1">
-          <CouncilWordmark />
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-2 px-3 sm:px-6 lg:px-8">
+        <Link href="/" className="focus-ring min-w-0 rounded-xl p-1">
+          <CouncilWordmark className="min-w-0" />
         </Link>
 
         <nav className="hidden items-center gap-1.5 rounded-full border border-amber-500/15 bg-[#141622]/60 p-1.5 backdrop-blur-md md:flex shadow-inner">
