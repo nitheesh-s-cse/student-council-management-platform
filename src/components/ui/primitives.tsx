@@ -78,19 +78,20 @@ export function LinkButton({
 }
 
 export function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("gold-glass-card", className)} {...props} />;
+  return <div className={cn("gold-glass-card premium-border", className)} {...props} />;
 }
 
 export function Badge({
   className,
   tone = "neutral",
+  children,
   ...props
 }: HTMLAttributes<HTMLSpanElement> & {
   tone?: "neutral" | "brand" | "success" | "warning" | "danger" | "info";
 }) {
   const tones: Record<string, string> = {
     neutral: "bg-zinc-900/80 text-zinc-300 border-zinc-700/50",
-    brand: "bg-amber-500/15 text-amber-300 border-amber-500/30 shadow-[0_0_10px_rgba(212,175,55,0.15)]",
+    brand: "bg-amber-500/15 text-amber-300 border-amber-500/30 shadow-[0_0_12px_rgba(212,175,55,0.2)]",
     success: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
     warning: "bg-amber-500/15 text-amber-300 border-amber-500/30",
     danger: "bg-rose-500/15 text-rose-300 border-rose-500/30",
@@ -99,12 +100,15 @@ export function Badge({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1 rounded-full border px-3 py-1 text-[11px] font-semibold tracking-wider uppercase backdrop-blur",
+        "inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-semibold tracking-wider uppercase backdrop-blur",
         tones[tone],
         className,
       )}
       {...props}
-    />
+    >
+      {(tone === "brand" || tone === "success") && <span className="badge-dot" aria-hidden="true" />}
+      {children}
+    </span>
   );
 }
 
@@ -126,22 +130,22 @@ export function Avatar({
         src={src}
         alt={name}
         style={{ width: size, height: size }}
-        className={cn("rounded-full object-cover border border-amber-500/30 shadow-[0_0_12px_rgba(212,175,55,0.15)]", className)}
+        className={cn("rounded-full object-cover border border-amber-500/30 ring-1 ring-amber-500/25 shadow-[0_0_14px_rgba(212,175,55,0.18)]", className)}
       />
     );
   }
   const palette = [
-    "bg-gradient-to-br from-amber-600 to-amber-900",
-    "bg-gradient-to-br from-yellow-600 to-amber-950",
-    "bg-gradient-to-br from-zinc-700 to-zinc-900",
-    "bg-gradient-to-br from-amber-700 to-yellow-900",
+    "bg-gradient-to-br from-amber-500 via-amber-700 to-amber-950",
+    "bg-gradient-to-br from-yellow-500 via-amber-800 to-amber-950",
+    "bg-gradient-to-br from-zinc-500 via-zinc-700 to-zinc-950",
+    "bg-gradient-to-br from-amber-600 via-yellow-800 to-amber-950",
   ];
   const idx = name.charCodeAt(0) % palette.length;
   return (
     <div
       style={{ width: size, height: size, fontSize: size * 0.36 }}
       className={cn(
-        "flex shrink-0 items-center justify-center rounded-full font-serif font-bold text-amber-100 border border-amber-500/30 shadow-[0_0_12px_rgba(212,175,55,0.15)]",
+        "flex shrink-0 items-center justify-center rounded-full font-serif font-bold text-amber-100 border border-amber-500/30 ring-1 ring-amber-500/25 shadow-[0_0_14px_rgba(212,175,55,0.18)]",
         palette[idx],
         className,
       )}
@@ -165,9 +169,12 @@ export function SectionHeading({
   return (
     <div className={cn("max-w-2xl", className)}>
       {eyebrow && (
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-400">{eyebrow}</p>
+        <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-amber-400">
+          <span className="h-px w-10 bg-gradient-to-r from-amber-500/90 to-transparent" />
+          {eyebrow}
+        </p>
       )}
-      <h2 className="mt-2.5 font-serif gold-gradient-text text-[clamp(1.75rem,3.5vw,2.5rem)] font-normal tracking-tight leading-snug">
+      <h2 className="mt-3 font-serif gold-gradient-text text-[clamp(1.75rem,3.5vw,2.5rem)] font-normal tracking-tight leading-snug">
         {title}
       </h2>
       {description && <p className="mt-3.5 text-[15px] leading-relaxed text-muted">{description}</p>}

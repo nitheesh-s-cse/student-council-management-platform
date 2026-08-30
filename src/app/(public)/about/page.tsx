@@ -7,6 +7,7 @@ import { Card, SectionHeading, Avatar } from "@/components/ui/primitives";
 import Link from "next/link";
 import { ACADEMIC_YEAR } from "@/lib/constants";
 import { CampusBackground } from "@/components/public/campus-background";
+import { PremiumAmbience } from "@/components/public/premium-ambience";
 
 export const dynamic = "force-dynamic";
 
@@ -40,6 +41,8 @@ export default async function AboutPage() {
     <div className="relative overflow-hidden">
       {/* Campus background — fades out on scroll */}
       <CampusBackground />
+      {/* Ultra premium ambience — aurora orbs, particles, grain */}
+      <PremiumAmbience />
 
       <section className="relative overflow-hidden border-b border-[var(--border)]">
         <div className="absolute inset-0 -z-10">

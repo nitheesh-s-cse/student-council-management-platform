@@ -37,6 +37,10 @@ html {
 
 body {
   background-color: #08090d;
+  background-image:
+    radial-gradient(1100px 750px at 85% -10%, rgba(212, 175, 55, 0.07), transparent 60%),
+    radial-gradient(900px 650px at -10% 25%, rgba(255, 255, 255, 0.03), transparent 55%),
+    radial-gradient(800px 800px at 50% 115%, rgba(212, 175, 55, 0.05), transparent 60%);
   color: var(--text);
   font-family: var(--font-sans);
   min-height: 100vh;
@@ -78,10 +82,14 @@ body {
 }
 
 .gold-gradient-text {
-  background: linear-gradient(135deg, #fff5d6 0%, #e5c158 40%, #c4962c 100%);
+  background: linear-gradient(120deg, #fef3c7 0%, #e5c158 22%, #fff5d6 38%, #c4962c 58%, #e5c158 78%, #fef3c7 100%);
+  background-size: 220% auto;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
+  color: transparent;
   display: inline-block;
+  animation: text-shine 7s linear infinite;
 }
 
 .gold-gradient-btn {
@@ -91,6 +99,18 @@ body {
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(212, 175, 55, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.6);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.gold-gradient-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(115deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: skewX(-18deg);
+  animation: gold-sheen 3.8s ease-in-out infinite;
+  opacity: 0.7;
 }
 .gold-gradient-btn::after {
   content: '';
@@ -179,4 +199,343 @@ body {
   transform: translateX(-100%);
   background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.15), transparent);
   animation: shimmer 1.6s infinite;
+}
+
+/* ================================================================
+   ULTRA PREMIUM DESIGN SYSTEM
+   ================================================================ */
+
+/* Focus ring */
+.focus-ring:focus-visible {
+  outline: 2px solid rgba(212, 175, 55, 0.55);
+  outline-offset: 2px;
+  border-radius: inherit;
+}
+
+/* Custom scrollbar + selection */
+html {
+  scrollbar-color: rgba(212, 175, 55, 0.35) #0a0b10;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0b10;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #4a3a12, #8a6517, #4a3a12);
+  border-radius: 999px;
+  border: 2px solid #0a0b10;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #6b5517, #b08324, #6b5517);
+}
+::selection {
+  background: rgba(212, 175, 55, 0.3);
+  color: #fff;
+}
+
+/* Keyframes: shimmering gold + floating + pulsing glow */
+@keyframes text-shine {
+  to {
+    background-position: -220% center;
+  }
+}
+@keyframes gold-sheen {
+  0% {
+    transform: skewX(-18deg) translateX(0);
+  }
+  55% {
+    transform: skewX(-18deg) translateX(280%);
+  }
+  100% {
+    transform: skewX(-18deg) translateX(280%);
+  }
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+.animate-float {
+  animation: float 7s ease-in-out infinite;
+}
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.animate-pulse-glow {
+  animation: pulse-glow 6s ease-in-out infinite;
+}
+
+/* Badge status dot */
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #e5c158;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.85);
+  animation: badge-ping 2s ease-in-out infinite;
+}
+@keyframes badge-ping {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.6);
+    opacity: 0.55;
+  }
+}
+
+/* Gold hairline divider */
+.gold-rule {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.55), transparent);
+}
+
+/* Animated conic-gradient border ring (spins on hover) */
+@property --prem-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+@keyframes prem-rotate {
+  to {
+    --prem-angle: 360deg;
+  }
+}
+.premium-border {
+  position: relative;
+}
+.premium-border::before {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--prem-angle, 0deg),
+    rgba(212, 175, 55, 0) 0%,
+    rgba(212, 175, 55, 0.55) 18%,
+    rgba(255, 255, 255, 0.9) 28%,
+    rgba(212, 175, 55, 0.55) 38%,
+    rgba(212, 175, 55, 0) 60%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: prem-rotate 5s linear infinite;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+.premium-border:hover::before,
+.premium-border.premium-border-live::before {
+  opacity: 1;
+}
+
+/* Card hover spotlight (center glow) */
+.gold-glass-card {
+  position: relative;
+}
+.gold-glass-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    560px circle at 50% 0%,
+    rgba(212, 175, 55, 0.13),
+    rgba(212, 175, 55, 0.04) 45%,
+    transparent 68%
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+.gold-glass-card:hover::before {
+  opacity: 1;
+}
+.gold-glass-card > * {
+  position: relative;
+  z-index: 1;
+}
+/* Keep genuinely positioned decorations (orbs, glows) in place */
+.gold-glass-card > .absolute {
+  position: absolute;
+}
+.gold-glass-card > .fixed {
+  position: fixed;
+}
+
+/* Top glass hairline highlight */
+.gold-glass-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  z-index: 2;
+  background: linear-gradient(90deg, transparent, rgba(245, 215, 127, 0.8), transparent);
+  opacity: 0.6;
+  transition: opacity 0.4s ease, left 0.4s ease, right 0.4s ease;
+}
+.gold-glass-card:hover::after {
+  opacity: 1;
+  left: 3%;
+  right: 3%;
+}
+
+/* Premium glass panel */
+.glass-premium {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
+  backdrop-filter: blur(22px) saturate(1.4);
+  -webkit-backdrop-filter: blur(22px) saturate(1.4);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+}
+
+/* Aurora ambient orbs */
+.aurora-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  will-change: transform;
+  pointer-events: none;
+}
+@keyframes aurora-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(60px, -45px) scale(1.15);
+  }
+  66% {
+    transform: translate(-45px, 35px) scale(0.92);
+  }
+}
+@keyframes aurora-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  40% {
+    transform: translate(-55px, 40px) scale(1.12);
+  }
+  70% {
+    transform: translate(30px, -25px) scale(0.9);
+  }
+}
+@keyframes aurora-c {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(0.95);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate(20px, -30px) scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* Rising gold particles */
+@keyframes rise {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.9;
+  }
+  92% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-105vh) translateX(18px) rotate(180deg);
+    opacity: 0;
+  }
+}
+.particle {
+  position: absolute;
+  bottom: -3vh;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(245, 215, 127, 0.95), rgba(212, 175, 55, 0.4) 55%, transparent);
+  animation: rise linear infinite;
+  pointer-events: none;
+}
+
+/* Marquee */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+/* Filmic grain overlay */
+.premium-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+}
+
+/* 3D tilt glare */
+.tilt-card {
+  transform-style: preserve-3d;
+}
+.tilt-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 5;
+}
+.tilt-card:hover .tilt-glare {
+  opacity: 1;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

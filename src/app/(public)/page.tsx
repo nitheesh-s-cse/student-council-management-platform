@@ -4,12 +4,23 @@ import { db } from "@/db";
 import { members, teams, announcements, events } from "@/db/schema";
 import { and, desc, eq, gte } from "drizzle-orm";
 import { LinkButton, Card, Badge, SectionHeading, Avatar } from "@/components/ui/primitives";
-import { MotionDiv, StaggerGrid, StaggerItem, AnimatedStatCard } from "@/components/ui/animated-container";
+import { MotionDiv, StaggerGrid, StaggerItem, AnimatedStatCard, TiltCard } from "@/components/ui/animated-container";
 import { ACADEMIC_YEAR } from "@/lib/constants";
 import { formatDate } from "@/lib/utils";
 import { CampusBackground } from "@/components/public/campus-background";
+import { PremiumAmbience } from "@/components/public/premium-ambience";
 
 export const dynamic = "force-dynamic";
+
+const TICKER = [
+  "Integrated Governance",
+  "Committee Operations",
+  "Real-Time Chat",
+  "Task Execution",
+  "Campus Events",
+  "Polling & Voting",
+  "Executive Leadership",
+];
 
 export default async function HomePage() {
   const [memberCount, teamCount, board, latestAnnouncements, upcomingEvents] = await Promise.all([
@@ -34,6 +45,8 @@ export default async function HomePage() {
     <div className="relative overflow-hidden">
       {/* Campus background — fades out on scroll */}
       <CampusBackground />
+      {/* Ultra premium ambience — aurora orbs, particles, grain */}
+      <PremiumAmbience />
       {/* Animated Glowing Halos */}
       <div className="pointer-events-none absolute -top-40 left-1/2 -z-10 h-[650px] w-[950px] -translate-x-1/2 rounded-full bg-amber-500/5 blur-[160px] animate-pulse-glow" />
       <div className="pointer-events-none absolute top-[45%] right-[-10%] -z-10 h-[550px] w-[550px] rounded-full bg-yellow-600/3 blur-[150px] animate-pulse-glow" />
@@ -81,6 +94,23 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Premium marquee ticker */}
+      <section className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="marquee-mask overflow-hidden rounded-full border border-amber-500/15 bg-[#0d0e14]/60 py-3.5 backdrop-blur-xl shadow-[0_0_30px_rgba(212,175,55,0.08)]">
+          <div className="marquee-track">
+            {[...TICKER, ...TICKER].map((k, i) => (
+              <span
+                key={i}
+                className="mx-6 inline-flex items-center gap-4 text-[11px] font-semibold uppercase tracking-[0.32em] text-amber-200/60"
+              >
+                {k}
+                <span aria-hidden="true" className="text-amber-500/70">✦</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Platform Features Grid */}
       <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
         <MotionDiv>
@@ -101,14 +131,16 @@ export default async function HomePage() {
             { icon: Vote, title: "Polling & Voting Engine", desc: "Execute single-choice, multiple-choice, or anonymous voting for official council resolutions." },
             { icon: ShieldCheck, title: "Enterprise Grade Security", desc: "Multi-level authorization, audit logging and secure record keeping for council operations." },
           ].map((f) => (
-            <StaggerItem key={f.title}>
-              <Card className="h-full p-8 transition-all duration-300 border-amber-500/15">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-300 border border-amber-500/25 shadow-[0_0_20px_rgba(212,175,55,0.15)]">
-                  <f.icon className="h-6 w-6" />
-                </div>
-                <p className="mt-6 font-serif text-xl text-amber-100">{f.title}</p>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{f.desc}</p>
-              </Card>
+            <StaggerItem key={f.title} className="h-full">
+              <TiltCard className="h-full rounded-3xl">
+                <Card className="h-full p-8 transition-all duration-300 border-amber-500/15">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-300 border border-amber-500/25 shadow-[0_0_20px_rgba(212,175,55,0.15)]">
+                    <f.icon className="h-6 w-6" />
+                  </div>
+                  <p className="mt-6 font-serif text-xl text-amber-100">{f.title}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{f.desc}</p>
+                </Card>
+              </TiltCard>
             </StaggerItem>
           ))}
         </StaggerGrid>
@@ -125,17 +157,19 @@ export default async function HomePage() {
 
           <StaggerGrid className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {board.map((m) => (
-              <StaggerItem key={m.id}>
-                <Link href={`/members/${m.slug}`}>
-                  <Card className="flex items-center gap-5 p-6 border-amber-500/15 transition-all">
-                    <Avatar name={m.fullName} src={m.photoUrl} size={62} />
-                    <div className="min-w-0">
-                      <p className="truncate font-serif text-lg text-amber-100 group-hover:text-amber-300 transition-colors">{m.fullName}</p>
-                      <p className="text-xs font-semibold uppercase tracking-wider gold-gradient-text mt-0.5">{m.position}</p>
-                      <p className="mt-1 text-xs text-muted">{m.department} · Year {m.year}</p>
-                    </div>
-                  </Card>
-                </Link>
+              <StaggerItem key={m.id} className="h-full">
+                <TiltCard className="h-full rounded-3xl">
+                  <Link href={`/members/${m.slug}`} className="block h-full">
+                    <Card className="flex h-full items-center gap-5 p-6 border-amber-500/15 transition-all">
+                      <Avatar name={m.fullName} src={m.photoUrl} size={62} />
+                      <div className="min-w-0">
+                        <p className="truncate font-serif text-lg text-amber-100 group-hover:text-amber-300 transition-colors">{m.fullName}</p>
+                        <p className="text-xs font-semibold uppercase tracking-wider gold-gradient-text mt-0.5">{m.position}</p>
+                        <p className="mt-1 text-xs text-muted">{m.department} · Year {m.year}</p>
+                      </div>
+                    </Card>
+                  </Link>
+                </TiltCard>
               </StaggerItem>
             ))}
           </StaggerGrid>
