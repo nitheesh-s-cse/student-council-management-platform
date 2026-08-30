@@ -6,6 +6,7 @@ import { eq } from "drizzle-orm";
 import { Card, SectionHeading, Avatar } from "@/components/ui/primitives";
 import Link from "next/link";
 import { ACADEMIC_YEAR } from "@/lib/constants";
+import { CampusBackground } from "@/components/public/campus-background";
 
 export const dynamic = "force-dynamic";
 
@@ -36,7 +37,10 @@ export default async function AboutPage() {
   const board = await db.select().from(members).where(eq(members.category, "board")).orderBy(members.id);
 
   return (
-    <div>
+    <div className="relative overflow-hidden">
+      {/* Campus background — fades out on scroll */}
+      <CampusBackground />
+
       <section className="relative overflow-hidden border-b border-[var(--border)]">
         <div className="absolute inset-0 -z-10">
           <Image src="/images/about-pattern.jpg" alt="" fill className="object-cover opacity-[0.12] dark:opacity-[0.2]" />
