@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { randomBytes, createHash } from "crypto";
-import { eq } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 import { db } from "@/db";
 import { users, passwordResetTokens } from "@/db/schema";
 import { rateLimit } from "@/lib/rate-limit";
@@ -22,7 +22,12 @@ export async function POST(request: Request) {
     }
 
     const { email } = schema.parse(await request.json());
-    const [user] = await db.select().from(users).where(eq(users.email, email.toLowerCase())).limit(1);
+    // Case-insensitive lookup — safe even if a mixed-case email exists.
+    const [user] = await db
+      .select()
+      .from(users)
+      .where(sql`lower(${users.email}) = ${email.toLowerCase().trim()}`)
+      .limit(1);
 
     if (user) {
       const token = randomBytes(32).toString("hex");

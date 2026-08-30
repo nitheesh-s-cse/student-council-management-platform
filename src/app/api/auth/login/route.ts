@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { db } from "@/db";
 import { users } from "@/db/schema";
 import { createSession, verifyPassword, getClientIp } from "@/lib/auth";
@@ -24,7 +24,13 @@ export async function POST(request: Request) {
     const body = schema.parse(await request.json());
     const email = body.email.toLowerCase().trim();
 
-    const [user] = await db.select().from(users).where(eq(users.email, email)).limit(1);
+    // Case-insensitive lookup — the DB is normalized to lowercase, but this
+    // stays safe even if a mixed-case email ever sneaks in again.
+    const [user] = await db
+      .select()
+      .from(users)
+      .where(sql`lower(${users.email}) = ${email}`)
+      .limit(1);
 
     if (!user) {
       return NextResponse.json({ error: "Invalid email or password." }, { status: 401 });
