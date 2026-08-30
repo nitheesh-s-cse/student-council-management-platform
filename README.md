@@ -34,8 +34,19 @@ An operating system and management platform for the PPG Institute of Technology 
 3. **Set up Environment Variables:**
    Create a `.env` file in the root directory:
    ```env
-   DATABASE_URL="your-postgresql-connection-string"
+   # PostgreSQL connection string — use the Supabase *connection pooling*
+   # URL (Transaction mode) so the app works on serverless hosts (IPv4).
+   DATABASE_URL="postgresql://postgres.<project-ref>:<password>@aws-0-<region>.pooler.supabase.com:6543/postgres"
+
+   # Supabase object storage — used for PDF/document uploads.
+   # Dashboard → Project Settings → API.
+   SUPABASE_URL="https://<project-ref>.supabase.co"
+   SUPABASE_SERVICE_ROLE_KEY="<your-service-role-key>"
    ```
+   > ⚠️ `SUPABASE_SERVICE_ROLE_KEY` bypasses Row Level Security. Never expose it
+   > in client-side code or commit it; only the server reads it (`.env` is
+   > git-ignored). Set the same variables in your hosting provider (Vercel →
+   > Settings → Environment Variables).
 
 4. **Seed Database:**
    ```bash
