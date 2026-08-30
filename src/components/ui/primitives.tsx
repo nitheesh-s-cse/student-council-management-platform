@@ -13,22 +13,22 @@ export function Button({
   size?: "sm" | "md" | "lg" | "icon";
 }) {
   const variants: Record<string, string> = {
-    primary: "bg-brand-600 text-white hover:bg-brand-700 active:bg-brand-800 shadow-sm",
-    secondary: "bg-[var(--surface-muted)] text-[var(--text)] hover:brightness-95 border border-[var(--border)]",
-    outline: "border border-[var(--border)] text-[var(--text)] hover:bg-[var(--surface-muted)]",
-    ghost: "text-[var(--text)] hover:bg-[var(--surface-muted)]",
-    danger: "bg-rose-600 text-white hover:bg-rose-700",
+    primary: "gold-gradient-btn font-semibold tracking-wide border border-amber-300/30 shadow-lg shadow-amber-950/40",
+    secondary: "bg-[#161824]/90 text-amber-100/90 hover:text-amber-100 hover:bg-[#1d2030] border border-amber-500/20 backdrop-blur",
+    outline: "border border-amber-500/30 text-amber-100/90 hover:text-white hover:bg-amber-500/10 hover:border-amber-500/60 backdrop-blur",
+    ghost: "text-amber-200/80 hover:text-amber-200 hover:bg-amber-500/10",
+    danger: "bg-rose-900/40 text-rose-200 border border-rose-700/40 hover:bg-rose-800/60",
   };
   const sizes: Record<string, string> = {
-    sm: "h-8 px-3 text-xs gap-1.5",
-    md: "h-10 px-4 text-sm gap-2",
-    lg: "h-12 px-6 text-[15px] gap-2",
-    icon: "h-9 w-9 justify-center",
+    sm: "h-9 px-3.5 text-xs gap-1.5 rounded-xl",
+    md: "h-11 px-5 text-sm gap-2 rounded-xl",
+    lg: "h-13 px-7 text-[15px] gap-2.5 rounded-2xl",
+    icon: "h-10 w-10 justify-center rounded-xl",
   };
   return (
     <button
       className={cn(
-        "focus-ring inline-flex items-center justify-center rounded-lg font-medium transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-50",
+        "focus-ring inline-flex items-center justify-center font-medium transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50",
         variants[variant],
         sizes[size],
         className,
@@ -52,21 +52,21 @@ export function LinkButton({
   children: ReactNode;
 }) {
   const variants: Record<string, string> = {
-    primary: "bg-brand-600 text-white hover:bg-brand-700 shadow-sm",
-    secondary: "bg-[var(--surface-muted)] text-[var(--text)] hover:brightness-95 border border-[var(--border)]",
-    outline: "border border-[var(--border)] text-[var(--text)] hover:bg-[var(--surface-muted)]",
-    ghost: "text-[var(--text)] hover:bg-[var(--surface-muted)]",
+    primary: "gold-gradient-btn font-semibold tracking-wide border border-amber-300/30 shadow-lg shadow-amber-950/40",
+    secondary: "bg-[#161824]/90 text-amber-100/90 hover:text-amber-100 hover:bg-[#1d2030] border border-amber-500/20 backdrop-blur",
+    outline: "border border-amber-500/30 text-amber-100/90 hover:text-white hover:bg-amber-500/10 hover:border-amber-500/60 backdrop-blur",
+    ghost: "text-amber-200/80 hover:text-amber-200 hover:bg-amber-500/10",
   };
   const sizes: Record<string, string> = {
-    sm: "h-8 px-3 text-xs gap-1.5",
-    md: "h-10 px-4 text-sm gap-2",
-    lg: "h-12 px-6 text-[15px] gap-2",
+    sm: "h-9 px-3.5 text-xs gap-1.5 rounded-xl",
+    md: "h-11 px-5 text-sm gap-2 rounded-xl",
+    lg: "h-13 px-7 text-[15px] gap-2.5 rounded-2xl",
   };
   return (
     <Link
       href={href}
       className={cn(
-        "focus-ring inline-flex items-center justify-center rounded-lg font-medium transition-colors duration-150",
+        "focus-ring inline-flex items-center justify-center font-medium transition-all duration-200",
         variants[variant],
         sizes[size],
         className,
@@ -78,7 +78,7 @@ export function LinkButton({
 }
 
 export function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("surface rounded-2xl shadow-[var(--shadow-card)]", className)} {...props} />;
+  return <div className={cn("gold-glass-card", className)} {...props} />;
 }
 
 export function Badge({
@@ -89,17 +89,17 @@ export function Badge({
   tone?: "neutral" | "brand" | "success" | "warning" | "danger" | "info";
 }) {
   const tones: Record<string, string> = {
-    neutral: "bg-[var(--surface-muted)] text-[var(--text)] border-[var(--border)]",
-    brand: "bg-brand-50 text-brand-700 border-brand-200 dark:bg-brand-900/30 dark:text-brand-200 dark:border-brand-800",
-    success: "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/20 dark:text-emerald-300 dark:border-emerald-800",
-    warning: "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-900/20 dark:text-amber-300 dark:border-amber-800",
-    danger: "bg-rose-50 text-rose-700 border-rose-200 dark:bg-rose-900/20 dark:text-rose-300 dark:border-rose-800",
-    info: "bg-sky-50 text-sky-700 border-sky-200 dark:bg-sky-900/20 dark:text-sky-300 dark:border-sky-800",
+    neutral: "bg-zinc-900/80 text-zinc-300 border-zinc-700/50",
+    brand: "bg-amber-500/15 text-amber-300 border-amber-500/30 shadow-[0_0_10px_rgba(212,175,55,0.15)]",
+    success: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
+    warning: "bg-amber-500/15 text-amber-300 border-amber-500/30",
+    danger: "bg-rose-500/15 text-rose-300 border-rose-500/30",
+    info: "bg-sky-500/15 text-sky-300 border-sky-500/30",
   };
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-[11px] font-semibold",
+        "inline-flex items-center gap-1 rounded-full border px-3 py-1 text-[11px] font-semibold tracking-wider uppercase backdrop-blur",
         tones[tone],
         className,
       )}
@@ -126,17 +126,22 @@ export function Avatar({
         src={src}
         alt={name}
         style={{ width: size, height: size }}
-        className={cn("rounded-full object-cover border border-[var(--border)]", className)}
+        className={cn("rounded-full object-cover border border-amber-500/30 shadow-[0_0_12px_rgba(212,175,55,0.15)]", className)}
       />
     );
   }
-  const palette = ["bg-brand-500", "bg-ink-600", "bg-gold-500", "bg-emerald-600", "bg-sky-600"];
+  const palette = [
+    "bg-gradient-to-br from-amber-600 to-amber-900",
+    "bg-gradient-to-br from-yellow-600 to-amber-950",
+    "bg-gradient-to-br from-zinc-700 to-zinc-900",
+    "bg-gradient-to-br from-amber-700 to-yellow-900",
+  ];
   const idx = name.charCodeAt(0) % palette.length;
   return (
     <div
       style={{ width: size, height: size, fontSize: size * 0.36 }}
       className={cn(
-        "flex shrink-0 items-center justify-center rounded-full font-semibold text-white",
+        "flex shrink-0 items-center justify-center rounded-full font-serif font-bold text-amber-100 border border-amber-500/30 shadow-[0_0_12px_rgba(212,175,55,0.15)]",
         palette[idx],
         className,
       )}
@@ -160,12 +165,12 @@ export function SectionHeading({
   return (
     <div className={cn("max-w-2xl", className)}>
       {eyebrow && (
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-600">{eyebrow}</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-400">{eyebrow}</p>
       )}
-      <h2 className="mt-2 text-[clamp(1.5rem,3vw,2.25rem)] font-semibold tracking-tight text-[var(--text)]">
+      <h2 className="mt-2.5 font-serif gold-gradient-text text-[clamp(1.75rem,3.5vw,2.5rem)] font-normal tracking-tight leading-snug">
         {title}
       </h2>
-      {description && <p className="mt-3 text-[15px] leading-relaxed text-muted">{description}</p>}
+      {description && <p className="mt-3.5 text-[15px] leading-relaxed text-muted">{description}</p>}
     </div>
   );
 }
@@ -182,15 +187,15 @@ export function EmptyState({
   action?: ReactNode;
 }) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-[var(--border)] px-6 py-14 text-center">
-      {icon && <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[var(--surface-muted)] text-muted">{icon}</div>}
-      <p className="text-sm font-semibold text-[var(--text)]">{title}</p>
-      {description && <p className="mt-1.5 max-w-sm text-sm text-muted">{description}</p>}
-      {action && <div className="mt-5">{action}</div>}
+    <div className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-amber-500/20 bg-[#141622]/40 backdrop-blur-xl px-6 py-16 text-center">
+      {icon && <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-300 border border-amber-500/20 shadow-[0_0_20px_rgba(212,175,55,0.1)]">{icon}</div>}
+      <p className="text-base font-serif text-amber-100">{title}</p>
+      {description && <p className="mt-2 max-w-sm text-sm text-muted">{description}</p>}
+      {action && <div className="mt-6">{action}</div>}
     </div>
   );
 }
 
 export function Skeleton({ className }: { className?: string }) {
-  return <div className={cn("skeleton rounded-lg", className)} />;
+  return <div className={cn("skeleton rounded-xl", className)} />;
 }

@@ -1,68 +1,56 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-serif: "Playfair Display", "Cinzel", Georgia, serif;
+  --font-display: "Playfair Display", "Cinzel", Georgia, serif;
 
-  --color-ink-950: #0b0f1a;
-  --color-ink-900: #10131f;
-  --color-ink-800: #171b2b;
-  --color-ink-700: #232839;
-  --color-ink-600: #333a52;
-  --color-ink-500: #4b5370;
-  --color-ink-400: #6b7390;
-  --color-ink-300: #9aa1bd;
-  --color-ink-200: #cdd2e6;
-  --color-ink-100: #e7e9f5;
-  --color-ink-50: #f5f6fb;
+  --color-gold-50: #fffdf5;
+  --color-gold-100: #fef9e3;
+  --color-gold-200: #fcf0be;
+  --color-gold-300: #f8e18b;
+  --color-gold-400: #f2cb52;
+  --color-gold-500: #e5b324;
+  --color-gold-600: #cc9415;
+  --color-gold-700: #a36d12;
+  --color-gold-800: #865516;
+  --color-gold-900: #714617;
+  --color-gold-950: #422409;
 
-  --color-brand-900: #4a1408;
-  --color-brand-800: #6b1e0d;
-  --color-brand-700: #8f2a12;
-  --color-brand-600: #b8391a;
-  --color-brand-500: #d9481f;
-  --color-brand-400: #e8672f;
-  --color-brand-300: #f18a53;
-  --color-brand-200: #f8b98b;
-  --color-brand-100: #fce2cc;
-  --color-brand-50: #fdf3ea;
+  --color-obsidian-950: #0a0b0e;
+  --color-obsidian-900: #0f1117;
+  --color-obsidian-850: #141720;
+  --color-obsidian-800: #1a1e2b;
+  --color-obsidian-700: #252b3d;
 
-  --color-gold-500: #c99a3d;
-  --color-gold-400: #dcb45c;
-
-  --shadow-card: 0 1px 2px rgba(16, 19, 31, 0.04), 0 8px 24px -12px rgba(16, 19, 31, 0.14);
-  --shadow-card-lg: 0 4px 12px rgba(16, 19, 31, 0.06), 0 24px 48px -24px rgba(16, 19, 31, 0.28);
+  --color-brand-600: #d4af37;
+  --color-brand-500: #e5c158;
 }
 
 :root {
-  color-scheme: light;
-  --bg: #f7f7fa;
-  --surface: #ffffff;
-  --surface-muted: #f2f3f8;
-  --border: #e6e7f0;
-  --text: #14162a;
-  --text-muted: #5b6178;
-}
-
-[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #0b0d16;
-  --surface: #12141f;
-  --surface-muted: #171a28;
-  --border: #262a3c;
-  --text: #eef0fb;
-  --text-muted: #969cbb;
+  --bg: #0b0c10;
+  --surface: #12141c;
+  --surface-muted: #181b26;
+  --surface-glass: rgba(22, 25, 36, 0.75);
+  --border: rgba(212, 175, 55, 0.12);
+  --border-active: rgba(212, 175, 55, 0.35);
+  --text: #f5f6fa;
+  --text-muted: #9da3ba;
+  --gold-accent: #d4af37;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f7f6f2;
+  --surface: #ffffff;
+  --surface-muted: #f0eee6;
+  --surface-glass: rgba(255, 255, 255, 0.85);
+  --border: rgba(184, 142, 47, 0.18);
+  --border-active: rgba(184, 142, 47, 0.5);
+  --text: #1a1815;
+  --text-muted: #6e695e;
+  --gold-accent: #b88e2f;
 }
 
 html {
@@ -70,29 +58,81 @@ html {
 }
 
 body {
-  background: var(--bg);
+  background-color: var(--bg);
   color: var(--text);
   font-family: var(--font-sans);
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+    radial-gradient(circle at 85% 30%, rgba(184, 142, 47, 0.04) 0%, transparent 40%);
+  background-attachment: fixed;
 }
 
-::selection {
-  background: var(--color-brand-200);
-  color: var(--color-brand-900);
+/* Typography Helpers */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #fff3d1 0%, #e5c158 45%, #b88e2f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-gradient-bg {
+  background: linear-gradient(135deg, #f5d77f 0%, #d4af37 50%, #996515 100%);
+  color: #0b0c10;
+}
+
+.gold-gradient-btn {
+  background: linear-gradient(135deg, #f5d77f 0%, #d4af37 50%, #aa771c 100%);
+  color: #0d0e12;
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.gold-gradient-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.7);
+  filter: brightness(1.05);
+}
+
+.gold-glass-card {
+  background: var(--surface-glass);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  box-shadow: 
+    0 10px 35px -5px rgba(0, 0, 0, 0.4),
+    0 0 1px 1px rgba(212, 175, 55, 0.08) inset;
+  border-radius: 1.25rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gold-glass-card:hover {
+  border-color: var(--border-active);
+  box-shadow: 
+    0 20px 45px -10px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(212, 175, 55, 0.12),
+    0 0 1px 1px rgba(212, 175, 55, 0.2) inset;
 }
 
 .surface {
-  background: var(--surface);
+  background-color: var(--surface);
   border: 1px solid var(--border);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
 }
 
 .surface-muted {
-  background: var(--surface-muted);
+  background-color: var(--surface-muted);
 }
 
 .text-muted {
   color: var(--text-muted);
 }
 
+.gold-glow {
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+}
+
+/* Scrollbar */
 .scrollbar-thin::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -102,6 +142,7 @@ body {
   border-radius: 999px;
 }
 
+/* Skeleton */
 .skeleton {
   position: relative;
   overflow: hidden;
@@ -112,23 +153,11 @@ body {
   position: absolute;
   inset: 0;
   transform: translateX(-100%);
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
   animation: shimmer 1.6s infinite;
-}
-[data-theme="dark"] .skeleton::after {
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
 }
 @keyframes shimmer {
   100% {
     transform: translateX(100%);
   }
-}
-
-.focus-ring {
-  outline: none;
-}
-.focus-ring:focus-visible {
-  outline: 2px solid var(--color-brand-500);
-  outline-offset: 2px;
-  border-radius: 6px;
 }
