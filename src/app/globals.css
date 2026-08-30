@@ -20,14 +20,14 @@
 
 :root {
   color-scheme: dark;
-  --bg: #08090d;
-  --surface: #12141c;
-  --surface-muted: #181b26;
-  --surface-glass: rgba(18, 20, 30, 0.75);
-  --border: rgba(212, 175, 55, 0.16);
-  --border-active: rgba(212, 175, 55, 0.45);
+  --bg: transparent;
+  --surface: rgba(18, 20, 30, 0.75);
+  --surface-muted: rgba(24, 27, 38, 0.65);
+  --surface-glass: rgba(18, 20, 30, 0.72);
+  --border: rgba(212, 175, 55, 0.2);
+  --border-active: rgba(212, 175, 55, 0.5);
   --text: #f5f6fa;
-  --text-muted: #9da3ba;
+  --text-muted: #abb1c7;
   --gold-accent: #d4af37;
 }
 
@@ -36,7 +36,7 @@ html {
 }
 
 body {
-  background-color: var(--bg);
+  background-color: #08090d;
   color: var(--text);
   font-family: var(--font-sans);
   min-height: 100vh;
@@ -44,7 +44,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Background Blending layer with PPG Institutions Campus photo */
+/* Background Blending layer with PPG Institutions Campus photo - PROMINENT VISIBILITY */
 .campus-bg-blend {
   position: fixed;
   inset: 0;
@@ -53,9 +53,8 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: brightness(0.4) contrast(1.15) saturate(1.1);
-  transform: scale(1.03);
-  transition: transform 10s ease-out;
+  filter: brightness(0.68) contrast(1.1) saturate(1.15);
+  transform: scale(1.01);
 }
 
 .campus-bg-overlay {
@@ -63,10 +62,9 @@ body {
   inset: 0;
   z-index: -10;
   background: 
-    radial-gradient(circle at 50% 15%, rgba(212, 175, 55, 0.12) 0%, transparent 65%),
-    radial-gradient(circle at 85% 60%, rgba(184, 142, 47, 0.08) 0%, transparent 50%),
-    linear-gradient(180deg, rgba(8, 9, 13, 0.88) 0%, rgba(12, 14, 21, 0.78) 40%, rgba(8, 9, 13, 0.95) 100%);
-  backdrop-filter: blur(12px);
+    radial-gradient(circle at 50% 15%, rgba(212, 175, 55, 0.15) 0%, transparent 65%),
+    linear-gradient(180deg, rgba(8, 9, 13, 0.55) 0%, rgba(12, 14, 21, 0.65) 50%, rgba(8, 9, 13, 0.78) 100%);
+  backdrop-filter: blur(2px);
 }
 
 /* Typography Helpers */
@@ -86,7 +84,7 @@ body {
   background: linear-gradient(135deg, #f7df8f 0%, #d4af37 50%, #aa771c 100%);
   color: #08090d;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.6);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .gold-gradient-btn::after {
@@ -105,22 +103,22 @@ body {
 }
 .gold-gradient-btn:hover {
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 10px 35px rgba(212, 175, 55, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+  box-shadow: 0 10px 35px rgba(212, 175, 55, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.8);
   filter: brightness(1.06);
 }
 .gold-gradient-btn:active {
   transform: translateY(-1px) scale(0.98);
 }
 
-/* Glassmorphic Neumorphic Cards */
+/* Glassmorphic Neumorphic Cards with visible translucent background */
 .gold-glass-card {
-  background: rgba(18, 20, 30, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(14, 16, 25, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border);
   box-shadow: 
-    0 12px 40px -8px rgba(0, 0, 0, 0.6),
-    0 0 1px 1px rgba(212, 175, 55, 0.1) inset;
+    0 12px 40px -8px rgba(0, 0, 0, 0.55),
+    0 0 1px 1px rgba(212, 175, 55, 0.12) inset;
   border-radius: 1.5rem;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -129,32 +127,41 @@ body {
   border-color: var(--border-active);
   transform: translateY(-4px);
   box-shadow: 
-    0 22px 50px -10px rgba(0, 0, 0, 0.75),
-    0 0 25px rgba(212, 175, 55, 0.18),
-    0 0 1px 1px rgba(212, 175, 55, 0.3) inset;
+    0 22px 50px -10px rgba(0, 0, 0, 0.7),
+    0 0 25px rgba(212, 175, 55, 0.22),
+    0 0 1px 1px rgba(212, 175, 55, 0.35) inset;
 }
 
-/* Ultra Animations & Keyframes */
-@keyframes floatAnim {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-8px) rotate(0.5deg); }
-}
-.animate-float {
-  animation: floatAnim 6s ease-in-out infinite;
+.surface {
+  background-color: rgba(18, 20, 30, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
 }
 
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 0.65; transform: scale(1.08); }
-}
-.animate-pulse-glow {
-  animation: pulseGlow 4s ease-in-out infinite;
+.surface-muted {
+  background-color: rgba(24, 27, 38, 0.6);
 }
 
-@keyframes shimmer {
-  100% { transform: translateX(100%); }
+.text-muted {
+  color: var(--text-muted);
 }
 
+.gold-glow {
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.25);
+}
+
+/* Scrollbar */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+
+/* Skeleton */
 .skeleton {
   position: relative;
   overflow: hidden;
