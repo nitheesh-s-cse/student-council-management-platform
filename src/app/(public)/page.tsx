@@ -67,9 +67,6 @@ export default async function HomePage() {
               <LinkButton href="/about" size="lg">
                 Explore Council <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </LinkButton>
-              <LinkButton href="/members" variant="outline" size="lg">
-                Member Directory
-              </LinkButton>
             </MotionDiv>
 
             {/* Stats Bar */}
@@ -123,9 +120,6 @@ export default async function HomePage() {
           <div className="flex flex-wrap items-end justify-between gap-6">
             <MotionDiv>
               <SectionHeading eyebrow="Council Executive Board" title="Distinguished Leadership" />
-            </MotionDiv>
-            <MotionDiv delay={0.2}>
-              <LinkButton href="/members" variant="outline" size="sm">View Full Directory</LinkButton>
             </MotionDiv>
           </div>
 

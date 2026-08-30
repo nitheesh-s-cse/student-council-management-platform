@@ -1,5 +1,5 @@
 export const COUNCIL_NAME = "PPG Institute of Technology — Student Council";
-export const ACADEMIC_YEAR = "2025 – 2026";
+export const ACADEMIC_YEAR = "2026 – 2027";
 export const INSTITUTE_NAME = "PPG Institute of Technology";
 export const INSTITUTE_ADDRESS = "NH 209, Sathy Main Road, Saravanampatti, Coimbatore – 641035, Tamil Nadu";
 
