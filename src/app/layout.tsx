@@ -27,8 +27,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
       </head>
       <body className="antialiased font-sans selection:bg-amber-500/30 selection:text-amber-200 min-h-screen relative" suppressHydrationWarning>
-        <div className="campus-bg-blend" aria-hidden="true" />
-        <div className="campus-bg-overlay" aria-hidden="true" />
         <ToastProvider>{children}</ToastProvider>
       </body>
     </html>

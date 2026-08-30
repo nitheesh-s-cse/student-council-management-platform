@@ -7,6 +7,7 @@ import { LinkButton, Card, Badge, SectionHeading, Avatar } from "@/components/ui
 import { MotionDiv, StaggerGrid, StaggerItem, AnimatedStatCard } from "@/components/ui/animated-container";
 import { ACADEMIC_YEAR } from "@/lib/constants";
 import { formatDate } from "@/lib/utils";
+import { CampusBackground } from "@/components/public/campus-background";
 
 export const dynamic = "force-dynamic";
 
@@ -31,6 +32,8 @@ export default async function HomePage() {
 
   return (
     <div className="relative overflow-hidden">
+      {/* Campus background — fades out on scroll */}
+      <CampusBackground />
       {/* Animated Glowing Halos */}
       <div className="pointer-events-none absolute -top-40 left-1/2 -z-10 h-[650px] w-[950px] -translate-x-1/2 rounded-full bg-amber-500/10 blur-[160px] animate-pulse-glow" />
       <div className="pointer-events-none absolute top-[45%] right-[-10%] -z-10 h-[550px] w-[550px] rounded-full bg-yellow-600/8 blur-[150px] animate-pulse-glow" />
