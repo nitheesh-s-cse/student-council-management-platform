@@ -1,12 +1,18 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
+// Council logo mark rendered from the official logo image. The intrinsic
+// width/height match the source image (1353x1163); the displayed size is
+// controlled by the caller via className (defaults to 36px square) and
+// object-contain keeps the aspect ratio without distortion.
 export function CouncilMark({ className }: { className?: string }) {
   return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/images/ppgit-logo.png"
-      alt="PPG Institute of Technology Logo"
-      className={cn("h-10 w-auto object-contain filter drop-shadow-[0_0_12px_rgba(212,175,55,0.4)] transition-transform hover:scale-105", className)}
+    <Image
+      src="/images/council-logo.png"
+      alt="PPGIT Student Council"
+      width={1353}
+      height={1163}
+      className={cn("h-9 w-9 shrink-0 object-contain", className)}
     />
   );
 }
