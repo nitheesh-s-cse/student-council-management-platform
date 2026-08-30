@@ -48,9 +48,6 @@ export function SiteHeader() {
           <LinkButton href="/login" variant="outline" size="sm">
             Member Login
           </LinkButton>
-          <LinkButton href="/members" variant="primary" size="sm">
-            Directory
-          </LinkButton>
         </div>
 
         <button
@@ -78,9 +75,6 @@ export function SiteHeader() {
             <div className="mt-3 flex gap-2 border-t border-amber-500/15 pt-4">
               <LinkButton href="/login" variant="outline" size="sm" className="flex-1">
                 Member Login
-              </LinkButton>
-              <LinkButton href="/members" variant="primary" size="sm" className="flex-1">
-                Directory
               </LinkButton>
             </div>
           </nav>
