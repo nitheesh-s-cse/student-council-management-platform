@@ -35,8 +35,8 @@ export default async function HomePage() {
       {/* Campus background — fades out on scroll */}
       <CampusBackground />
       {/* Animated Glowing Halos */}
-      <div className="pointer-events-none absolute -top-40 left-1/2 -z-10 h-[650px] w-[950px] -translate-x-1/2 rounded-full bg-amber-500/10 blur-[160px] animate-pulse-glow" />
-      <div className="pointer-events-none absolute top-[45%] right-[-10%] -z-10 h-[550px] w-[550px] rounded-full bg-yellow-600/8 blur-[150px] animate-pulse-glow" />
+      <div className="pointer-events-none absolute -top-40 left-1/2 -z-10 h-[650px] w-[950px] -translate-x-1/2 rounded-full bg-amber-500/5 blur-[160px] animate-pulse-glow" />
+      <div className="pointer-events-none absolute top-[45%] right-[-10%] -z-10 h-[550px] w-[550px] rounded-full bg-yellow-600/3 blur-[150px] animate-pulse-glow" />
 
       {/* Hero Section */}
       <section className="relative px-4 pt-20 pb-28 sm:px-6 sm:pt-28 lg:px-8">

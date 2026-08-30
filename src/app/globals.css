@@ -54,7 +54,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: brightness(0.68) contrast(1.1) saturate(1.15);
+  filter: brightness(0.68) contrast(1.1) saturate(1.02);
   transform: scale(1.01);
   opacity: 1;
   transition: opacity 0.25s linear;
@@ -65,7 +65,7 @@ body {
   inset: 0;
   z-index: -10;
   background: 
-    radial-gradient(circle at 50% 15%, rgba(212, 175, 55, 0.15) 0%, transparent 65%),
+    radial-gradient(circle at 50% 15%, rgba(212, 175, 55, 0.04) 0%, transparent 65%),
     linear-gradient(180deg, rgba(8, 9, 13, 0.55) 0%, rgba(12, 14, 21, 0.65) 50%, rgba(8, 9, 13, 0.78) 100%);
   backdrop-filter: blur(2px);
   opacity: 1;
