@@ -10,6 +10,7 @@ if (!databaseUrl) {
 
 const isCloudDb =
   databaseUrl.includes("supabase.co") ||
+  databaseUrl.includes("supabase.com") ||
   databaseUrl.includes("neon.tech") ||
   databaseUrl.includes("render.com") ||
   databaseUrl.includes("rds.amazonaws.com") ||
