@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { SESSION_COOKIE } from "@/lib/auth";
+import { SESSION_COOKIE } from "@/lib/constants";
 
 // Edge-safe first line of defense: redirect unauthenticated visitors away
 // from protected areas before any page code runs. This is a UX shortcut

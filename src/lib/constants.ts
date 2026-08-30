@@ -3,6 +3,8 @@ export const ACADEMIC_YEAR = "2025 – 2026";
 export const INSTITUTE_NAME = "PPG Institute of Technology";
 export const INSTITUTE_ADDRESS = "NH 209, Sathy Main Road, Saravanampatti, Coimbatore – 641035, Tamil Nadu";
 
+export const SESSION_COOKIE = "ppgc_session";
+
 export const ROLE_LABELS: Record<string, string> = {
   super_admin: "Super Admin",
   admin: "Admin",

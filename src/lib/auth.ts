@@ -6,7 +6,8 @@ import { db } from "@/db";
 import { sessions, users, members } from "@/db/schema";
 import { eq, and, gt } from "drizzle-orm";
 
-export const SESSION_COOKIE = "ppgc_session";
+import { DEMO_PASSWORD, SESSION_COOKIE } from "@/lib/constants";
+export { SESSION_COOKIE };
 const SESSION_TTL_MS = 1000 * 60 * 60 * 24 * 7; // 7 days
 
 export type SessionUser = {
