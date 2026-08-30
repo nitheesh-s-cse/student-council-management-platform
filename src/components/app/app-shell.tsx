@@ -166,7 +166,7 @@ export function AppShell({ user, children }: { user: SessionUser; children: Reac
             <Menu className="h-5 w-5" />
           </button>
           <div className="flex items-center gap-2 md:hidden">
-            <CouncilMark className="h-7 w-7" />
+            <CouncilMark className="h-10 w-10" />
           </div>
           <form action="/dashboard/search" className="hidden flex-1 max-w-md md:block">
             <div className="relative">

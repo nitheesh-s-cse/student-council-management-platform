@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 // Council logo mark rendered from the official logo image. The intrinsic
 // width/height match the source image (1353x1163); the displayed size is
-// controlled by the caller via className (defaults to 36px square) and
+// controlled by the caller via className (defaults to 48px square) and
 // object-contain keeps the aspect ratio without distortion.
 export function CouncilMark({ className }: { className?: string }) {
   return (
@@ -12,7 +12,7 @@ export function CouncilMark({ className }: { className?: string }) {
       alt="PPGIT Student Council"
       width={1353}
       height={1163}
-      className={cn("h-9 w-9 shrink-0 object-contain", className)}
+      className={cn("h-12 w-12 shrink-0 object-contain", className)}
     />
   );
 }
