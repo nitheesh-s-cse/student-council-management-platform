@@ -6,7 +6,6 @@ import Link from "next/link";
 import { Loader2, Lock, Mail } from "lucide-react";
 import { CouncilWordmark } from "@/components/ui/logo";
 import { Button } from "@/components/ui/primitives";
-import { DEMO_PASSWORD } from "@/lib/constants";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -99,12 +98,6 @@ export default function LoginPage() {
             <Link href="/forgot-password" className="text-brand-600 hover:underline">Forgot password?</Link>
             <Link href="/" className="text-muted hover:text-[var(--text)]">Back to site</Link>
           </div>
-        </div>
-
-        <div className="mt-6 rounded-xl border border-dashed border-[var(--border)] p-4 text-xs text-muted">
-          <p className="font-medium text-[var(--text)]">Demo access</p>
-          <p className="mt-1">Every seeded council account uses the password <code className="rounded bg-[var(--surface-muted)] px-1 py-0.5">{DEMO_PASSWORD}</code>.</p>
-          <p className="mt-1">Try <code className="rounded bg-[var(--surface-muted)] px-1 py-0.5">superadmin@council.ppgit.edu.in</code> for full admin access.</p>
         </div>
       </div>
     </div>
