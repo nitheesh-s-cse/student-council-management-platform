@@ -23,7 +23,7 @@ export default async function ChatConversationPage({ params }: { params: Promise
   const active = conversations.find((c) => c.conversation.id === conversationId);
 
   return (
-    <div className="mx-auto flex h-[calc(100vh-4rem)] max-w-7xl md:h-screen">
+    <div className="mx-auto flex h-[calc(100dvh-10rem)] max-w-7xl md:h-[calc(100dvh-5rem)]">
       <ChatList conversations={conversations} currentUserId={user.id} activeId={conversationId} className="hidden md:flex" />
       <ConversationView
         conversationId={conversationId}

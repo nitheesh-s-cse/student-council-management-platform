@@ -21,9 +21,9 @@ export function CouncilWordmark({ className, subtitleClassName }: { className?: 
   return (
     <div className={cn("flex items-center gap-3", className)}>
       <CouncilMark />
-      <div className="leading-tight">
-        <p className="font-serif text-[14px] font-semibold tracking-wide text-amber-100">PPG Institute of Technology</p>
-        <p className={cn("text-[10px] font-semibold uppercase tracking-[0.2em] gold-gradient-text", subtitleClassName)}>
+      <div className="min-w-0 leading-tight">
+        <p className="truncate font-serif text-[14px] font-semibold tracking-wide text-amber-100">PPG Institute of Technology</p>
+        <p className={cn("max-w-full truncate text-[10px] font-semibold uppercase tracking-[0.2em] gold-gradient-text", subtitleClassName)}>
           Student Council
         </p>
       </div>

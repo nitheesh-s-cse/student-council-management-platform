@@ -29,11 +29,11 @@ export default async function PublicAnnouncementsPage() {
       ) : (
         <div className="mt-10 space-y-4">
           {rows.map((a) => (
-            <Card key={a.id} className="p-6">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <p className="text-[16px] font-semibold text-[var(--text)]">{a.title}</p>
+            <Card key={a.id} className="p-4.5 sm:p-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4">
+                <p className="text-base sm:text-[16px] font-semibold text-[var(--text)] min-w-0 flex-1">{a.title}</p>
                 {a.priority !== "normal" && (
-                  <Badge tone={a.priority === "urgent" ? "danger" : "warning"}>{ANNOUNCEMENT_PRIORITY_LABELS[a.priority]}</Badge>
+                  <Badge tone={a.priority === "urgent" ? "danger" : "warning"} className="shrink-0 self-start sm:self-auto">{ANNOUNCEMENT_PRIORITY_LABELS[a.priority]}</Badge>
                 )}
               </div>
               <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-muted">{a.content}</p>

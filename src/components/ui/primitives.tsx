@@ -78,7 +78,7 @@ export function LinkButton({
 }
 
 export function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("gold-glass-card premium-border", className)} {...props} />;
+  return <div className={cn("gold-glass-card premium-border max-w-full", className)} {...props} />;
 }
 
 export function Badge({
@@ -100,14 +100,14 @@ export function Badge({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-semibold tracking-wider uppercase backdrop-blur",
+        "inline-flex shrink-0 max-w-full items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-semibold tracking-wider uppercase backdrop-blur",
         tones[tone],
         className,
       )}
       {...props}
     >
-      {(tone === "brand" || tone === "success") && <span className="badge-dot" aria-hidden="true" />}
-      {children}
+      {(tone === "brand" || tone === "success") && <span className="badge-dot shrink-0" aria-hidden="true" />}
+      <span className="truncate">{children}</span>
     </span>
   );
 }

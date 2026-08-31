@@ -16,6 +16,35 @@
   --color-gold-800: #865516;
   --color-gold-900: #714617;
   --color-gold-950: #422409;
+
+  /* Brand scale — the amber/gold identity used by brand-* utilities
+     (buttons, badges, links) across the app and admin surfaces. */
+  --color-muted: #abb1c7;
+  --color-brand-50: #fff8ed;
+  --color-brand-100: #ffefd5;
+  --color-brand-200: #fed7aa;
+  --color-brand-300: #fcd34d;
+  --color-brand-400: #fbbf24;
+  --color-brand-500: #f59e0b;
+  --color-brand-600: #d97706;
+  --color-brand-700: #b45309;
+  --color-brand-800: #92400e;
+  --color-brand-900: #78350f;
+  --color-brand-950: #451a03;
+
+  /* Ink scale — the slate/dark gray used by ink-* utilities in the
+     secure-control admin shell and chat surfaces. */
+  --color-ink-50: #f4f5f8;
+  --color-ink-100: #e8eaf0;
+  --color-ink-200: #c8ccd8;
+  --color-ink-300: #9aa0b3;
+  --color-ink-400: #6f768e;
+  --color-ink-500: #51586e;
+  --color-ink-600: #3d4255;
+  --color-ink-700: #2c3040;
+  --color-ink-800: #191c28;
+  --color-ink-900: #0e1017;
+  --color-ink-950: #0b0c10;
 }
 
 :root {
@@ -31,8 +60,23 @@
   --gold-accent: #d4af37;
 }
 
+/* ---------- Responsive hardening ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
 }
 
 body {
@@ -45,7 +89,101 @@ body {
   font-family: var(--font-sans);
   min-height: 100vh;
   position: relative;
-  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+/* Responsive media — nothing may exceed its container or distort. */
+img,
+video,
+iframe,
+embed,
+object {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Form controls must always fit within their parent. */
+input,
+select,
+textarea,
+button {
+  max-width: 100%;
+}
+
+/* Global soft-wrap so long URLs / unbroken words never push the page
+   wider on any screen. `anywhere` also lets flex/grid children shrink
+   below their content so they cannot force the parent wider. */
+p,
+a,
+span,
+div,
+li,
+td,
+th,
+strong,
+em,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
+small,
+summary {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Ensure flex children don't overflow parent containers by default */
+.flex > * {
+  min-width: 0;
+}
+
+.gold-glass-card {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+  .gold-glass-card.p-6,
+  .gold-glass-card.p-8 {
+    padding: 1.125rem;
+  }
+}
+
+/* Scroll-safe wrapper for wide tables. Only this container scrolls
+   horizontally when a table is wider than the viewport. */
+.table-container {
+  overflow-x: auto;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Consistent form control base used by admin member forms. */
+.input {
+  width: 100%;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+  padding-inline: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--text);
+}
+.input:focus-visible {
+  outline: 2px solid rgba(212, 175, 55, 0.55);
+  outline-offset: 2px;
+}
+.input::placeholder {
+  color: var(--text-muted);
+}
+textarea.input {
+  height: auto;
+  padding-block: 0.5rem;
+}
+select.input {
+  padding-inline: 0.5rem;
 }
 
 /* Background Blending layer with PPG Institutions Campus photo - PROMINENT VISIBILITY */
@@ -59,7 +197,6 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   filter: brightness(0.68) contrast(1.1) saturate(1.02);
-  transform: scale(1.01);
   opacity: 1;
   transition: opacity 0.25s linear;
 }

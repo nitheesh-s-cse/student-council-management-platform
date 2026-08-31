@@ -7,6 +7,7 @@ import {
   users,
   members,
   messageReactions,
+  files,
 } from "@/db/schema";
 import { eq, desc, and, asc, sql } from "drizzle-orm";
 
@@ -23,10 +24,11 @@ export async function listConversationsForUser(userId: number) {
   const results = [];
   for (const row of rows) {
     const [lastMessage] = await db
-      .select({ message: messages, senderMemberName: members.fullName, senderEmail: users.email })
+      .select({ message: messages, senderMemberName: members.fullName, senderEmail: users.email, file: files })
       .from(messages)
       .leftJoin(users, eq(messages.senderUserId, users.id))
       .leftJoin(members, eq(users.memberId, members.id))
+      .leftJoin(files, eq(messages.fileId, files.id))
       .where(eq(messages.conversationId, row.conversation.id))
       .orderBy(desc(messages.createdAt))
       .limit(1);
@@ -42,6 +44,7 @@ export async function listConversationsForUser(userId: number) {
     results.push({
       conversation: row.conversation,
       lastMessage: lastMessage?.message ?? null,
+      lastFileName: lastMessage?.file?.originalName ?? null,
       lastSenderName: lastMessage?.senderMemberName ?? lastMessage?.senderEmail ?? null,
       unread,
     });
@@ -72,10 +75,12 @@ export async function getConversationMessages(conversationId: number, limit = 50
       senderMemberName: members.fullName,
       senderPhoto: members.photoUrl,
       senderEmail: users.email,
+      file: files,
     })
     .from(messages)
     .leftJoin(users, eq(messages.senderUserId, users.id))
     .leftJoin(members, eq(users.memberId, members.id))
+    .leftJoin(files, eq(messages.fileId, files.id))
     .where(eq(messages.conversationId, conversationId))
     .orderBy(asc(messages.createdAt))
     .limit(limit);

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, CheckCheck, ArrowLeft, SmilePlus, Paperclip } from "lucide-react";
+import { Send, CheckCheck, ArrowLeft, SmilePlus, Paperclip, Trash2, Loader2, FileText } from "lucide-react";
 import Link from "next/link";
 import { Avatar } from "@/components/ui/primitives";
 import { cn, relativeTime } from "@/lib/utils";
@@ -29,8 +29,10 @@ export function ConversationView({
   const [text, setText] = useState("");
   const [typingUsers, setTypingUsers] = useState<{ userId: number; name: string }[]>([]);
   const [pickerFor, setPickerFor] = useState<number | null>(null);
+  const [uploading, setUploading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const lastTypingSent = useRef(0);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setMessages(initialMessages);
@@ -73,6 +75,14 @@ export function ConversationView({
     fetch(`/api/chat/conversations/${conversationId}/typing`, { method: "POST" });
   }
 
+  async function refreshMessages() {
+    const msgRes = await fetch(`/api/chat/conversations/${conversationId}/messages`);
+    if (msgRes.ok) {
+      const data = await msgRes.json();
+      setMessages(data.messages);
+    }
+  }
+
   async function send() {
     const content = text.trim();
     if (!content) return;
@@ -82,11 +92,37 @@ export function ConversationView({
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ content }),
     });
-    if (res.ok) {
-      const msgRes = await fetch(`/api/chat/conversations/${conversationId}/messages`);
-      const data = await msgRes.json();
-      setMessages(data.messages);
+    if (res.ok) await refreshMessages();
+  }
+
+  async function sendWithFile(file: File) {
+    setUploading(true);
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      const up = await fetch("/api/files", { method: "POST", body: fd });
+      const upData = await up.json();
+      if (!up.ok) {
+        alert(upData.error ?? "File upload failed.");
+        return;
+      }
+      const res = await fetch(`/api/chat/conversations/${conversationId}/messages`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fileId: upData.id }),
+      });
+      if (res.ok) await refreshMessages();
+    } catch {
+      alert("Could not upload the file. Please try again.");
+    } finally {
+      setUploading(false);
     }
+  }
+
+  async function deleteForEveryone(messageId: number) {
+    if (!window.confirm("Delete this message for everyone? This cannot be undone.")) return;
+    const res = await fetch(`/api/chat/messages/${messageId}`, { method: "DELETE" });
+    if (res.ok) await refreshMessages();
   }
 
   async function react(messageId: number, emoji: string) {
@@ -95,9 +131,7 @@ export function ConversationView({
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ emoji }),
     });
-    const msgRes = await fetch(`/api/chat/conversations/${conversationId}/messages`);
-    const data = await msgRes.json();
-    setMessages(data.messages);
+    await refreshMessages();
     setPickerFor(null);
   }
 
@@ -139,7 +173,36 @@ export function ConversationView({
                       mine ? "rounded-br-md bg-brand-600 text-white" : "rounded-bl-md surface text-[var(--text)]",
                     )}
                   >
-                    {m.message.deletedAt ? <span className="italic opacity-70">Message deleted</span> : m.message.content}
+                    {m.message.deletedAt ? (
+                      <span className="italic opacity-70">Message deleted</span>
+                    ) : (
+                      <div className="break-words">
+                        {m.file && (
+                          <a
+                            href={`/api/files/${m.file.id}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className={cn(
+                              "mb-1.5 flex max-w-[240px] items-center gap-2 rounded-lg border px-2.5 py-2 text-xs transition-colors",
+                              mine
+                                ? "border-white/30 bg-white/10 hover:bg-white/20"
+                                : "border-[var(--border)] bg-[var(--surface-muted)] hover:bg-brand-500/10",
+                            )}
+                          >
+                            <FileText className="h-4 w-4 shrink-0" />
+                            <span className="min-w-0">
+                              <span className="block truncate font-medium">{m.file.originalName}</span>
+                              <span className="block opacity-70">
+                                {m.file.size > 1024 * 1024
+                                  ? `${(m.file.size / 1024 / 1024).toFixed(1)} MB`
+                                  : `${Math.max(1, Math.round(m.file.size / 1024))} KB`}
+                              </span>
+                            </span>
+                          </a>
+                        )}
+                        {m.message.content}
+                      </div>
+                    )}
                   </div>
                   <button
                     onClick={() => setPickerFor(pickerFor === m.message.id ? null : m.message.id)}
@@ -151,6 +214,16 @@ export function ConversationView({
                   >
                     <SmilePlus className="h-3 w-3 text-muted" />
                   </button>
+                  {mine && (
+                    <button
+                      onClick={() => deleteForEveryone(m.message.id)}
+                      className="focus-ring absolute -top-3 right-0 translate-x-1/2 rounded-full border border-[var(--border)] bg-[var(--surface)] p-1 opacity-0 shadow-sm transition-opacity group-hover:opacity-100"
+                      aria-label="Delete for everyone"
+                      title="Delete for everyone"
+                    >
+                      <Trash2 className="h-3 w-3 text-rose-400" />
+                    </button>
+                  )}
                   {pickerFor === m.message.id && (
                     <div className="absolute -top-10 z-10 flex gap-1 rounded-full border border-[var(--border)] bg-[var(--surface)] p-1 shadow-[var(--shadow-card-lg)]">
                       {QUICK_EMOJI.map((e) => (
@@ -186,9 +259,26 @@ export function ConversationView({
 
       <div className="border-t border-[var(--border)] bg-[var(--surface)] p-3">
         <div className="flex items-center gap-2">
-          <button className="focus-ring inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-muted hover:bg-[var(--surface-muted)]" aria-label="Attach file" title="File attachments are enabled once object storage credentials are configured">
-            <Paperclip className="h-4 w-4" />
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            disabled={uploading}
+            className="focus-ring inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-muted hover:bg-[var(--surface-muted)] disabled:opacity-50"
+            aria-label="Attach a file"
+            title="Upload a PDF, image or document"
+          >
+            {uploading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Paperclip className="h-4 w-4" />}
           </button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="application/pdf,image/*,.doc,.docx,.xls,.xlsx,.txt,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,video/*"
+            className="hidden"
+            onChange={(e) => {
+              const f = e.target.files?.[0];
+              if (f) sendWithFile(f);
+              e.target.value = "";
+            }}
+          />
           <input
             value={text}
             onChange={(e) => { setText(e.target.value); notifyTyping(); }}

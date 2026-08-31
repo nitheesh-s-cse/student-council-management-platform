@@ -70,7 +70,7 @@ export default async function HomePage() {
             </MotionDiv>
 
             <MotionDiv delay={0.35}>
-              <p className="mt-6 max-w-2xl text-[17px] leading-relaxed text-muted font-normal">
+              <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted font-normal sm:text-[17px]">
                 The premier executive student body representing PPGIT — orchestrating campus innovation, 
                 task delivery, inter-departmental governance, and student leadership in one unified digital platform.
               </p>
@@ -187,11 +187,11 @@ export default async function HomePage() {
                 <p className="text-sm text-muted">No public announcements posted yet.</p>
               )}
               {latestAnnouncements.map((a) => (
-                <Card key={a.id} className="p-6">
-                  <div className="flex items-center justify-between gap-2">
-                    <p className="font-serif text-lg text-amber-100">{a.title}</p>
+                <Card key={a.id} className="p-4.5 sm:p-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4">
+                    <p className="font-serif text-base sm:text-lg text-amber-100 min-w-0 flex-1">{a.title}</p>
                     {a.priority !== "normal" && (
-                      <Badge tone={a.priority === "urgent" ? "danger" : "warning"}>{a.priority}</Badge>
+                      <Badge tone={a.priority === "urgent" ? "danger" : "warning"} className="shrink-0 self-start sm:self-auto">{a.priority}</Badge>
                     )}
                   </div>
                   <p className="mt-2.5 line-clamp-2 text-sm text-muted leading-relaxed">{a.content}</p>
@@ -212,13 +212,13 @@ export default async function HomePage() {
                 <p className="text-sm text-muted">No public events scheduled currently.</p>
               )}
               {upcomingEvents.map((e) => (
-                <Card key={e.id} className="flex gap-5 p-6">
+                <Card key={e.id} className="flex gap-4 sm:gap-5 p-4.5 sm:p-6">
                   <div className="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-2xl bg-amber-500/10 text-amber-300 border border-amber-500/30 shadow-[0_0_15px_rgba(212,175,55,0.15)]">
                     <span className="text-[10px] font-bold uppercase tracking-widest">{new Date(e.date).toLocaleString("en-IN", { month: "short" })}</span>
                     <span className="font-serif text-lg font-bold leading-none mt-0.5">{new Date(e.date).getDate()}</span>
                   </div>
-                  <div className="min-w-0">
-                    <p className="truncate font-serif text-lg text-amber-100">{e.title}</p>
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate font-serif text-base sm:text-lg text-amber-100">{e.title}</p>
                     <p className="mt-1 line-clamp-2 text-sm text-muted">{e.description}</p>
                     {e.venue && <p className="mt-2 text-xs font-semibold text-amber-400/80">📍 {e.venue}</p>}
                   </div>
@@ -235,7 +235,7 @@ export default async function HomePage() {
       {/* Luxury CTA */}
       <section className="mx-auto max-w-7xl px-4 pb-28 sm:px-6 lg:px-8">
         <MotionDiv delay={0.2}>
-          <Card className="relative overflow-hidden p-12 text-center sm:text-left sm:flex sm:items-center sm:justify-between border border-amber-500/30 bg-gradient-to-r from-[#141624]/90 via-[#1a1d2e]/90 to-[#121420]/90 backdrop-blur-2xl">
+          <Card className="relative overflow-hidden p-8 text-center sm:text-left sm:flex sm:items-center sm:justify-between border border-amber-500/30 bg-gradient-to-r from-[#141624]/90 via-[#1a1d2e]/90 to-[#121420]/90 backdrop-blur-2xl sm:p-10 lg:p-12">
             <div className="pointer-events-none absolute right-0 top-0 h-full w-1/2 bg-amber-500/10 blur-[100px] animate-pulse-glow" />
             <div className="relative z-10">
               <h3 className="font-serif text-2xl text-amber-100 font-normal">Council Member Portal Access</h3>

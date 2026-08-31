@@ -23,17 +23,17 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-amber-500/10 bg-[#0d0e14]/85 backdrop-blur-xl transition-all">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-2 px-3 sm:px-6 lg:px-8">
-        <Link href="/" className="focus-ring min-w-0 rounded-xl p-1">
+        <Link href="/" className="focus-ring flex min-w-0 items-center rounded-xl p-1">
           <CouncilWordmark className="min-w-0" />
         </Link>
 
-        <nav className="hidden items-center gap-1.5 rounded-full border border-amber-500/15 bg-[#141622]/60 p-1.5 backdrop-blur-md md:flex shadow-inner">
+        <nav className="hidden items-center gap-1.5 rounded-full border border-amber-500/15 bg-[#141622]/60 p-1.5 backdrop-blur-md shadow-inner lg:flex">
           {NAV.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "focus-ring rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-all duration-200",
+                "focus-ring rounded-full px-3 py-2 text-xs font-semibold uppercase tracking-wider transition-all duration-200 xl:px-4",
                 pathname === item.href
                   ? "bg-gradient-to-r from-amber-500/20 to-amber-600/10 text-amber-300 border border-amber-500/30 shadow-[0_0_15px_rgba(212,175,55,0.15)]"
                   : "text-amber-100/70 hover:text-amber-200 hover:bg-amber-500/10",
@@ -44,15 +44,15 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
-          <LinkButton href="/login" variant="outline" size="sm">
+        <div className="hidden items-center gap-3 lg:flex">
+          <LinkButton href="/login" variant="outline" size="sm" className="shrink-0">
             Member Login
           </LinkButton>
         </div>
 
         <button
           onClick={() => setOpen((v) => !v)}
-          className="focus-ring inline-flex h-10 w-10 items-center justify-center rounded-xl border border-amber-500/20 bg-[#161824] text-amber-300 md:hidden"
+          className="focus-ring inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-amber-500/20 bg-[#161824] text-amber-300 lg:hidden"
           aria-label="Toggle navigation"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -60,8 +60,8 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <div className="border-t border-amber-500/15 bg-[#0d0e14]/95 px-4 py-4 backdrop-blur-2xl md:hidden">
-          <nav className="flex flex-col gap-1.5">
+        <div className="border-t border-amber-500/15 bg-[#0d0e14]/95 px-4 py-4 backdrop-blur-2xl lg:hidden">
+          <nav className="mx-auto flex max-w-7xl flex-col gap-1.5">
             {NAV.map((item) => (
               <Link
                 key={item.href}

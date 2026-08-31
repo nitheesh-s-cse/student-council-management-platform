@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/db";
 import { files } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { requireUser, requireRole } from "@/lib/auth";
+import { requireUser } from "@/lib/auth";
 import { handleApiError } from "@/lib/api-helpers";
 import { logAudit } from "@/lib/audit";
 import { saveUploadedFile, MAX_FILE_SIZE, ALLOWED_MIME_TYPES } from "@/lib/storage";
@@ -14,7 +14,7 @@ export const dynamic = "force-dynamic";
 // above can upload.
 export async function POST(request: Request) {
   try {
-    const user = await requireRole("board");
+    const user = await requireUser();
 
     const form = await request.formData();
     const uploaded = form.get("file");

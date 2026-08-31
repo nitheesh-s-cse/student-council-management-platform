@@ -25,7 +25,11 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
   }
 }
 
-const schema = z.object({ content: z.string().min(1).max(4000), replyToId: z.number().int().optional().nullable() });
+const schema = z.object({
+  content: z.string().max(4000).optional().nullable(),
+  replyToId: z.number().int().optional().nullable(),
+  fileId: z.number().int().optional().nullable(),
+});
 
 export async function POST(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
@@ -35,8 +39,15 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
     const allowed = await isConversationMember(conversationId, user.id);
     if (!allowed) return NextResponse.json({ error: "Not a member of this conversation." }, { status: 403 });
 
-    const { content, replyToId } = schema.parse(await request.json());
-    const [message] = await db.insert(messages).values({ conversationId, senderUserId: user.id, content, replyToId }).returning();
+    const { content, replyToId, fileId } = schema.parse(await request.json());
+    if (!content && !fileId) {
+      return NextResponse.json({ error: "Message content or an attachment is required." }, { status: 422 });
+    }
+
+    const [message] = await db
+      .insert(messages)
+      .values({ conversationId, senderUserId: user.id, content: content ?? null, replyToId, fileId: fileId ?? null })
+      .returning();
 
     const [sender] = await db
       .select({ memberName: members.fullName, email: users.email })
@@ -52,7 +63,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
 
     await notifyMany(
       recipients.map((r) => r.userId).filter((id) => id !== user.id),
-      { type: "message", title: `New message from ${sender?.memberName ?? sender?.email ?? "a council member"}`, body: content.slice(0, 120), link: `/chat/${conversationId}` },
+      { type: "message", title: `New message from ${sender?.memberName ?? sender?.email ?? "a council member"}`, body: (content ?? "📎 Attachment").slice(0, 120), link: `/chat/${conversationId}` },
     );
 
     return NextResponse.json({ message, senderMemberName: sender?.memberName ?? null, senderEmail: sender?.email ?? null });

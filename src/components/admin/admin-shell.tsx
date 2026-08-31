@@ -91,8 +91,8 @@ export function AdminShell({ user, children }: { user: SessionUser; children: Re
 
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="flex h-16 items-center gap-3 border-b border-white/10 bg-ink-900/60 px-4 backdrop-blur md:px-8">
-          <button onClick={() => setOpen(true)} className="rounded-lg border border-white/10 p-2 text-ink-200 md:hidden"><Menu className="h-4 w-4" /></button>
-          <p className="text-sm font-medium text-ink-200">Signed in as <span className="text-white">{user.memberName ?? user.email}</span> · {ROLE_LABELS[user.role]}</p>
+          <button onClick={() => setOpen(true)} className="shrink-0 rounded-lg border border-white/10 p-2 text-ink-200 md:hidden"><Menu className="h-4 w-4" /></button>
+          <p className="min-w-0 flex-1 truncate text-sm font-medium text-ink-200">Signed in as <span className="text-white">{user.memberName ?? user.email}</span> · {ROLE_LABELS[user.role]}</p>
         </header>
         <main className="flex-1 bg-[var(--bg)] text-[var(--text)]">{children}</main>
       </div>

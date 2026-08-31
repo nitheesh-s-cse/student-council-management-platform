@@ -73,12 +73,12 @@ export default async function DashboardPage() {
 
       <div className="mt-8 grid gap-6 lg:grid-cols-3">
         <div className="space-y-6 lg:col-span-2">
-          <Card className="p-6">
-            <div className="flex items-center justify-between">
-              <p className="flex items-center gap-2 text-sm font-semibold text-[var(--text)]">
-                <ListChecks className="h-4 w-4 text-brand-600" /> My Active Tasks
+          <Card className="p-4.5 sm:p-6">
+            <div className="flex items-center justify-between gap-2">
+              <p className="flex items-center gap-2 text-sm font-semibold text-[var(--text)] min-w-0 flex-1">
+                <ListChecks className="h-4 w-4 shrink-0 text-brand-600" /> My Active Tasks
               </p>
-              <Link href="/tasks" className="text-xs font-medium text-brand-600 hover:underline">View all</Link>
+              <Link href="/tasks" className="shrink-0 text-xs font-medium text-brand-600 hover:underline">View all</Link>
             </div>
             {myTasks.length === 0 ? (
               <div className="mt-4">
@@ -87,8 +87,8 @@ export default async function DashboardPage() {
             ) : (
               <div className="mt-4 space-y-3">
                 {myTasks.slice(0, 5).map((t) => (
-                  <Link key={t.id} href={`/tasks/${t.id}`} className="flex items-center justify-between gap-3 rounded-lg border border-[var(--border)] p-3 transition-colors hover:border-brand-300">
-                    <div className="min-w-0">
+                  <Link key={t.id} href={`/tasks/${t.id}`} className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 rounded-lg border border-[var(--border)] p-3 transition-colors hover:border-brand-300">
+                    <div className="min-w-0 flex-1">
                       <p className="truncate text-sm font-medium text-[var(--text)]">{t.title}</p>
                       <p className="text-xs text-muted">{t.code} · {TASK_STATUS_LABELS[t.status]}</p>
                     </div>
@@ -103,18 +103,18 @@ export default async function DashboardPage() {
           </Card>
 
           {isBoardOrAbove && (
-            <Card className="p-6">
+            <Card className="p-4.5 sm:p-6">
               <p className="flex items-center gap-2 text-sm font-semibold text-[var(--text)]">
-                <Users2 className="h-4 w-4 text-brand-600" /> Team Performance
+                <Users2 className="h-4 w-4 shrink-0 text-brand-600" /> Team Performance
               </p>
               <div className="mt-4 space-y-4">
                 {teamOverview.map((t) => {
                   const pct = t.total === 0 ? 0 : Math.round((t.completed / t.total) * 100);
                   return (
                     <div key={t.teamId}>
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="font-medium text-[var(--text)]">{t.name}</span>
-                        <span className="text-muted">{t.completed}/{t.total} tasks · {pct}%</span>
+                      <div className="flex items-center justify-between gap-2 text-xs">
+                        <span className="font-medium text-[var(--text)] truncate">{t.name}</span>
+                        <span className="shrink-0 text-muted">{t.completed}/{t.total} tasks · {pct}%</span>
                       </div>
                       <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-[var(--surface-muted)]">
                         <div className="h-full rounded-full bg-brand-500 transition-all" style={{ width: `${pct}%` }} />
@@ -126,12 +126,12 @@ export default async function DashboardPage() {
             </Card>
           )}
 
-          <Card className="p-6">
-            <div className="flex items-center justify-between">
-              <p className="flex items-center gap-2 text-sm font-semibold text-[var(--text)]">
-                <Megaphone className="h-4 w-4 text-brand-600" /> Recent Announcements
+          <Card className="p-4.5 sm:p-6">
+            <div className="flex items-center justify-between gap-2">
+              <p className="flex items-center gap-2 text-sm font-semibold text-[var(--text)] min-w-0 flex-1">
+                <Megaphone className="h-4 w-4 shrink-0 text-brand-600" /> Recent Announcements
               </p>
-              <Link href="/announcements" className="text-xs font-medium text-brand-600 hover:underline">View all</Link>
+              <Link href="/announcements" className="shrink-0 text-xs font-medium text-brand-600 hover:underline">View all</Link>
             </div>
             {recentAnnouncements.length === 0 ? (
               <div className="mt-4"><EmptyState title="No announcements" description="Council updates will appear here." /></div>

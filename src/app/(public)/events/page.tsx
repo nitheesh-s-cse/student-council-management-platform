@@ -37,15 +37,15 @@ export default async function PublicEventsPage() {
       ) : (
         <div className="mt-10 space-y-4">
           {rows.map(({ event, team }) => (
-            <Card key={event.id} className="flex flex-col gap-4 p-6 sm:flex-row sm:items-center">
+            <Card key={event.id} className="flex flex-col gap-4 p-4.5 sm:p-6 sm:flex-row sm:items-center">
               <div className="flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-xl bg-brand-50 text-brand-700 dark:bg-brand-900/30 dark:text-brand-200">
                 <span className="text-[11px] font-semibold uppercase">{new Date(event.date).toLocaleString("en-IN", { month: "short" })}</span>
                 <span className="text-xl font-bold leading-none">{new Date(event.date).getDate()}</span>
               </div>
               <div className="min-w-0 flex-1">
-                <div className="flex flex-wrap items-center gap-2">
-                  <p className="text-[16px] font-semibold text-[var(--text)]">{event.title}</p>
-                  <Badge tone={STATUS_TONE[event.status]}>{event.status}</Badge>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <p className="text-base sm:text-[16px] font-semibold text-[var(--text)] min-w-0 flex-1">{event.title}</p>
+                  <Badge tone={STATUS_TONE[event.status]} className="shrink-0 self-start sm:self-auto">{event.status}</Badge>
                 </div>
                 <p className="mt-1 text-sm text-muted">{event.description}</p>
                 <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted">

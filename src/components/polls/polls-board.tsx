@@ -90,13 +90,13 @@ function PollCard({ item, onVoted }: { item: PollItem; onVoted: (item: PollItem)
   }
 
   return (
-    <Card className="p-6">
-      <div className="flex flex-wrap items-start justify-between gap-2">
-        <div>
+    <Card className="p-4.5 sm:p-6">
+      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 sm:gap-4">
+        <div className="min-w-0 flex-1">
           <p className="text-[15px] font-semibold text-[var(--text)]">{poll.question}</p>
           {poll.description && <p className="mt-1 text-sm text-muted">{poll.description}</p>}
         </div>
-        <div className="flex gap-1.5">
+        <div className="flex flex-wrap gap-1.5 shrink-0 self-start sm:self-auto">
           {poll.anonymous && <Badge tone="neutral">Anonymous</Badge>}
           {closed && <Badge tone="danger">Closed</Badge>}
         </div>

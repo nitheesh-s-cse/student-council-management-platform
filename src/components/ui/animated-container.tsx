@@ -128,7 +128,7 @@ export function AnimatedStatCard({
       viewport={{ once: true }}
       whileHover={{ scale: 1.05 }}
       transition={{ duration: 0.5, delay, ease: PREMIUM_EASE }}
-      className="border-r border-amber-500/15 last:border-r-0 px-4 text-center"
+      className="border-b border-amber-500/15 px-4 py-5 text-center last:border-b-0 min-[400px]:border-b-0 min-[400px]:border-r min-[400px]:py-0 min-[400px]:last:border-r-0"
     >
       <p className="font-serif gold-gradient-text text-3xl sm:text-4xl font-normal drop-shadow-[0_0_20px_rgba(212,175,55,0.3)]">{value}</p>
       <p className="mt-1 text-xs uppercase tracking-[0.18em] text-muted">{label}</p>
