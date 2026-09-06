@@ -181,53 +181,58 @@
   border-radius: 9999px;
   pointer-events: none;
   z-index: 0;
-  filter: blur(70px);
   will-change: transform;
 }
 
 .background-glow-orange,
 .bg-glow-orange {
-  background: radial-gradient(circle, rgba(255, 122, 0, 0.08), rgba(255, 122, 0, 0.02) 55%, transparent 72%);
+  background: radial-gradient(circle, #ff7a00 0%, rgba(255, 122, 0, 0.45) 45%, transparent 70%);
+  opacity: 0.08;
+  filter: blur(65px);
 }
 
 .background-glow-red,
 .bg-glow-red {
-  background: radial-gradient(circle, rgba(239, 68, 68, 0.06), rgba(239, 68, 68, 0.015) 55%, transparent 72%);
+  background: radial-gradient(circle, #ef4444 0%, rgba(239, 68, 68, 0.4) 45%, transparent 70%);
+  opacity: 0.06;
+  filter: blur(65px);
 }
 
 .background-glow-warm,
 .bg-glow-warm {
-  background: radial-gradient(circle, rgba(255, 154, 71, 0.07), transparent 70%);
+  background: radial-gradient(circle, #ff9a47 0%, rgba(255, 154, 71, 0.45) 45%, transparent 70%);
+  opacity: 0.07;
+  filter: blur(70px);
 }
 
 .bg-glow-lg {
-  width: 560px;
-  height: 560px;
-  filter: blur(95px);
+  width: 580px;
+  height: 580px;
+  filter: blur(85px);
 }
 
 .bg-glow-md {
-  width: 420px;
-  height: 420px;
-  filter: blur(75px);
+  width: 440px;
+  height: 440px;
+  filter: blur(65px);
 }
 
 .bg-glow-sm {
   width: 280px;
   height: 280px;
-  filter: blur(55px);
+  filter: blur(50px);
 }
 
-/* --- Faint grid/geometry pattern (very subtle, opacity 0.05) --- */
+/* --- Faint grid/geometry pattern (very subtle, opacity 0.07) --- */
 .background-pattern {
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 0;
   background-image:
-    radial-gradient(rgba(255, 122, 0, 0.12) 1px, transparent 1px);
+    radial-gradient(rgba(255, 122, 0, 0.16) 1px, transparent 1px);
   background-size: 36px 36px;
-  opacity: 0.06;
+  opacity: 0.07;
   mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000 0%, transparent 75%);
   -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000 0%, transparent 75%);
 }

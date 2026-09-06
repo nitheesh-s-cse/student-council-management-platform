@@ -6,8 +6,6 @@ import { eq } from "drizzle-orm";
 import { Card, SectionHeading, Avatar } from "@/components/ui/primitives";
 import Link from "next/link";
 import { ACADEMIC_YEAR } from "@/lib/constants";
-import { CampusBackground } from "@/components/public/campus-background";
-import { PremiumAmbience } from "@/components/public/premium-ambience";
 
 export const dynamic = "force-dynamic";
 
@@ -39,12 +37,8 @@ export default async function AboutPage() {
 
   return (
     <div className="relative overflow-hidden">
-      {/* Campus background — fades out on scroll */}
-      <CampusBackground />
-      {/* Ultra premium ambience — aurora orbs, particles, grain */}
-      <PremiumAmbience />
-
-      <section className="section-hero border-b border-[var(--border)]">
+      {/* Section 1: Hero — white + subtle orange & red ambient glow */}
+      <section className="section-hero border-b border-[#ffe7d2]">
         <div aria-hidden="true" className="background-glow background-glow-orange bg-glow-lg" style={{ left: "-6%", top: "-12%" }} />
         <div aria-hidden="true" className="background-glow background-glow-red bg-glow-md" style={{ right: "-4%", top: "8%" }} />
         <div className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6 lg:px-8">
@@ -61,7 +55,8 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className="section-gradient">
+      {/* Section 2: Mission Pillars — warm off-white #FFF9F2 */}
+      <section className="section-warm border-b border-[#ffe7d2]">
         <div aria-hidden="true" className="background-glow background-glow-orange bg-glow-md" style={{ left: "-4%", top: "10%" }} />
         <div aria-hidden="true" className="background-glow background-glow-red bg-glow-sm" style={{ right: "-3%", bottom: "-6%", opacity: 0.7 }} />
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
@@ -80,7 +75,8 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className="section-warm border-t border-[#ffe7d2]">
+      {/* Section 3: Structure — white with subtle red/orange radial gradient */}
+      <section className="section-gradient border-t border-[#ffe7d2]">
         <div aria-hidden="true" className="background-glow background-glow-warm bg-glow-md" style={{ right: "-5%", top: "-16%" }} />
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <SectionHeading eyebrow="Structure" title="How the council is organized" description="A six-member board oversees the council, supported by 25 executive members and nine standing committees that run day-to-day operations." />

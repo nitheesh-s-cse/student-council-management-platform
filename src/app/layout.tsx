@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
       </head>
       <body
-        className="antialiased font-sans min-h-screen relative bg-white text-[#18243a] selection:bg-[#ff7a00]/20 selection:text-[#18243a]"
+        className="antialiased font-sans min-h-screen relative text-[#18243a] selection:bg-[#ff7a00]/20 selection:text-[#18243a]"
         suppressHydrationWarning
       >
         <AmbientBackground />

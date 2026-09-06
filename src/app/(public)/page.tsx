@@ -7,8 +7,6 @@ import { LinkButton, Card, Badge, SectionHeading, Avatar } from "@/components/ui
 import { MotionDiv, StaggerGrid, StaggerItem, AnimatedStatCard, TiltCard } from "@/components/ui/animated-container";
 import { ACADEMIC_YEAR } from "@/lib/constants";
 import { formatDate } from "@/lib/utils";
-import { CampusBackground } from "@/components/public/campus-background";
-import { PremiumAmbience } from "@/components/public/premium-ambience";
 
 export const dynamic = "force-dynamic";
 
@@ -43,19 +41,11 @@ export default async function HomePage() {
 
   return (
     <div className="relative overflow-hidden">
-      {/* Campus background — fades out on scroll */}
-      <CampusBackground />
-      {/* Ultra premium ambience — aurora orbs, particles, grain */}
-      <PremiumAmbience />
-      {/* Warm decorative halos */}
-      <div className="pointer-events-none absolute -top-40 left-1/2 -z-10 h-[650px] w-[950px] -translate-x-1/2 rounded-full bg-[#ff7a00]/5 blur-[160px] animate-pulse-glow" />
-      <div className="pointer-events-none absolute top-[45%] right-[-10%] -z-10 h-[550px] w-[550px] rounded-full bg-[#ef4444]/4 blur-[150px] animate-pulse-glow" />
-
-      {/* Hero Section — Clean white base with subtle orange & red ambient glows */}
-      <section className="section-hero px-4 pt-20 pb-28 sm:px-6 sm:pt-28 lg:px-8">
-        <div aria-hidden="true" className="background-glow background-glow-orange bg-glow-lg" style={{ left: "-4%", top: "-8%" }} />
-        <div aria-hidden="true" className="background-glow background-glow-red bg-glow-md" style={{ right: "-6%", top: "12%" }} />
-        <div aria-hidden="true" className="background-glow background-glow-warm bg-glow-sm" style={{ left: "22%", top: "58%", opacity: 0.5 }} />
+      {/* Section 1: Hero — Clean white/warm-white base with subtle orange & red ambient glows */}
+      <section className="section-hero px-4 pt-24 pb-28 sm:px-6 sm:pt-32 lg:px-8">
+        <div aria-hidden="true" className="background-glow background-glow-orange bg-glow-lg" style={{ left: "-6%", top: "-10%" }} />
+        <div aria-hidden="true" className="background-glow background-glow-red bg-glow-md" style={{ right: "-6%", top: "10%" }} />
+        <div aria-hidden="true" className="background-glow background-glow-warm bg-glow-sm" style={{ left: "20%", top: "60%" }} />
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col items-center text-center">
             <MotionDiv delay={0.1}>
@@ -114,8 +104,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Section 2: Platform Features Grid — subtle red/orange radial gradient */}
-      <section className="section-gradient">
+      {/* Section 2: Platform Features Grid — warm off-white #FFF9F2 */}
+      <section className="section-warm border-y border-[#ffe7d2]">
         <div aria-hidden="true" className="background-glow background-glow-orange bg-glow-md" style={{ left: "-5%", top: "6%" }} />
         <div aria-hidden="true" className="background-glow background-glow-red bg-glow-sm" style={{ right: "-3%", bottom: "0%", opacity: 0.7 }} />
         <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
@@ -153,8 +143,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Section 3: Board Leadership — warm off-white #FFF9F2 */}
-      <section className="section-warm border-y border-[#ffe7d2] py-24">
+      {/* Section 3: Board Leadership — white with subtle red/orange radial gradient */}
+      <section className="section-gradient border-b border-[#ffe7d2] py-24">
         <div aria-hidden="true" className="background-glow background-glow-orange bg-glow-lg" style={{ right: "-6%", top: "-14%" }} />
         <div aria-hidden="true" className="background-glow background-glow-red bg-glow-sm" style={{ left: "4%", bottom: "-8%", opacity: 0.6 }} />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
