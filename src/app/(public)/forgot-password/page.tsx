@@ -27,31 +27,33 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[var(--bg)] px-4 py-12">
+    <div className="relative flex min-h-[calc(100vh-140px)] items-center justify-center overflow-hidden px-4 py-12">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-32 left-1/2 z-0 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-[#ff7a00]/8 blur-[140px]"
+        className="background-glow background-glow-orange bg-glow-lg"
+        style={{ left: "-6%", top: "-10%" }}
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -bottom-24 -right-24 z-0 h-[380px] w-[380px] rounded-full bg-[#ef4444]/7 blur-[130px]"
+        className="background-glow background-glow-red bg-glow-md"
+        style={{ right: "-4%", bottom: "4%" }}
       />
       <div className="relative z-10 w-full max-w-sm">
         <div className="mb-8 flex justify-center">
           <CouncilWordmark />
         </div>
-        <div className="surface rounded-3xl p-8 shadow-[var(--shadow-card-lg)]">
+        <div className="gold-glass-card rounded-3xl p-8 shadow-[0_10px_30px_rgba(24,36,58,0.08)] border border-[#ffd6b0]">
           {sent ? (
             <div className="text-center">
-              <h1 className="text-lg font-semibold text-[var(--text)]">Check your inbox</h1>
+              <h1 className="text-lg font-bold text-[#18243a]">Check your inbox</h1>
               <p className="mt-2 text-sm text-muted">
-                If an account exists for <span className="font-medium text-[var(--text)]">{email}</span>, we've sent
+                If an account exists for <span className="font-semibold text-[#f97316]">{email}</span>, we've sent
                 a password reset link. It expires in 60 minutes.
               </p>
             </div>
           ) : (
             <>
-              <h1 className="text-xl font-semibold text-[var(--text)]">Reset your password</h1>
+              <h1 className="text-xl font-bold text-[#18243a]">Reset your password</h1>
               <p className="mt-1.5 text-sm text-muted">We'll email you a secure link to choose a new password.</p>
               <form onSubmit={onSubmit} className="mt-6 space-y-4">
                 <div>

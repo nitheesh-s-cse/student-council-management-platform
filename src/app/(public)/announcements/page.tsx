@@ -17,8 +17,8 @@ export default async function PublicAnnouncementsPage() {
 
   return (
     <div className="section-soft relative">
-      <div aria-hidden="true" className="bg-glow bg-glow-warm bg-glow-md" style={{ left: "-5%", top: "-8%" }} />
-      <div aria-hidden="true" className="bg-glow bg-glow-orange bg-glow-sm" style={{ right: "-4%", bottom: "-6%", opacity: 0.55 }} />
+      <div aria-hidden="true" className="background-glow background-glow-warm bg-glow-md" style={{ left: "-5%", top: "-8%" }} />
+      <div aria-hidden="true" className="background-glow background-glow-orange bg-glow-sm" style={{ right: "-4%", bottom: "-6%", opacity: 0.55 }} />
       <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
       <SectionHeading
         eyebrow="Council notices"
@@ -34,13 +34,13 @@ export default async function PublicAnnouncementsPage() {
           {rows.map((a) => (
             <Card key={a.id} className="p-4.5 sm:p-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4">
-                <p className="text-base sm:text-[16px] font-semibold text-[var(--text)] min-w-0 flex-1">{a.title}</p>
+                <p className="text-base sm:text-[16px] font-bold text-[#18243a] min-w-0 flex-1">{a.title}</p>
                 {a.priority !== "normal" && (
                   <Badge tone={a.priority === "urgent" ? "danger" : "warning"} className="shrink-0 self-start sm:self-auto">{ANNOUNCEMENT_PRIORITY_LABELS[a.priority]}</Badge>
                 )}
               </div>
               <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-muted">{a.content}</p>
-              <p className="mt-4 text-xs text-muted">Published {formatDate(a.publishAt)}</p>
+              <p className="mt-4 text-xs font-semibold text-[#f97316]/90">Published {formatDate(a.publishAt)}</p>
             </Card>
           ))}
         </div>

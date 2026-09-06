@@ -19,18 +19,18 @@ export default async function MemberProfilePage({ params }: { params: Promise<{ 
 
   return (
     <div>
-      <section className="section-hero border-b border-[var(--border)]">
-        <div aria-hidden="true" className="bg-glow bg-glow-orange bg-glow-md" style={{ left: "-4%", top: "-14%" }} />
-        <div aria-hidden="true" className="bg-glow bg-glow-red bg-glow-sm" style={{ right: "-2%", top: "-6%", opacity: 0.6 }} />
+      <section className="section-hero border-b border-[#ffe7d2]">
+        <div aria-hidden="true" className="background-glow background-glow-orange bg-glow-md" style={{ left: "-4%", top: "-14%" }} />
+        <div aria-hidden="true" className="background-glow background-glow-red bg-glow-sm" style={{ right: "-2%", top: "-6%", opacity: 0.6 }} />
         <div className="mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
-          <Link href="/members" className="focus-ring inline-flex items-center gap-1.5 text-sm text-muted hover:text-brand-600">
+          <Link href="/members" className="focus-ring inline-flex items-center gap-1.5 text-sm text-muted hover:text-[#f97316]">
             <ArrowLeft className="h-3.5 w-3.5" /> Back to directory
           </Link>
           <div className="mt-6 flex flex-col items-start gap-6 sm:flex-row sm:items-center">
             <Avatar name={member.fullName} src={member.photoUrl} size={96} className="text-2xl" />
             <div>
-              <h1 className="text-2xl font-semibold tracking-tight text-[var(--text)] sm:text-3xl">{member.fullName}</h1>
-              <p className="mt-1 text-brand-600">{member.position ?? "Council Member"}</p>
+              <h1 className="text-2xl font-bold tracking-tight text-[#18243a] sm:text-3xl">{member.fullName}</h1>
+              <p className="mt-1 font-semibold text-[#f97316]">{member.position ?? "Council Member"}</p>
               <div className="mt-3 flex flex-wrap gap-1.5">
                 <Badge tone="brand">{member.department}</Badge>
                 <Badge tone="neutral">Year {member.year}</Badge>
@@ -45,7 +45,7 @@ export default async function MemberProfilePage({ params }: { params: Promise<{ 
       </section>
 
       <section className="section-soft">
-        <div aria-hidden="true" className="bg-glow bg-glow-warm bg-glow-md" style={{ right: "-4%", top: "-14%", opacity: 0.6 }} />
+        <div aria-hidden="true" className="background-glow background-glow-warm bg-glow-md" style={{ right: "-4%", top: "-14%", opacity: 0.6 }} />
         <div className="mx-auto grid max-w-5xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-3 lg:px-8">
         <div className="space-y-8 lg:col-span-2">
           <div>

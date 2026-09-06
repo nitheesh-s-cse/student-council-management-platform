@@ -1,35 +1,41 @@
-// Fixed ambient background layer shared by all routed pages.
-// Sits behind everything (z-index below content) and is purely decorative.
-// Subtle orange/red orbs + faint dot pattern, consistent with the brand.
+// Global layered ambient background system.
+// Sits fixed behind all content (pointer-events: none, z-index -10).
+// Creates a subtle, warm, modern, slightly dynamic institutional atmosphere
+// with low-opacity orange/red ambient glows and a faint geometric pattern.
 export function AmbientBackground() {
   return (
     <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-      {/* Upper-left warm orange glow */}
+      {/* Upper-left subtle warm orange radial glow */}
       <div
-        className="bg-glow bg-glow-orange bg-glow-lg"
+        className="background-glow background-glow-orange bg-glow-lg"
         style={{ left: "-6%", top: "-10%" }}
       />
-      {/* Upper-right soft red glow */}
+      {/* Upper-right soft red radial glow */}
       <div
-        className="bg-glow bg-glow-red bg-glow-md"
+        className="background-glow background-glow-red bg-glow-md"
         style={{ right: "-4%", top: "4%" }}
       />
       {/* Mid-page faint warm bloom */}
       <div
-        className="bg-glow bg-glow-warm bg-glow-lg"
-        style={{ left: "12%", top: "46%", opacity: 0.6 }}
+        className="background-glow background-glow-warm bg-glow-lg"
+        style={{ left: "12%", top: "44%", opacity: 0.7 }}
       />
-      {/* Bottom-left orange accent */}
+      {/* Mid-right gentle orange arc */}
       <div
-        className="bg-glow bg-glow-orange bg-glow-sm"
-        style={{ left: "-2%", bottom: "6%", opacity: 0.5 }}
+        className="background-glow background-glow-orange bg-glow-md"
+        style={{ right: "6%", top: "62%", opacity: 0.55 }}
       />
-      {/* Bottom-right red accent */}
+      {/* Bottom-left subtle orange accent */}
       <div
-        className="bg-glow bg-glow-red bg-glow-sm"
-        style={{ right: "-2%", bottom: "-4%", opacity: 0.55 }}
+        className="background-glow background-glow-orange bg-glow-sm"
+        style={{ left: "-2%", bottom: "4%", opacity: 0.5 }}
       />
-      {/* Faint top dot pattern */}
+      {/* Bottom-right soft red accent */}
+      <div
+        className="background-glow background-glow-red bg-glow-sm"
+        style={{ right: "-2%", bottom: "-4%", opacity: 0.5 }}
+      />
+      {/* Faint geometric dot pattern with soft radial mask */}
       <div className="background-pattern" />
     </div>
   );

@@ -24,9 +24,9 @@ export default async function PublicEventsPage() {
     .orderBy(asc(events.date));
 
   return (
-    <div className="section-radial-orange relative">
-      <div aria-hidden="true" className="bg-glow bg-glow-orange bg-glow-md" style={{ left: "-5%", top: "-8%" }} />
-      <div aria-hidden="true" className="bg-glow bg-glow-red bg-glow-sm" style={{ right: "-3%", bottom: "-4%", opacity: 0.7 }} />
+    <div className="section-gradient relative">
+      <div aria-hidden="true" className="background-glow background-glow-orange bg-glow-md" style={{ left: "-5%", top: "-8%" }} />
+      <div aria-hidden="true" className="background-glow background-glow-red bg-glow-sm" style={{ right: "-3%", bottom: "-4%", opacity: 0.6 }} />
       <div className="mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
       <SectionHeading
         eyebrow="Council calendar"
@@ -41,13 +41,13 @@ export default async function PublicEventsPage() {
         <div className="mt-10 space-y-4">
           {rows.map(({ event, team }) => (
             <Card key={event.id} className="flex flex-col gap-4 p-4.5 sm:p-6 sm:flex-row sm:items-center">
-              <div className="flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-xl bg-brand-50 text-brand-700 dark:bg-brand-900/30 dark:text-brand-200">
-                <span className="text-[11px] font-semibold uppercase">{new Date(event.date).toLocaleString("en-IN", { month: "short" })}</span>
+              <div className="flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-2xl bg-[#fff7ed] text-[#f97316] border border-[#ffd6b0] dark:bg-brand-900/30 dark:text-brand-200">
+                <span className="text-[11px] font-bold uppercase">{new Date(event.date).toLocaleString("en-IN", { month: "short" })}</span>
                 <span className="text-xl font-bold leading-none">{new Date(event.date).getDate()}</span>
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                  <p className="text-base sm:text-[16px] font-semibold text-[var(--text)] min-w-0 flex-1">{event.title}</p>
+                  <p className="text-base sm:text-[16px] font-bold text-[#18243a] min-w-0 flex-1">{event.title}</p>
                   <Badge tone={STATUS_TONE[event.status]} className="shrink-0 self-start sm:self-auto">{event.status}</Badge>
                 </div>
                 <p className="mt-1 text-sm text-muted">{event.description}</p>

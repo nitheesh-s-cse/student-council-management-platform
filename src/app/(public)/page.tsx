@@ -51,11 +51,11 @@ export default async function HomePage() {
       <div className="pointer-events-none absolute -top-40 left-1/2 -z-10 h-[650px] w-[950px] -translate-x-1/2 rounded-full bg-[#ff7a00]/5 blur-[160px] animate-pulse-glow" />
       <div className="pointer-events-none absolute top-[45%] right-[-10%] -z-10 h-[550px] w-[550px] rounded-full bg-[#ef4444]/4 blur-[150px] animate-pulse-glow" />
 
-      {/* Hero Section */}
+      {/* Hero Section — Clean white base with subtle orange & red ambient glows */}
       <section className="section-hero px-4 pt-20 pb-28 sm:px-6 sm:pt-28 lg:px-8">
-        <div aria-hidden="true" className="bg-glow bg-glow-orange bg-glow-lg" style={{ left: "-4%", top: "-8%" }} />
-        <div aria-hidden="true" className="bg-glow bg-glow-red bg-glow-md" style={{ right: "-6%", top: "12%" }} />
-        <div aria-hidden="true" className="bg-glow bg-glow-warm bg-glow-sm" style={{ left: "22%", top: "58%", opacity: 0.5 }} />
+        <div aria-hidden="true" className="background-glow background-glow-orange bg-glow-lg" style={{ left: "-4%", top: "-8%" }} />
+        <div aria-hidden="true" className="background-glow background-glow-red bg-glow-md" style={{ right: "-6%", top: "12%" }} />
+        <div aria-hidden="true" className="background-glow background-glow-warm bg-glow-sm" style={{ left: "22%", top: "58%", opacity: 0.5 }} />
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col items-center text-center">
             <MotionDiv delay={0.1}>
@@ -114,10 +114,10 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Platform Features Grid */}
-      <section className="section-radial-orange">
-        <div aria-hidden="true" className="bg-glow bg-glow-orange bg-glow-md" style={{ left: "-5%", top: "6%" }} />
-        <div aria-hidden="true" className="bg-glow bg-glow-red bg-glow-sm" style={{ right: "-3%", bottom: "0%", opacity: 0.7 }} />
+      {/* Section 2: Platform Features Grid — subtle red/orange radial gradient */}
+      <section className="section-gradient">
+        <div aria-hidden="true" className="background-glow background-glow-orange bg-glow-md" style={{ left: "-5%", top: "6%" }} />
+        <div aria-hidden="true" className="background-glow background-glow-red bg-glow-sm" style={{ right: "-3%", bottom: "0%", opacity: 0.7 }} />
         <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
         <MotionDiv>
           <SectionHeading
@@ -153,10 +153,10 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Board Leadership */}
+      {/* Section 3: Board Leadership — warm off-white #FFF9F2 */}
       <section className="section-warm border-y border-[#ffe7d2] py-24">
-        <div aria-hidden="true" className="bg-glow bg-glow-orange bg-glow-lg" style={{ right: "-6%", top: "-14%" }} />
-        <div aria-hidden="true" className="bg-glow bg-glow-red bg-glow-sm" style={{ left: "4%", bottom: "-8%", opacity: 0.6 }} />
+        <div aria-hidden="true" className="background-glow background-glow-orange bg-glow-lg" style={{ right: "-6%", top: "-14%" }} />
+        <div aria-hidden="true" className="background-glow background-glow-red bg-glow-sm" style={{ left: "4%", bottom: "-8%", opacity: 0.6 }} />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <MotionDiv>
@@ -185,8 +185,10 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Announcements & Events */}
+      {/* Section 4: Announcements & Events — very light warm background #FFFCF8 */}
       <section className="section-soft">
+        <div aria-hidden="true" className="background-glow background-glow-warm bg-glow-md" style={{ left: "-4%", top: "10%" }} />
+        <div aria-hidden="true" className="background-glow background-glow-orange bg-glow-sm" style={{ right: "-2%", bottom: "4%", opacity: 0.5 }} />
         <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-2">
           {/* Bulletins */}
@@ -243,10 +245,10 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Luxury CTA */}
+      {/* Section 5: White transition base with CTA section: orange → red gradient */}
       <section className="section-white">
         <div className="mx-auto max-w-7xl px-4 pb-28 sm:px-6 lg:px-8">
-        <div aria-hidden="true" className="bg-glow bg-glow-warm bg-glow-md" style={{ right: "8%", top: "-40%", opacity: 0.8 }} />
+        <div aria-hidden="true" className="background-glow background-glow-warm bg-glow-md" style={{ right: "8%", top: "-40%", opacity: 0.6 }} />
         <MotionDiv delay={0.2} className="relative">
           <Card className="relative overflow-hidden p-8 text-center sm:text-left sm:flex sm:items-center sm:justify-between border-[#ffd6b0] bg-brand-gradient sm:p-10 lg:p-12">
             <div className="pointer-events-none absolute right-0 top-0 h-full w-1/2 bg-white/15 blur-[100px] animate-pulse-glow" />

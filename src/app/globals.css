@@ -167,7 +167,15 @@
    cards and controls always win the visual hierarchy.
    ================================================================ */
 
-/* --- Soft blurred orange/red glow orbs (absolute, behind content) --- */
+/* ================================================================
+   AMBIENT BACKGROUND SYSTEM
+   Reusable layered background utilities. Decorations are always
+   pointer-transparent, sit behind content, and stay subtle (opacity 0.03 - 0.10,
+   blur 40px - 100px) so text, cards, and controls always dominate visually.
+   ================================================================ */
+
+/* --- Reusable Background Glow Utility Classes --- */
+.background-glow,
 .bg-glow {
   position: absolute;
   border-radius: 9999px;
@@ -176,77 +184,93 @@
   filter: blur(70px);
   will-change: transform;
 }
+
+.background-glow-orange,
 .bg-glow-orange {
-  background: radial-gradient(circle, rgba(255, 122, 0, 0.14), rgba(255, 122, 0, 0.04) 55%, transparent 72%);
+  background: radial-gradient(circle, rgba(255, 122, 0, 0.08), rgba(255, 122, 0, 0.02) 55%, transparent 72%);
 }
+
+.background-glow-red,
 .bg-glow-red {
-  background: radial-gradient(circle, rgba(239, 68, 68, 0.12), rgba(239, 68, 68, 0.035) 55%, transparent 72%);
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.06), rgba(239, 68, 68, 0.015) 55%, transparent 72%);
 }
+
+.background-glow-warm,
 .bg-glow-warm {
-  background: radial-gradient(circle, rgba(255, 154, 71, 0.12), transparent 70%);
+  background: radial-gradient(circle, rgba(255, 154, 71, 0.07), transparent 70%);
 }
+
 .bg-glow-lg {
   width: 560px;
   height: 560px;
   filter: blur(95px);
 }
+
 .bg-glow-md {
   width: 420px;
   height: 420px;
-  filter: blur(80px);
+  filter: blur(75px);
 }
+
 .bg-glow-sm {
   width: 280px;
   height: 280px;
-  filter: blur(60px);
+  filter: blur(55px);
 }
 
-/* --- Faint grid/geometry pattern (optional, very subtle) --- */
+/* --- Faint grid/geometry pattern (very subtle, opacity 0.05) --- */
 .background-pattern {
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 0;
   background-image:
-    radial-gradient(rgba(255, 122, 0, 0.09) 1px, transparent 1px);
+    radial-gradient(rgba(255, 122, 0, 0.12) 1px, transparent 1px);
   background-size: 36px 36px;
-  opacity: 0.35;
+  opacity: 0.06;
   mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000 0%, transparent 75%);
   -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000 0%, transparent 75%);
 }
 
-/* --- Section background rhythm classes --- */
+/* --- Section Background System (Visual Rhythm) --- */
 .section-white {
   position: relative;
   background-color: #ffffff;
 }
+
 .section-warm {
   position: relative;
   background-color: #fff9f2;
 }
+
 .section-warm-2 {
   position: relative;
   background-color: #fff7ed;
 }
+
 .section-soft {
   position: relative;
   background-color: #fffcf8;
 }
+
+.section-gradient,
 .section-radial-orange {
   position: relative;
   background-color: #ffffff;
   background-image:
-    radial-gradient(circle at 10% 12%, rgba(255, 122, 0, 0.09), transparent 38%),
-    radial-gradient(circle at 92% 18%, rgba(239, 68, 68, 0.06), transparent 38%);
+    radial-gradient(circle at 10% 10%, rgba(255, 122, 0, 0.08), transparent 35%),
+    radial-gradient(circle at 90% 20%, rgba(239, 68, 68, 0.06), transparent 35%);
 }
+
 .section-radial-red {
   position: relative;
   background-color: #fffcf8;
   background-image:
-    radial-gradient(circle at 88% 6%, rgba(239, 68, 68, 0.07), transparent 36%),
+    radial-gradient(circle at 88% 6%, rgba(239, 68, 68, 0.06), transparent 36%),
     radial-gradient(circle at 6% 88%, rgba(255, 122, 0, 0.06), transparent 36%);
 }
-/* CTA band */
+
+/* CTA band: orange → red brand gradient */
 .section-cta {
   position: relative;
   background-image: linear-gradient(135deg, #ff7a00 0%, #ef4444 100%);
@@ -257,87 +281,111 @@
 .section-warm > *,
 .section-warm-2 > *,
 .section-soft > *,
+.section-gradient > *,
 .section-radial-orange > *,
 .section-radial-red > *,
 .section-cta > * {
   position: relative;
   z-index: 1;
 }
+
 /* Except things that are explicitly decorative */
 .section-white > .bg-glow,
+.section-white > .background-glow,
 .section-white > .background-pattern,
 .section-warm > .bg-glow,
+.section-warm > .background-glow,
 .section-warm > .background-pattern,
 .section-warm-2 > .bg-glow,
+.section-warm-2 > .background-glow,
 .section-warm-2 > .background-pattern,
 .section-soft > .bg-glow,
+.section-soft > .background-glow,
 .section-soft > .background-pattern,
+.section-gradient > .bg-glow,
+.section-gradient > .background-glow,
+.section-gradient > .background-pattern,
 .section-radial-orange > .bg-glow,
+.section-radial-orange > .background-glow,
 .section-radial-orange > .background-pattern,
 .section-radial-red > .bg-glow,
+.section-radial-red > .background-glow,
 .section-radial-red > .background-pattern {
   z-index: 0;
 }
 
-/* Hero section — strongest but still subtle ambient treatment */
+/* Hero section — strongest ambient treatment with generous whitespace */
 .section-hero {
   position: relative;
   background-color: #ffffff;
   background-image:
-    radial-gradient(980px 620px at 18% 0%, rgba(255, 122, 0, 0.1), transparent 52%),
-    radial-gradient(760px 520px at 90% 8%, rgba(239, 68, 68, 0.07), transparent 50%),
-    radial-gradient(640px 480px at 55% 110%, rgba(255, 122, 0, 0.05), transparent 55%);
+    radial-gradient(980px 620px at 18% 0%, rgba(255, 122, 0, 0.08), transparent 52%),
+    radial-gradient(760px 520px at 90% 8%, rgba(239, 68, 68, 0.06), transparent 50%),
+    radial-gradient(640px 480px at 55% 110%, rgba(255, 154, 71, 0.04), transparent 55%);
   overflow: hidden;
 }
+
 .section-hero > * {
   position: relative;
   z-index: 1;
 }
+
 .section-hero > .bg-glow,
+.section-hero > .background-glow,
 .section-hero > .background-pattern {
   z-index: 0;
 }
 
+/* Dark mode overrides for ambient sections */
 [data-theme="dark"] .section-white,
+[data-theme="dark"] .section-gradient,
 [data-theme="dark"] .section-radial-orange {
   background-color: #0c1220;
 }
+
 [data-theme="dark"] .section-warm,
 [data-theme="dark"] .section-warm-2 {
   background-color: #101828;
 }
+
 [data-theme="dark"] .section-soft,
 [data-theme="dark"] .section-radial-red {
   background-color: #0f1728;
 }
+
+[data-theme="dark"] .section-gradient,
 [data-theme="dark"] .section-radial-orange {
   background-image:
-    radial-gradient(circle at 10% 12%, rgba(255, 122, 0, 0.12), transparent 38%),
-    radial-gradient(circle at 92% 18%, rgba(239, 68, 68, 0.09), transparent 38%);
+    radial-gradient(circle at 10% 10%, rgba(255, 122, 0, 0.1), transparent 38%),
+    radial-gradient(circle at 90% 20%, rgba(239, 68, 68, 0.08), transparent 38%);
 }
+
 [data-theme="dark"] .section-radial-red {
   background-image:
-    radial-gradient(circle at 88% 6%, rgba(239, 68, 68, 0.1), transparent 36%),
-    radial-gradient(circle at 6% 88%, rgba(255, 122, 0, 0.08), transparent 36%);
+    radial-gradient(circle at 88% 6%, rgba(239, 68, 68, 0.08), transparent 36%),
+    radial-gradient(circle at 6% 88%, rgba(255, 122, 0, 0.07), transparent 36%);
 }
+
 [data-theme="dark"] .section-hero {
   background-color: #0c1220;
   background-image:
-    radial-gradient(980px 620px at 18% 0%, rgba(255, 122, 0, 0.13), transparent 52%),
-    radial-gradient(760px 520px at 90% 8%, rgba(239, 68, 68, 0.09), transparent 50%);
+    radial-gradient(980px 620px at 18% 0%, rgba(255, 122, 0, 0.11), transparent 52%),
+    radial-gradient(760px 520px at 90% 8%, rgba(239, 68, 68, 0.08), transparent 50%);
 }
 
 /* Dark-mode card surfaces — translucent navy glass */
 [data-theme="dark"] .gold-glass-card,
 [data-theme="dark"] .surface {
-  background: rgba(19, 28, 46, 0.86);
+  background: rgba(19, 28, 46, 0.88);
   border-color: rgba(255, 122, 0, 0.22);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
+
 [data-theme="dark"] .gold-glass-card:hover {
   border-color: rgba(255, 154, 71, 0.55);
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
 }
+
 [data-theme="dark"] .chip-btn {
   background: rgba(28, 38, 60, 0.7);
   color: #f5f6fa;
@@ -365,9 +413,9 @@ body {
 body {
   background-color: #ffffff;
   background-image:
-    radial-gradient(1200px 720px at 12% -8%, rgba(255, 122, 0, 0.07), transparent 55%),
-    radial-gradient(1000px 640px at 92% 4%, rgba(239, 68, 68, 0.05), transparent 55%),
-    radial-gradient(900px 720px at 50% 118%, rgba(255, 122, 0, 0.045), transparent 60%);
+    radial-gradient(circle at 10% 10%, rgba(255, 122, 0, 0.08), transparent 35%),
+    radial-gradient(circle at 90% 20%, rgba(239, 68, 68, 0.06), transparent 35%),
+    radial-gradient(circle at 50% 90%, rgba(255, 154, 71, 0.04), transparent 45%);
   background-attachment: fixed;
   color: var(--text);
   font-family: var(--font-sans);
@@ -977,6 +1025,8 @@ html {
 }
 .modal-overlay {
   animation: modal-fade-in 0.18s ease-out;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 .modal-overlay > * {
   animation: modal-pop-in 0.24s cubic-bezier(0.16, 1, 0.3, 1);

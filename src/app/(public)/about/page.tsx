@@ -45,12 +45,11 @@ export default async function AboutPage() {
       <PremiumAmbience />
 
       <section className="section-hero border-b border-[var(--border)]">
-        <div className="absolute inset-0 -z-[1]">
-          <Image src="/images/about-pattern.jpg" alt="" fill className="object-cover opacity-[0.1] dark:opacity-[0.16]" />
-        </div>
+        <div aria-hidden="true" className="background-glow background-glow-orange bg-glow-lg" style={{ left: "-6%", top: "-12%" }} />
+        <div aria-hidden="true" className="background-glow background-glow-red bg-glow-md" style={{ right: "-4%", top: "8%" }} />
         <div className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6 lg:px-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-600">About the Council</p>
-          <h1 className="mt-3 text-[clamp(2rem,5vw,3rem)] font-semibold tracking-tight text-[var(--text)]">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#f97316]">About the Council</p>
+          <h1 className="mt-3 text-[clamp(2rem,5vw,3rem)] font-extrabold tracking-tight text-[#18243a]">
             Who we are, and what we stand for
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-relaxed text-muted">
@@ -62,18 +61,18 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className="section-radial-orange">
-        <div aria-hidden="true" className="bg-glow bg-glow-orange bg-glow-md" style={{ left: "-4%", top: "10%" }} />
-        <div aria-hidden="true" className="bg-glow bg-glow-red bg-glow-sm" style={{ right: "-3%", bottom: "-6%", opacity: 0.7 }} />
+      <section className="section-gradient">
+        <div aria-hidden="true" className="background-glow background-glow-orange bg-glow-md" style={{ left: "-4%", top: "10%" }} />
+        <div aria-hidden="true" className="background-glow background-glow-red bg-glow-sm" style={{ right: "-3%", bottom: "-6%", opacity: 0.7 }} />
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <SectionHeading eyebrow="Our mission" title="Why the council exists" description="Four responsibilities guide everything we do." />
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {PILLARS.map((p) => (
             <Card key={p.title} className="p-6">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-50 text-brand-600 dark:bg-brand-900/30 dark:text-brand-300">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#fff7ed] text-[#f97316] border border-[#ffd6b0] dark:bg-brand-900/30 dark:text-brand-300">
                 <p.icon className="h-5 w-5" />
               </div>
-              <p className="mt-4 text-[15px] font-semibold text-[var(--text)]">{p.title}</p>
+              <p className="mt-4 text-[15px] font-bold text-[#18243a]">{p.title}</p>
               <p className="mt-1.5 text-sm leading-relaxed text-muted">{p.desc}</p>
             </Card>
           ))}
@@ -81,8 +80,8 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className="section-warm border-t border-[var(--border)]">
-        <div aria-hidden="true" className="bg-glow bg-glow-warm bg-glow-md" style={{ right: "-5%", top: "-16%" }} />
+      <section className="section-warm border-t border-[#ffe7d2]">
+        <div aria-hidden="true" className="background-glow background-glow-warm bg-glow-md" style={{ right: "-5%", top: "-16%" }} />
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <SectionHeading eyebrow="Structure" title="How the council is organized" description="A six-member board oversees the council, supported by 25 executive members and nine standing committees that run day-to-day operations." />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

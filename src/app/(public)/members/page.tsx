@@ -28,8 +28,8 @@ export default async function MembersPage({
 
   return (
     <div className="section-warm relative">
-      <div aria-hidden="true" className="bg-glow bg-glow-orange bg-glow-lg" style={{ left: "-6%", top: "-10%" }} />
-      <div aria-hidden="true" className="bg-glow bg-glow-red bg-glow-md" style={{ right: "-4%", top: "8%" }} />
+      <div aria-hidden="true" className="background-glow background-glow-orange bg-glow-lg" style={{ left: "-6%", top: "-10%" }} />
+      <div aria-hidden="true" className="background-glow background-glow-red bg-glow-md" style={{ right: "-4%", top: "8%" }} />
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
       <SectionHeading
         eyebrow="Council roster"
@@ -37,7 +37,7 @@ export default async function MembersPage({
         description="Every elected board member, executive member and committee member of the PPGIT Student Council."
       />
 
-      <form className="mt-8 grid grid-cols-2 gap-3 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-3 sm:flex sm:flex-wrap sm:items-center">
+      <form className="mt-8 grid grid-cols-2 gap-3 rounded-2xl border border-[#ffd6b0] bg-white/85 backdrop-blur-md p-3 sm:flex sm:flex-wrap sm:items-center shadow-sm">
         <div className="relative col-span-2 sm:flex-1 sm:min-w-[200px]">
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
           <input
@@ -45,7 +45,7 @@ export default async function MembersPage({
             name="q"
             defaultValue={params.q}
             placeholder="Search by name or department…"
-            className="focus-ring h-10 w-full rounded-xl border border-[var(--border)] bg-white pl-9 pr-3 text-sm"
+            className="focus-ring h-10 w-full rounded-xl border border-[#ffe7d2] bg-white pl-9 pr-3 text-sm text-[#18243a]"
           />
         </div>
         <select
