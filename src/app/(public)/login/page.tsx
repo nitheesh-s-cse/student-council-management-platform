@@ -39,12 +39,20 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[var(--bg)] px-4 py-12">
-      <div className="w-full max-w-sm">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[var(--bg)] px-4 py-12">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-32 left-1/2 z-0 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-[#ff7a00]/8 blur-[140px]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-24 -right-24 z-0 h-[380px] w-[380px] rounded-full bg-[#ef4444]/7 blur-[130px]"
+      />
+      <div className="relative z-10 w-full max-w-sm">
         <div className="mb-8 flex justify-center">
           <CouncilWordmark />
         </div>
-        <div className="surface rounded-2xl p-8 shadow-[var(--shadow-card-lg)]">
+        <div className="surface rounded-3xl p-8 shadow-[var(--shadow-card-lg)]">
           <h1 className="text-xl font-semibold text-[var(--text)]">Member sign in</h1>
           <p className="mt-1.5 text-sm text-muted">Access your council dashboard, tasks and chat.</p>
 
@@ -61,7 +69,7 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@council.ppgit.edu.in"
-                  className="focus-ring h-11 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] pl-9 pr-3 text-sm"
+                  className="focus-ring h-11 w-full rounded-xl border border-[var(--border)] bg-white pl-9 pr-3 text-sm"
                 />
               </div>
             </div>
@@ -77,13 +85,13 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="focus-ring h-11 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] pl-9 pr-3 text-sm"
+                  className="focus-ring h-11 w-full rounded-xl border border-[var(--border)] bg-white pl-9 pr-3 text-sm"
                 />
               </div>
             </div>
 
             {error && (
-              <p role="alert" className="rounded-lg bg-rose-50 px-3 py-2 text-xs font-medium text-rose-700 dark:bg-rose-900/20 dark:text-rose-300">
+              <p role="alert" className="rounded-xl bg-red-50 px-3 py-2 text-xs font-medium text-red-600 ring-1 ring-red-100">
                 {error}
               </p>
             )}

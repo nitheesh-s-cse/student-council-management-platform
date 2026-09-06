@@ -17,13 +17,28 @@ export function CouncilMark({ className }: { className?: string }) {
   );
 }
 
-export function CouncilWordmark({ className, subtitleClassName }: { className?: string; subtitleClassName?: string }) {
+export function CouncilWordmark({
+  className,
+  subtitleClassName,
+  tone = "default",
+}: {
+  className?: string;
+  subtitleClassName?: string;
+  tone?: "default" | "inverse";
+}) {
   return (
     <div className={cn("flex items-center gap-3", className)}>
       <CouncilMark />
       <div className="min-w-0 leading-tight">
-        <p className="truncate font-serif text-[14px] font-semibold tracking-wide text-amber-100">PPG Institute of Technology</p>
-        <p className={cn("max-w-full truncate text-[10px] font-semibold uppercase tracking-[0.2em] gold-gradient-text", subtitleClassName)}>
+        <p
+          className={cn(
+            "truncate text-[14px] font-extrabold tracking-tight",
+            tone === "inverse" ? "text-white" : "text-[#18243a]",
+          )}
+        >
+          PPG Institute of Technology
+        </p>
+        <p className={cn("max-w-full truncate text-[10px] font-bold uppercase tracking-[0.22em] text-[#f97316]", subtitleClassName)}>
           Student Council
         </p>
       </div>

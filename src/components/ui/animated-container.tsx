@@ -103,7 +103,7 @@ export function StaggerItem({
           transition: { duration: 0.5, ease: PREMIUM_EASE },
         },
       }}
-      whileHover={{ y: -6, scale: 1.02 }}
+      whileHover={{ y: -4, scale: 1.01 }}
       transition={{ duration: 0.25 }}
       className={className}
     >
@@ -128,9 +128,9 @@ export function AnimatedStatCard({
       viewport={{ once: true }}
       whileHover={{ scale: 1.05 }}
       transition={{ duration: 0.5, delay, ease: PREMIUM_EASE }}
-      className="border-b border-amber-500/15 px-4 py-5 text-center last:border-b-0 min-[400px]:border-b-0 min-[400px]:border-r min-[400px]:py-0 min-[400px]:last:border-r-0"
+      className="border-b border-[#ffd6b0] px-4 py-5 text-center last:border-b-0 min-[400px]:border-b-0 min-[400px]:border-r min-[400px]:py-0 min-[400px]:last:border-r-0"
     >
-      <p className="font-serif gold-gradient-text text-3xl sm:text-4xl font-normal drop-shadow-[0_0_20px_rgba(212,175,55,0.3)]">{value}</p>
+      <p className="text-3xl font-extrabold tracking-tight text-brand-gradient sm:text-4xl">{value}</p>
       <p className="mt-1 text-xs uppercase tracking-[0.18em] text-muted">{label}</p>
     </motion.div>
   );
@@ -153,7 +153,7 @@ export function TiltCard({
   const rotateY = useSpring(useTransform(mx, [0, 1], [-max, max]), { stiffness: 180, damping: 20 });
   const glareX = useTransform(mx, [0, 1], ["20%", "80%"]);
   const glareY = useTransform(my, [0, 1], ["15%", "85%"]);
-  const glareBg = useMotionTemplate`radial-gradient(420px circle at ${glareX} ${glareY}, rgba(255, 255, 255, 0.12), rgba(212, 175, 55, 0.1) 38%, transparent 62%)`;
+  const glareBg = useMotionTemplate`radial-gradient(420px circle at ${glareX} ${glareY}, rgba(255, 255, 255, 0.35), rgba(255, 122, 0, 0.12) 38%, transparent 62%)`;
 
   function handleMove(e: MouseEvent<HTMLDivElement>) {
     const el = ref.current;

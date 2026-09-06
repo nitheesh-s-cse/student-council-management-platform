@@ -50,16 +50,22 @@ export function AdminShell({ user, children }: { user: SessionUser; children: Re
     router.refresh();
   }
 
+  const navLinkClass = (active: boolean) =>
+    cn(
+      "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors",
+      active ? "bg-brand-gradient text-white font-semibold shadow-[0_6px_16px_rgba(255,122,0,0.25)]" : "text-[#4b5563] hover:bg-[#fff7ed] hover:text-[#f97316]",
+    );
+
   return (
-    <div className="flex min-h-screen bg-ink-950 text-ink-100">
-      <aside className={cn("fixed inset-y-0 left-0 z-50 w-64 shrink-0 flex-col border-r border-white/10 bg-ink-900 md:static md:flex", open ? "flex" : "hidden")}>
-        <div className="flex h-16 items-center gap-2.5 border-b border-white/10 px-5">
+    <div className="flex min-h-screen bg-[#fffcf8] text-[#18243a]">
+      <aside className={cn("fixed inset-y-0 left-0 z-50 w-64 shrink-0 flex-col border-r border-[#ffe7d2] bg-white md:static md:flex", open ? "flex" : "hidden")}>
+        <div className="flex h-16 items-center gap-2.5 border-b border-[#ffe7d2] px-5">
           <CouncilMark />
           <div>
-            <p className="text-xs font-bold uppercase tracking-wide text-white">Secure Control</p>
-            <p className="text-[10px] text-ink-300">PPGIT Student Council</p>
+            <p className="text-xs font-extrabold uppercase tracking-wide text-[#18243a]">Secure Control</p>
+            <p className="text-[10px] text-[#6b7280]">PPGIT Student Council</p>
           </div>
-          <button onClick={() => setOpen(false)} className="ml-auto rounded-lg p-1 text-ink-300 md:hidden"><X className="h-4 w-4" /></button>
+          <button onClick={() => setOpen(false)} className="ml-auto rounded-lg p-1 text-[#6b7280] md:hidden"><X className="h-4 w-4" /></button>
         </div>
         <nav className="flex-1 space-y-1 overflow-y-auto px-3 py-4">
           {NAV.map((item) => {
@@ -69,30 +75,29 @@ export function AdminShell({ user, children }: { user: SessionUser; children: Re
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className={cn(
-                  "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
-                  active ? "bg-brand-600 text-white" : "text-ink-200 hover:bg-white/5 hover:text-white",
-                )}
+                className={navLinkClass(active)}
               >
                 <item.icon className="h-4 w-4" /> {item.label}
               </Link>
             );
           })}
         </nav>
-        <div className="space-y-1 border-t border-white/10 p-3">
-          <Link href="/dashboard" className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-ink-200 hover:bg-white/5 hover:text-white">
+        <div className="space-y-1 border-t border-[#ffe7d2] p-3">
+          <Link href="/dashboard" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-[#4b5563] hover:bg-[#fff7ed] hover:text-[#f97316]">
             <ArrowLeft className="h-4 w-4" /> Back to member app
           </Link>
-          <button onClick={logout} className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-rose-300 hover:bg-white/5">
+          <button onClick={logout} className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-red-600 hover:bg-red-50">
             <LogOut className="h-4 w-4" /> Sign out
           </button>
         </div>
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex h-16 items-center gap-3 border-b border-white/10 bg-ink-900/60 px-4 backdrop-blur md:px-8">
-          <button onClick={() => setOpen(true)} className="shrink-0 rounded-lg border border-white/10 p-2 text-ink-200 md:hidden"><Menu className="h-4 w-4" /></button>
-          <p className="min-w-0 flex-1 truncate text-sm font-medium text-ink-200">Signed in as <span className="text-white">{user.memberName ?? user.email}</span> · {ROLE_LABELS[user.role]}</p>
+        <header className="flex h-16 items-center gap-3 border-b border-[#ffe7d2] bg-white/85 px-4 backdrop-blur md:px-8">
+          <button onClick={() => setOpen(true)} className="shrink-0 rounded-xl border border-[#ffd6b0] p-2 text-[#f97316] md:hidden"><Menu className="h-4 w-4" /></button>
+          <p className="min-w-0 flex-1 truncate text-sm font-medium text-[#6b7280]">
+            Signed in as <span className="font-semibold text-[#18243a]">{user.memberName ?? user.email}</span> · {ROLE_LABELS[user.role]}
+          </p>
         </header>
         <main className="flex-1 bg-[var(--bg)] text-[var(--text)]">{children}</main>
       </div>

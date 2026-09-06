@@ -39,7 +39,7 @@ function ResetPasswordForm() {
   }
 
   return (
-    <div className="surface rounded-2xl p-8 shadow-[var(--shadow-card-lg)]">
+    <div className="surface rounded-3xl p-8 shadow-[var(--shadow-card-lg)]">
       {done ? (
         <p className="text-sm text-emerald-600">Password updated. Redirecting you to sign in…</p>
       ) : !token ? (
@@ -55,7 +55,7 @@ function ResetPasswordForm() {
               placeholder="New password (min. 8 characters)"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="focus-ring h-11 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm"
+              className="focus-ring h-11 w-full rounded-xl border border-[var(--border)] bg-white px-3 text-sm"
             />
             {error && <p className="text-xs font-medium text-rose-600">{error}</p>}
             <Button type="submit" className="w-full" size="lg" disabled={loading}>
@@ -72,8 +72,16 @@ function ResetPasswordForm() {
 
 export default function ResetPasswordPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[var(--bg)] px-4 py-12">
-      <div className="w-full max-w-sm">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[var(--bg)] px-4 py-12">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-32 left-1/2 z-0 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-[#ff7a00]/8 blur-[140px]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-24 -right-24 z-0 h-[380px] w-[380px] rounded-full bg-[#ef4444]/7 blur-[130px]"
+      />
+      <div className="relative z-10 w-full max-w-sm">
         <div className="mb-8 flex justify-center"><CouncilWordmark /></div>
         <Suspense fallback={null}>
           <ResetPasswordForm />

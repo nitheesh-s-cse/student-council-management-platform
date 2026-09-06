@@ -284,7 +284,7 @@ export function ConversationView({
             onChange={(e) => { setText(e.target.value); notifyTyping(); }}
             onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && (e.preventDefault(), send())}
             placeholder="Type a message…"
-            className="focus-ring h-11 flex-1 rounded-full border border-[var(--border)] bg-[var(--surface-muted)] px-4 text-sm"
+            className="focus-ring h-11 flex-1 rounded-full border border-[var(--border)] bg-white px-4 text-sm"
           />
           <button onClick={send} className="focus-ring inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-600 text-white hover:bg-brand-700" aria-label="Send message">
             <Send className="h-4 w-4" />

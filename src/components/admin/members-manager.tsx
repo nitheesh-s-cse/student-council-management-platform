@@ -81,20 +81,21 @@ export function MembersManager({ initialMembers }: { initialMembers: Member[] })
         </select>
       </div>
 
-      <Card className="mt-6 overflow-x-auto">
-        <table className="w-full min-w-[720px] text-sm">
-          <thead>
-            <tr className="border-b border-[var(--border)] text-left text-xs uppercase tracking-wide text-muted">
-              <th className="px-4 py-3 font-medium">Member</th>
-              <th className="px-4 py-3 font-medium">Department</th>
-              <th className="px-4 py-3 font-medium">Category</th>
-              <th className="px-4 py-3 font-medium">Status</th>
-              <th className="px-4 py-3 font-medium text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.map((m) => (
-              <tr key={m.id} className="border-b border-[var(--border)] last:border-0">
+      <Card className="mt-6 overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[720px] text-sm">
+            <thead>
+              <tr className="bg-brand-gradient text-left text-xs uppercase tracking-wide text-white">
+                <th className="px-4 py-3 font-bold">Member</th>
+                <th className="px-4 py-3 font-bold">Department</th>
+                <th className="px-4 py-3 font-bold">Category</th>
+                <th className="px-4 py-3 font-bold">Status</th>
+                <th className="px-4 py-3 font-bold text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map((m) => (
+              <tr key={m.id} className="border-b border-[var(--border)] transition-colors last:border-0 hover:bg-[#fff7ed]">
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-2.5">
                     <Avatar name={m.fullName} src={m.photoUrl} size={32} />
@@ -122,6 +123,7 @@ export function MembersManager({ initialMembers }: { initialMembers: Member[] })
           </tbody>
         </table>
         {filtered.length === 0 && <p className="p-8 text-center text-sm text-muted">No members match your filters.</p>}
+        </div>
       </Card>
 
       {editing && (
@@ -365,7 +367,7 @@ function ImportModal({ onClose, onImported }: { onClose: () => void; onImported:
 
 function Modal({ title, onClose, children, wide }: { title: string; onClose: () => void; children: React.ReactNode; wide?: boolean }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+    <div className="modal-overlay fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
       <Card className={`w-full ${wide ? "max-w-2xl" : "max-w-lg"} max-h-[90vh] overflow-y-auto p-6`}>
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold text-[var(--text)]">{title}</h2>

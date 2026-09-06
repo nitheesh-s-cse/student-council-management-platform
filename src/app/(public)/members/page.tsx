@@ -42,13 +42,13 @@ export default async function MembersPage({
             name="q"
             defaultValue={params.q}
             placeholder="Search by name or department…"
-            className="focus-ring h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] pl-9 pr-3 text-sm"
+            className="focus-ring h-10 w-full rounded-xl border border-[var(--border)] bg-white pl-9 pr-3 text-sm"
           />
         </div>
         <select
           name="category"
           defaultValue={params.category ?? ""}
-          className="focus-ring h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm sm:w-auto"
+          className="focus-ring h-10 w-full rounded-xl border border-[var(--border)] bg-white px-3 text-sm sm:w-auto"
         >
           <option value="">All categories</option>
           <option value="board">Board</option>
@@ -58,14 +58,14 @@ export default async function MembersPage({
         <select
           name="department"
           defaultValue={params.department ?? ""}
-          className="focus-ring h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm sm:w-auto"
+          className="focus-ring h-10 w-full rounded-xl border border-[var(--border)] bg-white px-3 text-sm sm:w-auto"
         >
           <option value="">All departments</option>
           {departments.map((d) => (
             <option key={d} value={d}>{d}</option>
           ))}
         </select>
-        <button type="submit" className="focus-ring col-span-2 h-10 rounded-lg bg-brand-600 px-4 text-sm font-medium text-white hover:bg-brand-700 sm:w-auto">
+        <button type="submit" className="focus-ring col-span-2 h-10 rounded-xl bg-brand-gradient px-5 text-sm font-bold text-white shadow-[0_6px_16px_rgba(255,122,0,0.3)] transition-all duration-200 hover:-translate-y-0.5 sm:w-auto">
           Filter
         </button>
       </form>

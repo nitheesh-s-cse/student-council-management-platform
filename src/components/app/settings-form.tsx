@@ -107,7 +107,7 @@ export function SettingsForm({ notifyEmail, notifyPush, email }: { notifyEmail: 
             placeholder="Current password"
             value={currentPassword}
             onChange={(e) => setCurrentPassword(e.target.value)}
-            className="focus-ring h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm"
+            className="focus-ring h-10 w-full rounded-xl border border-[var(--border)] bg-white px-3 text-sm"
           />
           <input
             type="password"
@@ -116,7 +116,7 @@ export function SettingsForm({ notifyEmail, notifyPush, email }: { notifyEmail: 
             placeholder="New password (min. 8 characters)"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
-            className="focus-ring h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm"
+            className="focus-ring h-10 w-full rounded-xl border border-[var(--border)] bg-white px-3 text-sm"
           />
           {passwordError && <p className="text-xs font-medium text-rose-600">{passwordError}</p>}
           <Button type="submit" size="sm" disabled={passwordLoading}>

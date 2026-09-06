@@ -47,25 +47,25 @@ export default async function HomePage() {
       <CampusBackground />
       {/* Ultra premium ambience — aurora orbs, particles, grain */}
       <PremiumAmbience />
-      {/* Animated Glowing Halos */}
-      <div className="pointer-events-none absolute -top-40 left-1/2 -z-10 h-[650px] w-[950px] -translate-x-1/2 rounded-full bg-amber-500/5 blur-[160px] animate-pulse-glow" />
-      <div className="pointer-events-none absolute top-[45%] right-[-10%] -z-10 h-[550px] w-[550px] rounded-full bg-yellow-600/3 blur-[150px] animate-pulse-glow" />
+      {/* Warm decorative halos */}
+      <div className="pointer-events-none absolute -top-40 left-1/2 -z-10 h-[650px] w-[950px] -translate-x-1/2 rounded-full bg-[#ff7a00]/5 blur-[160px] animate-pulse-glow" />
+      <div className="pointer-events-none absolute top-[45%] right-[-10%] -z-10 h-[550px] w-[550px] rounded-full bg-[#ef4444]/4 blur-[150px] animate-pulse-glow" />
 
       {/* Hero Section */}
       <section className="relative px-4 pt-20 pb-28 sm:px-6 sm:pt-28 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col items-center text-center">
             <MotionDiv delay={0.1}>
-              <Badge tone="brand" className="mb-6 px-4 py-1.5 backdrop-blur-md shadow-[0_0_20px_rgba(212,175,55,0.2)]">
-                <Sparkles className="h-3.5 w-3.5 text-amber-300 animate-spin" style={{ animationDuration: '8s' }} />
+              <Badge tone="brand" className="mb-6 px-4 py-1.5 shadow-[0_2px_10px_rgba(255,122,0,0.12)]">
+                <Sparkles className="h-3.5 w-3.5 text-[#f97316] animate-spin" style={{ animationDuration: '8s' }} />
                 Academic Term {ACADEMIC_YEAR}
               </Badge>
             </MotionDiv>
 
             <MotionDiv delay={0.2}>
-              <h1 className="max-w-4xl font-serif text-[clamp(2rem,7.5vw,5.25rem)] font-normal leading-[1.08] tracking-tight break-words">
+              <h1 className="max-w-4xl text-[clamp(2.25rem,7vw,5rem)] font-extrabold leading-[1.06] tracking-tight text-[#18243a] break-words">
                 PPG Institute of Technology <br />
-                <span className="gold-gradient-text font-serif italic">Student Council</span>
+                <span className="text-brand-gradient">Student Council</span>
               </h1>
             </MotionDiv>
 
@@ -84,7 +84,7 @@ export default async function HomePage() {
 
             {/* Stats Bar */}
             <MotionDiv delay={0.65} className="mt-20 w-full max-w-4xl">
-              <div className="grid grid-cols-1 gap-3 rounded-3xl border border-amber-500/25 bg-[#121420]/80 backdrop-blur-2xl p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.65)] min-[400px]:grid-cols-3">
+              <div className="grid grid-cols-1 gap-3 rounded-3xl border border-[#ffd6b0] bg-white p-6 sm:p-8 shadow-[0_10px_30px_rgba(24,36,58,0.08)] min-[400px]:grid-cols-3">
                 <AnimatedStatCard value={`${memberCount}+`} label="Elected Members" delay={0.7} />
                 <AnimatedStatCard value={teamCount} label="Active Committees" delay={0.8} />
                 <AnimatedStatCard value="10" label="Departments" delay={0.9} />
@@ -96,15 +96,15 @@ export default async function HomePage() {
 
       {/* Premium marquee ticker */}
       <section className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="marquee-mask overflow-hidden rounded-full border border-amber-500/15 bg-[#0d0e14]/60 py-3.5 backdrop-blur-xl shadow-[0_0_30px_rgba(212,175,55,0.08)]">
+        <div className="marquee-mask overflow-hidden rounded-full border border-[#ffe7d2] bg-white py-3.5 shadow-sm">
           <div className="marquee-track">
             {[...TICKER, ...TICKER].map((k, i) => (
               <span
                 key={i}
-                className="mx-6 inline-flex items-center gap-4 text-[11px] font-semibold uppercase tracking-[0.32em] text-amber-200/60"
+                className="mx-6 inline-flex items-center gap-4 text-[11px] font-bold uppercase tracking-[0.32em] text-[#18243a]/60"
               >
                 {k}
-                <span aria-hidden="true" className="text-amber-500/70">✦</span>
+                <span aria-hidden="true" className="text-[#ff7a00]">✦</span>
               </span>
             ))}
           </div>
@@ -133,11 +133,11 @@ export default async function HomePage() {
           ].map((f) => (
             <StaggerItem key={f.title} className="h-full">
               <TiltCard className="h-full rounded-3xl">
-                <Card className="h-full p-8 transition-all duration-300 border-amber-500/15">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-300 border border-amber-500/25 shadow-[0_0_20px_rgba(212,175,55,0.15)]">
+                <Card className="h-full p-8 transition-all duration-300">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#fff7ed] text-[#f97316] border border-[#ffd6b0]">
                     <f.icon className="h-6 w-6" />
                   </div>
-                  <p className="mt-6 font-serif text-xl text-amber-100">{f.title}</p>
+                  <p className="mt-6 text-xl font-bold text-[#18243a]">{f.title}</p>
                   <p className="mt-2 text-sm leading-relaxed text-muted">{f.desc}</p>
                 </Card>
               </TiltCard>
@@ -147,7 +147,7 @@ export default async function HomePage() {
       </section>
 
       {/* Board Leadership */}
-      <section className="border-y border-amber-500/15 bg-[#0e1017]/80 py-24 backdrop-blur-2xl">
+      <section className="border-y border-[#ffe7d2] bg-[#fff9f2] py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <MotionDiv>
@@ -160,11 +160,11 @@ export default async function HomePage() {
               <StaggerItem key={m.id} className="h-full">
                 <TiltCard className="h-full rounded-3xl">
                   <Link href={`/members/${m.slug}`} className="block h-full">
-                    <Card className="flex h-full items-center gap-5 p-6 border-amber-500/15 transition-all">
+                    <Card className="flex h-full items-center gap-5 p-6 transition-all">
                       <Avatar name={m.fullName} src={m.photoUrl} size={62} />
                       <div className="min-w-0">
-                        <p className="truncate font-serif text-lg text-amber-100 group-hover:text-amber-300 transition-colors">{m.fullName}</p>
-                        <p className="text-xs font-semibold uppercase tracking-wider gold-gradient-text mt-0.5">{m.position}</p>
+                        <p className="truncate text-lg font-bold text-[#18243a] transition-colors group-hover:text-[#f97316]">{m.fullName}</p>
+                        <p className="mt-0.5 text-xs font-bold uppercase tracking-wider text-[#f97316]">{m.position}</p>
                         <p className="mt-1 text-xs text-muted">{m.department} · Year {m.year}</p>
                       </div>
                     </Card>
@@ -189,13 +189,13 @@ export default async function HomePage() {
               {latestAnnouncements.map((a) => (
                 <Card key={a.id} className="p-4.5 sm:p-6">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4">
-                    <p className="font-serif text-base sm:text-lg text-amber-100 min-w-0 flex-1">{a.title}</p>
+                    <p className="text-base sm:text-lg font-bold text-[#18243a] min-w-0 flex-1">{a.title}</p>
                     {a.priority !== "normal" && (
                       <Badge tone={a.priority === "urgent" ? "danger" : "warning"} className="shrink-0 self-start sm:self-auto">{a.priority}</Badge>
                     )}
                   </div>
                   <p className="mt-2.5 line-clamp-2 text-sm text-muted leading-relaxed">{a.content}</p>
-                  <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-amber-400/80">{formatDate(a.publishAt)}</p>
+                  <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-[#f97316]/90">{formatDate(a.publishAt)}</p>
                 </Card>
               ))}
             </div>
@@ -213,14 +213,14 @@ export default async function HomePage() {
               )}
               {upcomingEvents.map((e) => (
                 <Card key={e.id} className="flex gap-4 sm:gap-5 p-4.5 sm:p-6">
-                  <div className="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-2xl bg-amber-500/10 text-amber-300 border border-amber-500/30 shadow-[0_0_15px_rgba(212,175,55,0.15)]">
+                  <div className="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-2xl bg-brand-gradient text-white">
                     <span className="text-[10px] font-bold uppercase tracking-widest">{new Date(e.date).toLocaleString("en-IN", { month: "short" })}</span>
-                    <span className="font-serif text-lg font-bold leading-none mt-0.5">{new Date(e.date).getDate()}</span>
+                    <span className="text-lg font-bold leading-none mt-0.5">{new Date(e.date).getDate()}</span>
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="truncate font-serif text-base sm:text-lg text-amber-100">{e.title}</p>
+                    <p className="truncate text-base sm:text-lg font-bold text-[#18243a]">{e.title}</p>
                     <p className="mt-1 line-clamp-2 text-sm text-muted">{e.description}</p>
-                    {e.venue && <p className="mt-2 text-xs font-semibold text-amber-400/80">📍 {e.venue}</p>}
+                    {e.venue && <p className="mt-2 text-xs font-semibold text-[#f97316]">📍 {e.venue}</p>}
                   </div>
                 </Card>
               ))}
@@ -235,16 +235,17 @@ export default async function HomePage() {
       {/* Luxury CTA */}
       <section className="mx-auto max-w-7xl px-4 pb-28 sm:px-6 lg:px-8">
         <MotionDiv delay={0.2}>
-          <Card className="relative overflow-hidden p-8 text-center sm:text-left sm:flex sm:items-center sm:justify-between border border-amber-500/30 bg-gradient-to-r from-[#141624]/90 via-[#1a1d2e]/90 to-[#121420]/90 backdrop-blur-2xl sm:p-10 lg:p-12">
-            <div className="pointer-events-none absolute right-0 top-0 h-full w-1/2 bg-amber-500/10 blur-[100px] animate-pulse-glow" />
+          <Card className="relative overflow-hidden p-8 text-center sm:text-left sm:flex sm:items-center sm:justify-between border-[#ffd6b0] bg-brand-gradient sm:p-10 lg:p-12">
+            <div className="pointer-events-none absolute right-0 top-0 h-full w-1/2 bg-white/15 blur-[100px] animate-pulse-glow" />
+            <div className="pointer-events-none absolute -left-24 -top-24 h-64 w-64 rounded-full bg-white/20 blur-[80px] animate-pulse-glow" />
             <div className="relative z-10">
-              <h3 className="font-serif text-2xl text-amber-100 font-normal">Council Member Portal Access</h3>
-              <p className="mt-2 text-sm text-muted max-w-lg">
+              <h3 className="text-2xl font-extrabold text-white">Council Member Portal Access</h3>
+              <p className="mt-2 text-sm text-white/85 max-w-lg">
                 Authorized council delegates and committee leads can sign in to manage tasks, team discussions, and executive voting.
               </p>
             </div>
             <div className="relative z-10 mt-8 sm:mt-0 shrink-0">
-              <LinkButton href="/login" size="lg">
+              <LinkButton href="/login" size="lg" variant="secondary" className="shadow-[0_10px_28px_rgba(24,36,58,0.18)]">
                 Member Sign In <ArrowRight className="h-4 w-4" />
               </LinkButton>
             </div>

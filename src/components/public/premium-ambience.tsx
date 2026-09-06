@@ -21,7 +21,7 @@ export function PremiumAmbience({ className }: { className?: string }) {
 
   return (
     <div aria-hidden="true" className={cn("pointer-events-none absolute inset-0 -z-10 overflow-hidden", className)}>
-      {/* Drifting aurora orbs */}
+      {/* Drifting warm orbs */}
       <div
         className="aurora-orb"
         style={{
@@ -29,7 +29,7 @@ export function PremiumAmbience({ className }: { className?: string }) {
           height: 520,
           left: "-12%",
           top: "-18%",
-          background: "radial-gradient(circle, rgba(212,175,55,0.24), rgba(212,175,55,0.06) 55%, transparent 72%)",
+          background: "radial-gradient(circle, rgba(255,122,0,0.14), rgba(255,122,0,0.04) 55%, transparent 72%)",
           animation: "aurora-a 18s ease-in-out infinite",
         }}
       />
@@ -40,7 +40,7 @@ export function PremiumAmbience({ className }: { className?: string }) {
           height: 430,
           right: "-10%",
           top: "2%",
-          background: "radial-gradient(circle, rgba(140,110,50,0.2), rgba(140,110,50,0.05) 55%, transparent 72%)",
+          background: "radial-gradient(circle, rgba(239,68,68,0.1), rgba(239,68,68,0.03) 55%, transparent 72%)",
           animation: "aurora-b 22s ease-in-out infinite",
         }}
       />
@@ -51,12 +51,12 @@ export function PremiumAmbience({ className }: { className?: string }) {
           height: 360,
           left: "16%",
           top: "52%",
-          background: "radial-gradient(circle, rgba(212,175,55,0.14), transparent 70%)",
+          background: "radial-gradient(circle, rgba(255,154,71,0.08), transparent 70%)",
           animation: "aurora-c 26s ease-in-out infinite",
         }}
       />
 
-      {/* Rising gold particles */}
+      {/* Rising orange sparks */}
       {particles.map((p, i) => (
         <span
           key={i}

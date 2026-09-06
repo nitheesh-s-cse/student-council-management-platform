@@ -67,16 +67,22 @@ export function TaskBoard({
           <p className="mt-1 text-sm text-muted">Track everything the council is working on right now.</p>
         </div>
         <div className="flex items-center gap-2">
-          <div className="flex rounded-lg border border-[var(--border)] p-0.5">
+          <div className="inline-flex items-center gap-1 rounded-full border border-[#ffd6b0] bg-white p-1 shadow-sm">
             <button
               onClick={() => setView("kanban")}
-              className={cn("focus-ring flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium", view === "kanban" ? "bg-brand-600 text-white" : "text-muted")}
+              className={cn(
+                "focus-ring inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-semibold transition-all duration-200",
+                view === "kanban" ? "bg-brand-gradient text-white shadow-[0_4px_12px_rgba(255,122,0,0.25)]" : "text-muted hover:text-[#f97316]",
+              )}
             >
               <LayoutGrid className="h-3.5 w-3.5" /> Board
             </button>
             <button
               onClick={() => setView("list")}
-              className={cn("focus-ring flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium", view === "list" ? "bg-brand-600 text-white" : "text-muted")}
+              className={cn(
+                "focus-ring inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-semibold transition-all duration-200",
+                view === "list" ? "bg-brand-gradient text-white shadow-[0_4px_12px_rgba(255,122,0,0.25)]" : "text-muted hover:text-[#f97316]",
+              )}
             >
               <ListIcon className="h-3.5 w-3.5" /> List
             </button>
@@ -222,7 +228,7 @@ function CreateTaskModal({
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+    <div className="modal-overlay fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
       <Card className="w-full max-w-lg max-h-[90vh] overflow-y-auto p-6">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold text-[var(--text)]">Create task</h2>
@@ -238,7 +244,7 @@ function CreateTaskModal({
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Prepare Tech Fest poster"
-              className="focus-ring mt-1.5 h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm"
+              className="focus-ring mt-1.5 h-10 w-full rounded-xl border border-[var(--border)] bg-white px-3 text-sm"
             />
           </div>
           <div>
@@ -253,7 +259,7 @@ function CreateTaskModal({
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="text-xs font-medium text-muted">Team</label>
-              <select value={teamId} onChange={(e) => setTeamId(e.target.value)} className="focus-ring mt-1.5 h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-2 text-sm">
+              <select value={teamId} onChange={(e) => setTeamId(e.target.value)} className="focus-ring mt-1.5 h-10 w-full rounded-xl border border-[var(--border)] bg-white px-2 text-sm">
                 <option value="">No team</option>
                 {teams.map((t) => (
                   <option key={t.id} value={t.id}>{t.name}</option>
@@ -262,7 +268,7 @@ function CreateTaskModal({
             </div>
             <div>
               <label className="text-xs font-medium text-muted">Priority</label>
-              <select value={priority} onChange={(e) => setPriority(e.target.value)} className="focus-ring mt-1.5 h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-2 text-sm">
+              <select value={priority} onChange={(e) => setPriority(e.target.value)} className="focus-ring mt-1.5 h-10 w-full rounded-xl border border-[var(--border)] bg-white px-2 text-sm">
                 {TASK_PRIORITIES.map((p) => (
                   <option key={p} value={p}>{PRIORITY_LABELS[p]}</option>
                 ))}
@@ -271,7 +277,7 @@ function CreateTaskModal({
           </div>
           <div>
             <label className="text-xs font-medium text-muted">Deadline</label>
-            <input type="date" value={deadline} onChange={(e) => setDeadline(e.target.value)} className="focus-ring mt-1.5 h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm" />
+            <input type="date" value={deadline} onChange={(e) => setDeadline(e.target.value)} className="focus-ring mt-1.5 h-10 w-full rounded-xl border border-[var(--border)] bg-white px-3 text-sm" />
           </div>
           <div>
             <label className="text-xs font-medium text-muted">Assign to members</label>

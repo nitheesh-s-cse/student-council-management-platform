@@ -72,7 +72,7 @@ export function ChatList({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search conversations…"
-            className="focus-ring h-9 w-full rounded-lg border border-[var(--border)] bg-[var(--surface-muted)] pl-9 pr-3 text-sm"
+            className="focus-ring h-9 w-full rounded-xl border border-[var(--border)] bg-white pl-9 pr-3 text-sm"
           />
         </div>
       </div>
@@ -116,7 +116,7 @@ export function ChatList({
       </div>
 
       {showDirectory && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+        <div className="modal-overlay fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
           <div className="surface w-full max-w-sm rounded-2xl p-5 shadow-[var(--shadow-card-lg)]">
             <div className="flex items-center justify-between">
               <p className="text-sm font-semibold text-[var(--text)]">Start a conversation</p>

@@ -189,7 +189,7 @@ function CreatePollModal({ onClose, onCreated }: { onClose: () => void; onCreate
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+    <div className="modal-overlay fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
       <Card className="w-full max-w-lg max-h-[90vh] overflow-y-auto p-6">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold text-[var(--text)]">Create poll</h2>
@@ -198,11 +198,11 @@ function CreatePollModal({ onClose, onCreated }: { onClose: () => void; onCreate
         <form onSubmit={submit} className="mt-5 space-y-4">
           <div>
             <label className="text-xs font-medium text-muted">Question</label>
-            <input required value={question} onChange={(e) => setQuestion(e.target.value)} className="focus-ring mt-1.5 h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm" />
+            <input required value={question} onChange={(e) => setQuestion(e.target.value)} className="focus-ring mt-1.5 h-10 w-full rounded-xl border border-[var(--border)] bg-white px-3 text-sm" />
           </div>
           <div>
             <label className="text-xs font-medium text-muted">Poll type</label>
-            <select value={type} onChange={(e) => setType(e.target.value as typeof type)} className="focus-ring mt-1.5 h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-2 text-sm">
+            <select value={type} onChange={(e) => setType(e.target.value as typeof type)} className="focus-ring mt-1.5 h-10 w-full rounded-xl border border-[var(--border)] bg-white px-2 text-sm">
               <option value="single">Single choice</option>
               <option value="multiple">Multiple choice</option>
               <option value="yes_no">Yes / No</option>
@@ -231,7 +231,7 @@ function CreatePollModal({ onClose, onCreated }: { onClose: () => void; onCreate
           </div>
           <div>
             <label className="text-xs font-medium text-muted">Closes at (optional)</label>
-            <input type="datetime-local" value={closesAt} onChange={(e) => setClosesAt(e.target.value)} className="focus-ring mt-1.5 h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm" />
+            <input type="datetime-local" value={closesAt} onChange={(e) => setClosesAt(e.target.value)} className="focus-ring mt-1.5 h-10 w-full rounded-xl border border-[var(--border)] bg-white px-3 text-sm" />
           </div>
           {error && <p className="text-xs font-medium text-rose-600">{error}</p>}
           <Button type="submit" className="w-full" disabled={loading}>{loading && <Loader2 className="h-4 w-4 animate-spin" />} Publish poll</Button>

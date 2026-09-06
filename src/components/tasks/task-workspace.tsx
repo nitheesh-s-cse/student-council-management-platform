@@ -221,7 +221,7 @@ export function TaskWorkspace({
                 onChange={(e) => setComment(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && postComment()}
                 placeholder="Write a comment…"
-                className="focus-ring h-10 flex-1 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm"
+                className="focus-ring h-10 flex-1 rounded-xl border border-[var(--border)] bg-white px-3 text-sm"
               />
               <button onClick={postComment} disabled={posting} className="focus-ring inline-flex h-10 items-center gap-1.5 rounded-lg bg-brand-600 px-3 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50">
                 <Send className="h-3.5 w-3.5" />
