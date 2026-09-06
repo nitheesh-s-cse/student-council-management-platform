@@ -15,11 +15,14 @@ export default async function ProfilePage() {
 
   if (!user.memberId) {
     return (
-      <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 lg:px-8">
+      <div className="section-warm relative">
+        <div aria-hidden="true" className="bg-glow bg-glow-orange bg-glow-md" style={{ left: "-5%", top: "-8%" }} />
+        <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 lg:px-8">
         <Card className="p-8 text-center">
           <p className="text-sm font-semibold text-[var(--text)]">System administrator account</p>
           <p className="mt-1 text-sm text-muted">This account manages the platform and is not linked to a public council member profile.</p>
         </Card>
+        </div>
       </div>
     );
   }
@@ -27,7 +30,9 @@ export default async function ProfilePage() {
   const [member] = await db.select().from(members).where(eq(members.id, user.memberId)).limit(1);
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="section-soft relative">
+      <div aria-hidden="true" className="bg-glow bg-glow-orange bg-glow-md" style={{ left: "-5%", top: "-10%" }} />
+      <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="flex items-center gap-4">
         <Avatar name={member.fullName} src={member.photoUrl} size={72} />
         <div>
@@ -41,6 +46,7 @@ export default async function ProfilePage() {
 
       <div className="mt-8">
         <ProfileForm member={member} />
+      </div>
       </div>
     </div>
   );

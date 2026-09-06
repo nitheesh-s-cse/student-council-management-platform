@@ -24,7 +24,10 @@ export default async function PublicEventsPage() {
     .orderBy(asc(events.date));
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
+    <div className="section-radial-orange relative">
+      <div aria-hidden="true" className="bg-glow bg-glow-orange bg-glow-md" style={{ left: "-5%", top: "-8%" }} />
+      <div aria-hidden="true" className="bg-glow bg-glow-red bg-glow-sm" style={{ right: "-3%", bottom: "-4%", opacity: 0.7 }} />
+      <div className="mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
       <SectionHeading
         eyebrow="Council calendar"
         title="Events"
@@ -58,6 +61,7 @@ export default async function PublicEventsPage() {
           ))}
         </div>
       )}
+    </div>
     </div>
   );
 }

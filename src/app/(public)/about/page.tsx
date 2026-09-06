@@ -44,9 +44,9 @@ export default async function AboutPage() {
       {/* Ultra premium ambience — aurora orbs, particles, grain */}
       <PremiumAmbience />
 
-      <section className="relative overflow-hidden border-b border-[var(--border)]">
-        <div className="absolute inset-0 -z-10">
-          <Image src="/images/about-pattern.jpg" alt="" fill className="object-cover opacity-[0.12] dark:opacity-[0.2]" />
+      <section className="section-hero border-b border-[var(--border)]">
+        <div className="absolute inset-0 -z-[1]">
+          <Image src="/images/about-pattern.jpg" alt="" fill className="object-cover opacity-[0.1] dark:opacity-[0.16]" />
         </div>
         <div className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6 lg:px-8">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-600">About the Council</p>
@@ -62,7 +62,10 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+      <section className="section-radial-orange">
+        <div aria-hidden="true" className="bg-glow bg-glow-orange bg-glow-md" style={{ left: "-4%", top: "10%" }} />
+        <div aria-hidden="true" className="bg-glow bg-glow-red bg-glow-sm" style={{ right: "-3%", bottom: "-6%", opacity: 0.7 }} />
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <SectionHeading eyebrow="Our mission" title="Why the council exists" description="Four responsibilities guide everything we do." />
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {PILLARS.map((p) => (
@@ -75,9 +78,11 @@ export default async function AboutPage() {
             </Card>
           ))}
         </div>
+        </div>
       </section>
 
-      <section className="border-t border-[var(--border)] bg-[var(--surface)]">
+      <section className="section-warm border-t border-[var(--border)]">
+        <div aria-hidden="true" className="bg-glow bg-glow-warm bg-glow-md" style={{ right: "-5%", top: "-16%" }} />
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <SectionHeading eyebrow="Structure" title="How the council is organized" description="A six-member board oversees the council, supported by 25 executive members and nine standing committees that run day-to-day operations." />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

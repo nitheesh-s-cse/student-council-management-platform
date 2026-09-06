@@ -89,7 +89,13 @@ export function AppShell({ user, children }: { user: SessionUser; children: Reac
   const isNavActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
-    <div className="flex min-h-screen bg-[#fffcf8] text-[#18243a]">
+    <div className="relative flex min-h-screen bg-[#fffcf8] text-[#18243a]">
+      {/* Ambient background layer */}
+      <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-[1] overflow-hidden">
+        <div className="bg-glow bg-glow-orange bg-glow-lg" style={{ left: "-8%", top: "-12%" }} />
+        <div className="bg-glow bg-glow-red bg-glow-md" style={{ right: "-5%", top: "6%" }} />
+        <div className="bg-glow bg-glow-warm bg-glow-sm" style={{ left: "6%", bottom: "10%", opacity: 0.5 }} />
+      </div>
       {/* Desktop sidebar */}
       <aside className="hidden w-64 shrink-0 flex-col border-r border-[#ffe7d2] bg-white md:flex">
         <div className="flex h-20 items-center border-b border-[#ffe7d2] px-6">

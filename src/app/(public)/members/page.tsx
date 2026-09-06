@@ -27,7 +27,10 @@ export default async function MembersPage({
   const departments = Array.from(new Set(list.map((m) => m.department))).sort();
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+    <div className="section-warm relative">
+      <div aria-hidden="true" className="bg-glow bg-glow-orange bg-glow-lg" style={{ left: "-6%", top: "-10%" }} />
+      <div aria-hidden="true" className="bg-glow bg-glow-red bg-glow-md" style={{ right: "-4%", top: "8%" }} />
+      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
       <SectionHeading
         eyebrow="Council roster"
         title="Member Directory"
@@ -101,6 +104,7 @@ export default async function MembersPage({
           ))}
         </div>
       )}
+    </div>
     </div>
   );
 }

@@ -12,11 +12,14 @@ export default async function SettingsPage() {
   const [row] = await db.select().from(users).where(eq(users.id, user.id)).limit(1);
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="section-warm relative">
+      <div aria-hidden="true" className="bg-glow bg-glow-warm bg-glow-md" style={{ left: "-5%", top: "-8%" }} />
+      <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 lg:px-8">
       <h1 className="text-2xl font-semibold tracking-tight text-[var(--text)]">Settings</h1>
       <p className="mt-1 text-sm text-muted">Manage your account security, theme and notification preferences.</p>
       <div className="mt-8">
         <SettingsForm notifyEmail={row.notifyEmail} notifyPush={row.notifyPush} email={row.email} />
+      </div>
       </div>
     </div>
   );

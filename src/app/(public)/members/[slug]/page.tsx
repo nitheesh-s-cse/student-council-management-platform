@@ -19,7 +19,9 @@ export default async function MemberProfilePage({ params }: { params: Promise<{ 
 
   return (
     <div>
-      <section className="border-b border-[var(--border)] bg-[var(--surface)]">
+      <section className="section-hero border-b border-[var(--border)]">
+        <div aria-hidden="true" className="bg-glow bg-glow-orange bg-glow-md" style={{ left: "-4%", top: "-14%" }} />
+        <div aria-hidden="true" className="bg-glow bg-glow-red bg-glow-sm" style={{ right: "-2%", top: "-6%", opacity: 0.6 }} />
         <div className="mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
           <Link href="/members" className="focus-ring inline-flex items-center gap-1.5 text-sm text-muted hover:text-brand-600">
             <ArrowLeft className="h-3.5 w-3.5" /> Back to directory
@@ -42,7 +44,9 @@ export default async function MemberProfilePage({ params }: { params: Promise<{ 
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-5xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-3 lg:px-8">
+      <section className="section-soft">
+        <div aria-hidden="true" className="bg-glow bg-glow-warm bg-glow-md" style={{ right: "-4%", top: "-14%", opacity: 0.6 }} />
+        <div className="mx-auto grid max-w-5xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-3 lg:px-8">
         <div className="space-y-8 lg:col-span-2">
           <div>
             <SectionHeading title="About" className="mb-3" />
@@ -127,6 +131,7 @@ export default async function MemberProfilePage({ params }: { params: Promise<{ 
               </div>
             </Card>
           )}
+        </div>
         </div>
       </section>
     </div>

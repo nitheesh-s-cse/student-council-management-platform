@@ -108,7 +108,7 @@ export function TaskWorkspace({
           <select
             value={task.status}
             onChange={(e) => changeStatus(e.target.value)}
-            className="focus-ring h-10 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm font-medium"
+            className="focus-ring h-10 rounded-xl border border-[var(--border)] bg-white px-3 text-sm font-medium"
           >
             {TASK_STATUSES.map((s) => (
               <option key={s} value={s}>{TASK_STATUS_LABELS[s]}</option>
@@ -163,7 +163,7 @@ export function TaskWorkspace({
               onChange={(e) => setUpdateText(e.target.value)}
               placeholder="e.g. Poster first draft completed."
               rows={3}
-              className="focus-ring mt-3 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm"
+              className="focus-ring mt-3 w-full rounded-xl border border-[var(--border)] bg-white px-3 py-2 text-sm"
             />
             <div className="mt-3 flex items-center gap-3">
               <input

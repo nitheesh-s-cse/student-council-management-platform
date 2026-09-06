@@ -253,7 +253,7 @@ function CreateTaskModal({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={3}
-              className="focus-ring mt-1.5 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm"
+              className="focus-ring mt-1.5 w-full rounded-xl border border-[var(--border)] bg-white px-3 py-2 text-sm"
             />
           </div>
           <div className="grid grid-cols-2 gap-3">

@@ -218,7 +218,7 @@ function CreatePollModal({ onClose, onCreated }: { onClose: () => void; onCreate
                     value={o}
                     onChange={(e) => setOptions((prev) => prev.map((x, idx) => (idx === i ? e.target.value : x)))}
                     placeholder={`Option ${i + 1}`}
-                    className="focus-ring h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm"
+                    className="focus-ring h-10 w-full rounded-xl border border-[var(--border)] bg-white px-3 text-sm"
                   />
                 ))}
                 <button type="button" onClick={() => setOptions((prev) => [...prev, ""])} className="text-xs font-medium text-brand-600 hover:underline">+ Add option</button>

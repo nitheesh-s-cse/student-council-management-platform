@@ -55,7 +55,10 @@ export default async function DashboardPage() {
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="section-soft relative">
+      <div aria-hidden="true" className="bg-glow bg-glow-orange bg-glow-lg" style={{ left: "-6%", top: "-12%" }} />
+      <div aria-hidden="true" className="bg-glow bg-glow-red bg-glow-md" style={{ right: "-4%", top: "10%" }} />
+      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <p className="text-xs font-medium uppercase tracking-wide text-muted">
@@ -196,6 +199,7 @@ export default async function DashboardPage() {
             </div>
           </Card>
         </div>
+      </div>
       </div>
     </div>
   );

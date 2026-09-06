@@ -17,7 +17,10 @@ export default async function TeamDetailPage({ params }: { params: Promise<{ slu
   const pct = tasks.length ? Math.round((completed / tasks.length) * 100) : 0;
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="section-soft relative">
+      <div aria-hidden="true" className="bg-glow bg-glow-orange bg-glow-md" style={{ left: "-5%", top: "-10%" }} />
+      <div aria-hidden="true" className="bg-glow bg-glow-red bg-glow-sm" style={{ right: "-3%", top: "20%", opacity: 0.6 }} />
+      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
       <h1 className="text-2xl font-semibold tracking-tight text-[var(--text)]">{team.name}</h1>
       <p className="mt-1 max-w-2xl text-sm text-muted">{team.description}</p>
 
@@ -70,6 +73,7 @@ export default async function TeamDetailPage({ params }: { params: Promise<{ slu
             ))}
           </div>
         </Card>
+      </div>
       </div>
     </div>
   );

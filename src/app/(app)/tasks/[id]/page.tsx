@@ -17,8 +17,11 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
   const canManage = roleAtLeast(user.role, "team_lead") || detail.task.createdByUserId === user.id;
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="section-soft relative">
+      <div aria-hidden="true" className="bg-glow bg-glow-orange bg-glow-md" style={{ left: "-5%", top: "-10%" }} />
+      <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
       <TaskWorkspace detail={detail} canManage={canManage} currentUserId={user.id} />
+      </div>
     </div>
   );
 }

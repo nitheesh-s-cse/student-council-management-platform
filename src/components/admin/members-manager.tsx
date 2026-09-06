@@ -71,9 +71,9 @@ export function MembersManager({ initialMembers }: { initialMembers: Member[] })
       <div className="mt-6 flex flex-wrap items-center gap-3">
         <div className="relative flex-1 min-w-[200px]">
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
-          <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search members…" className="focus-ring h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] pl-9 pr-3 text-sm" />
+          <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search members…" className="focus-ring h-10 w-full rounded-xl border border-[var(--border)] bg-white pl-9 pr-3 text-sm" />
         </div>
-        <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)} className="focus-ring h-10 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm">
+        <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)} className="focus-ring h-10 rounded-xl border border-[var(--border)] bg-white px-3 text-sm">
           <option value="">All categories</option>
           <option value="board">Board</option>
           <option value="executive">Executive</option>

@@ -52,7 +52,10 @@ export default async function HomePage() {
       <div className="pointer-events-none absolute top-[45%] right-[-10%] -z-10 h-[550px] w-[550px] rounded-full bg-[#ef4444]/4 blur-[150px] animate-pulse-glow" />
 
       {/* Hero Section */}
-      <section className="relative px-4 pt-20 pb-28 sm:px-6 sm:pt-28 lg:px-8">
+      <section className="section-hero px-4 pt-20 pb-28 sm:px-6 sm:pt-28 lg:px-8">
+        <div aria-hidden="true" className="bg-glow bg-glow-orange bg-glow-lg" style={{ left: "-4%", top: "-8%" }} />
+        <div aria-hidden="true" className="bg-glow bg-glow-red bg-glow-md" style={{ right: "-6%", top: "12%" }} />
+        <div aria-hidden="true" className="bg-glow bg-glow-warm bg-glow-sm" style={{ left: "22%", top: "58%", opacity: 0.5 }} />
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col items-center text-center">
             <MotionDiv delay={0.1}>
@@ -112,7 +115,10 @@ export default async function HomePage() {
       </section>
 
       {/* Platform Features Grid */}
-      <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+      <section className="section-radial-orange">
+        <div aria-hidden="true" className="bg-glow bg-glow-orange bg-glow-md" style={{ left: "-5%", top: "6%" }} />
+        <div aria-hidden="true" className="bg-glow bg-glow-red bg-glow-sm" style={{ right: "-3%", bottom: "0%", opacity: 0.7 }} />
+        <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
         <MotionDiv>
           <SectionHeading
             eyebrow="Integrated Governance"
@@ -144,10 +150,13 @@ export default async function HomePage() {
             </StaggerItem>
           ))}
         </StaggerGrid>
+        </div>
       </section>
 
       {/* Board Leadership */}
-      <section className="border-y border-[#ffe7d2] bg-[#fff9f2] py-24">
+      <section className="section-warm border-y border-[#ffe7d2] py-24">
+        <div aria-hidden="true" className="bg-glow bg-glow-orange bg-glow-lg" style={{ right: "-6%", top: "-14%" }} />
+        <div aria-hidden="true" className="bg-glow bg-glow-red bg-glow-sm" style={{ left: "4%", bottom: "-8%", opacity: 0.6 }} />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <MotionDiv>
@@ -177,7 +186,8 @@ export default async function HomePage() {
       </section>
 
       {/* Announcements & Events */}
-      <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+      <section className="section-soft">
+        <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-2">
           {/* Bulletins */}
           <MotionDiv delay={0.1}>
@@ -230,11 +240,14 @@ export default async function HomePage() {
             </LinkButton>
           </MotionDiv>
         </div>
+        </div>
       </section>
 
       {/* Luxury CTA */}
-      <section className="mx-auto max-w-7xl px-4 pb-28 sm:px-6 lg:px-8">
-        <MotionDiv delay={0.2}>
+      <section className="section-white">
+        <div className="mx-auto max-w-7xl px-4 pb-28 sm:px-6 lg:px-8">
+        <div aria-hidden="true" className="bg-glow bg-glow-warm bg-glow-md" style={{ right: "8%", top: "-40%", opacity: 0.8 }} />
+        <MotionDiv delay={0.2} className="relative">
           <Card className="relative overflow-hidden p-8 text-center sm:text-left sm:flex sm:items-center sm:justify-between border-[#ffd6b0] bg-brand-gradient sm:p-10 lg:p-12">
             <div className="pointer-events-none absolute right-0 top-0 h-full w-1/2 bg-white/15 blur-[100px] animate-pulse-glow" />
             <div className="pointer-events-none absolute -left-24 -top-24 h-64 w-64 rounded-full bg-white/20 blur-[80px] animate-pulse-glow" />
@@ -251,6 +264,7 @@ export default async function HomePage() {
             </div>
           </Card>
         </MotionDiv>
+        </div>
       </section>
     </div>
   );

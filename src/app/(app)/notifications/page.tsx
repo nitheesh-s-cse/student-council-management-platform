@@ -10,8 +10,11 @@ export default async function NotificationsPage() {
   const notifications = await listNotifications(user.id, 50);
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="section-soft relative">
+      <div aria-hidden="true" className="bg-glow bg-glow-orange bg-glow-md" style={{ left: "-5%", top: "-8%" }} />
+      <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
       <NotificationsList initialNotifications={notifications} />
+      </div>
     </div>
   );
 }
