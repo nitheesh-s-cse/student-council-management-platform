@@ -49,15 +49,14 @@ export default async function HomePage() {
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col items-center text-center">
             <MotionDiv delay={0.1}>
-              <Badge tone="brand" className="mb-6 px-4 py-1.5 shadow-[0_2px_10px_rgba(255,122,0,0.12)]">
-                <Sparkles className="h-3.5 w-3.5 text-[#f97316] animate-spin" style={{ animationDuration: '8s' }} />
-                Academic Term {ACADEMIC_YEAR}
-              </Badge>
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#ffd6b0] bg-[#fff7ed] px-4 py-1.5 text-xs font-black tracking-widest text-[#c2410c] uppercase shadow-xs">
+                <span role="img" aria-label="campus">🏛️</span> AUTONOMOUS CAMPUS · ANNA UNIVERSITY AFFILIATED · TERM {ACADEMIC_YEAR}
+              </div>
             </MotionDiv>
 
             <MotionDiv delay={0.2}>
-              <h1 className="max-w-4xl text-[clamp(2.25rem,7vw,5rem)] font-extrabold leading-[1.06] tracking-tight text-[#18243a] break-words">
-                PPG Institute of Technology <br />
+              <h1 className="max-w-4xl text-[clamp(2.25rem,7vw,5rem)] font-black leading-[1.06] tracking-tight text-[#0f172a] break-words">
+                PPG <span className="text-[#ea580c]">Institute of Technology</span> <br />
                 <span className="text-brand-gradient">Student Council</span>
               </h1>
             </MotionDiv>
