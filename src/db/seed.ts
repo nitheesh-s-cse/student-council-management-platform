@@ -448,16 +448,6 @@ async function main() {
       isPublic: true,
     },
     {
-      title: "Tech Fest 2026",
-      description: "Flagship annual technical festival featuring hackathons, workshops and expos.",
-      date: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
-      venue: "PPGIT Campus Grounds",
-      organizerUserId: boardCreator,
-      teamId: eventTeamId,
-      status: "planned",
-      isPublic: true,
-    },
-    {
       title: "Board Strategy Meeting",
       description: "Internal planning meeting for the board on Q2 initiatives.",
       date: new Date(Date.now() + 1000 * 60 * 60 * 24 * 3),
