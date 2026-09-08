@@ -1,9 +1,10 @@
-import { CalendarDays } from "lucide-react";
+import Link from "next/link";
+import { CalendarDays, ArrowRight } from "lucide-react";
 import { db } from "@/db";
 import { events, teams } from "@/db/schema";
 import { and, eq, asc } from "drizzle-orm";
 import { Card, Badge, EmptyState, SectionHeading } from "@/components/ui/primitives";
-import { formatDate, formatTime } from "@/lib/utils";
+import { formatDate, formatTime, cn } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
@@ -24,7 +25,10 @@ export default async function PublicEventsPage() {
     .orderBy(asc(events.date));
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
+    <div className="section-gradient relative">
+      <div aria-hidden="true" className="background-glow background-glow-orange bg-glow-md" style={{ left: "-5%", top: "-8%" }} />
+      <div aria-hidden="true" className="background-glow background-glow-red bg-glow-sm" style={{ right: "-3%", bottom: "-4%", opacity: 0.6 }} />
+      <div className="mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
       <SectionHeading
         eyebrow="Council calendar"
         title="Events"
@@ -36,28 +40,55 @@ export default async function PublicEventsPage() {
         </div>
       ) : (
         <div className="mt-10 space-y-4">
-          {rows.map(({ event, team }) => (
-            <Card key={event.id} className="flex flex-col gap-4 p-6 sm:flex-row sm:items-center">
-              <div className="flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-xl bg-brand-50 text-brand-700 dark:bg-brand-900/30 dark:text-brand-200">
-                <span className="text-[11px] font-semibold uppercase">{new Date(event.date).toLocaleString("en-IN", { month: "short" })}</span>
-                <span className="text-xl font-bold leading-none">{new Date(event.date).getDate()}</span>
-              </div>
-              <div className="min-w-0 flex-1">
-                <div className="flex flex-wrap items-center gap-2">
-                  <p className="text-[16px] font-semibold text-[var(--text)]">{event.title}</p>
-                  <Badge tone={STATUS_TONE[event.status]}>{event.status}</Badge>
+          {rows.map(({ event, team }) => {
+            const isSymposium = event.title.toLowerCase().includes("symposium");
+            return (
+              <Card
+                key={event.id}
+                className={cn(
+                  "flex flex-col gap-4 p-4.5 sm:p-6 sm:flex-row sm:items-center transition-all duration-300",
+                  isSymposium && "border-[#ff9a47] bg-gradient-to-r from-white via-[#fffaf5] to-white shadow-[0_8px_24px_rgba(255,122,0,0.1)]",
+                )}
+              >
+                <div className="flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-2xl bg-[#fff7ed] text-[#f97316] border border-[#ffd6b0]">
+                  <span className="text-[11px] font-bold uppercase">{new Date(event.date).toLocaleString("en-IN", { month: "short" })}</span>
+                  <span className="text-xl font-bold leading-none">{new Date(event.date).getDate()}</span>
                 </div>
-                <p className="mt-1 text-sm text-muted">{event.description}</p>
-                <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted">
-                  <span>{formatDate(event.date)} · {formatTime(event.date)}</span>
-                  {event.venue && <span>{event.venue}</span>}
-                  {team && <span>Organized by {team.name}</span>}
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <p className="text-base sm:text-[16px] font-bold text-[#18243a] min-w-0">{event.title}</p>
+                      {isSymposium && (
+                        <span className="inline-flex items-center rounded-full bg-[#fff7ed] border border-[#fed7aa] px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-[#ea580c]">
+                          Featured Flagship
+                        </span>
+                      )}
+                    </div>
+                    <Badge tone={STATUS_TONE[event.status]} className="shrink-0 self-start sm:self-auto">{event.status}</Badge>
+                  </div>
+                  <p className="mt-1 text-sm text-muted">{event.description}</p>
+                  <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
+                    <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted">
+                      <span>{formatDate(event.date)} · {formatTime(event.date)}</span>
+                      {event.venue && <span>📍 {event.venue}</span>}
+                      {team && <span>Organized by {team.name}</span>}
+                    </div>
+                    {isSymposium && (
+                      <Link
+                        href="/events/symposium"
+                        className="focus-ring inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#f97316] to-[#ea580c] px-3.5 py-1.5 text-xs font-bold text-white shadow-sm transition-all hover:brightness-105 active:scale-95"
+                      >
+                        View Symposium Page <ArrowRight className="h-3.5 w-3.5" />
+                      </Link>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </Card>
-          ))}
+              </Card>
+            );
+          })}
         </div>
       )}
+    </div>
     </div>
   );
 }

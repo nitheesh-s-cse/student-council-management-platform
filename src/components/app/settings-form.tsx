@@ -15,13 +15,13 @@ export function SettingsForm({ notifyEmail, notifyPush, email }: { notifyEmail: 
   const [passwordLoading, setPasswordLoading] = useState(false);
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [theme, setThemeState] = useState<"light" | "dark" | "system">(
-    (typeof window !== "undefined" && (localStorage.getItem("ppgc-theme") as "light" | "dark" | "system")) || "system",
+    (typeof window !== "undefined" && (localStorage.getItem("ppgc-theme") as "light" | "dark" | "system")) || "light",
   );
 
   function setTheme(value: "light" | "dark" | "system") {
     setThemeState(value);
     localStorage.setItem("ppgc-theme", value);
-    const isDark = value === "dark" || (value === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    const isDark = value === "dark";
     document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
     fetch("/api/settings/theme", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ theme: value }) });
   }
@@ -107,7 +107,7 @@ export function SettingsForm({ notifyEmail, notifyPush, email }: { notifyEmail: 
             placeholder="Current password"
             value={currentPassword}
             onChange={(e) => setCurrentPassword(e.target.value)}
-            className="focus-ring h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm"
+            className="focus-ring h-10 w-full rounded-xl border border-[var(--border)] bg-white px-3 text-sm"
           />
           <input
             type="password"
@@ -116,7 +116,7 @@ export function SettingsForm({ notifyEmail, notifyPush, email }: { notifyEmail: 
             placeholder="New password (min. 8 characters)"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
-            className="focus-ring h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm"
+            className="focus-ring h-10 w-full rounded-xl border border-[var(--border)] bg-white px-3 text-sm"
           />
           {passwordError && <p className="text-xs font-medium text-rose-600">{passwordError}</p>}
           <Button type="submit" size="sm" disabled={passwordLoading}>

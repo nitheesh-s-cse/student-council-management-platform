@@ -34,11 +34,11 @@ export function ProfileForm({ member }: { member: typeof members.$inferSelect })
       <form onSubmit={submit} className="mt-4 space-y-4">
         <div>
           <label className="text-xs font-medium text-muted">Bio</label>
-          <textarea value={bio} onChange={(e) => setBio(e.target.value)} rows={4} className="focus-ring mt-1.5 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm" />
+          <textarea value={bio} onChange={(e) => setBio(e.target.value)} rows={4} className="focus-ring mt-1.5 w-full rounded-xl border border-[var(--border)] bg-white px-3 py-2 text-sm" />
         </div>
         <div>
           <label className="text-xs font-medium text-muted">Skills & interests (comma separated)</label>
-          <input value={skills} onChange={(e) => setSkills(e.target.value)} placeholder="Design, Public speaking, Photography" className="focus-ring mt-1.5 h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm" />
+          <input value={skills} onChange={(e) => setSkills(e.target.value)} placeholder="Design, Public speaking, Photography" className="focus-ring mt-1.5 h-10 w-full rounded-xl border border-[var(--border)] bg-white px-3 text-sm" />
         </div>
         <Button type="submit" disabled={loading}>{loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />} Save changes</Button>
       </form>

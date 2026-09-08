@@ -22,7 +22,10 @@ export default async function AdminDashboardPage() {
   ];
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="section-warm relative">
+      <div aria-hidden="true" className="bg-glow bg-glow-orange bg-glow-lg" style={{ left: "-6%", top: "-12%" }} />
+      <div aria-hidden="true" className="bg-glow bg-glow-red bg-glow-md" style={{ right: "-4%", top: "8%" }} />
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <h1 className="text-2xl font-semibold tracking-tight text-[var(--text)]">Council Overview</h1>
       <p className="mt-1 text-sm text-muted">Real-time snapshot of council operations.</p>
 
@@ -98,6 +101,7 @@ export default async function AdminDashboardPage() {
           ))}
         </div>
       </Card>
+      </div>
     </div>
   );
 }

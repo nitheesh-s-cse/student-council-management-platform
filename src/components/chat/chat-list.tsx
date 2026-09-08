@@ -72,13 +72,13 @@ export function ChatList({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search conversations…"
-            className="focus-ring h-9 w-full rounded-lg border border-[var(--border)] bg-[var(--surface-muted)] pl-9 pr-3 text-sm"
+            className="focus-ring h-9 w-full rounded-xl border border-[var(--border)] bg-white pl-9 pr-3 text-sm"
           />
         </div>
       </div>
       <div className="scrollbar-thin flex-1 overflow-y-auto px-2 pb-4">
         {filtered.length === 0 && <p className="px-3 py-8 text-center text-sm text-muted">No conversations yet.</p>}
-        {filtered.map(({ conversation, lastMessage, lastSenderName, unread }) => {
+        {filtered.map(({ conversation, lastMessage, lastFileName, lastSenderName, unread }) => {
           const Icon = TYPE_ICON[conversation.type];
           return (
             <Link
@@ -103,7 +103,9 @@ export function ChatList({
                 </div>
                 <div className="flex items-center justify-between gap-2">
                   <p className="truncate text-xs text-muted">
-                    {lastMessage ? `${lastSenderName ? `${lastSenderName}: ` : ""}${lastMessage.content ?? "Attachment"}` : "No messages yet"}
+                    {lastMessage
+                      ? `${lastSenderName ? `${lastSenderName}: ` : ""}${lastMessage.content ?? (lastFileName ? `📎 ${lastFileName}` : "Attachment")}`
+                      : "No messages yet"}
                   </p>
                   {unread > 0 && <Badge tone="brand" className="shrink-0">{unread}</Badge>}
                 </div>
@@ -114,7 +116,7 @@ export function ChatList({
       </div>
 
       {showDirectory && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+        <div className="modal-overlay fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
           <div className="surface w-full max-w-sm rounded-2xl p-5 shadow-[var(--shadow-card-lg)]">
             <div className="flex items-center justify-between">
               <p className="text-sm font-semibold text-[var(--text)]">Start a conversation</p>

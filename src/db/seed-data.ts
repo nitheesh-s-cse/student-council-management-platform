@@ -15,7 +15,7 @@ export type SeedMember = {
 };
 
 export const BOARD_MEMBERS: SeedMember[] = [
-  { fullName: "Tameema Naazmi. M.R.", department: "BME", year: "IV", category: "board", position: "President" },
+  { fullName: "Tameema Naazmi M.R.", department: "BME", year: "IV", category: "board", position: "President" },
   { fullName: "Rahul Krishnith", department: "AIDS", year: "IV", category: "board", position: "Vice President" },
   { fullName: "Mohammed Jubair A", department: "CSE", year: "III", category: "board", position: "Secretary" },
   { fullName: "Priya .T", department: "BME", year: "II", category: "board", position: "Joint Secretary" },
@@ -24,7 +24,7 @@ export const BOARD_MEMBERS: SeedMember[] = [
 ];
 
 export const EXECUTIVE_MEMBERS: SeedMember[] = [
-  { fullName: "Nakshatra. V", department: "ECE", year: "IV" },
+  { fullName: "Nakshatra V", department: "ECE", year: "IV" },
   { fullName: "Soma Prabha", department: "AGRI", year: "III" },
   { fullName: "Dharshan Sri", department: "MECH", year: "III" },
   { fullName: "Priya Dharshini", department: "AIML", year: "II" },
@@ -181,7 +181,7 @@ export const COMMITTEES: { name: string; slug: string; description: string; memb
       { fullName: "Vigneshwaran", department: "BME", year: "IV" },
       { fullName: "Santhoshini", department: "CSE", year: "III" },
       { fullName: "Praveen", department: "CSE", year: "II" },
-      { fullName: "Palani selvan", department: "CSE", year: "II" },
+      { fullName: "Palani Selvan", department: "CSE", year: "II" },
       { fullName: "Manoj", department: "CSE", year: "II" },
       { fullName: "Goushik Gokul", department: "AIDS", year: "III" },
       { fullName: "Blesswin Resibalan", department: "AIML", year: "II" },

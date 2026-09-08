@@ -9,9 +9,12 @@ export default async function TeamsPage() {
   const teams = await listTeamsWithCounts();
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="section-warm relative">
+      <div aria-hidden="true" className="bg-glow bg-glow-orange bg-glow-md" style={{ left: "-5%", top: "-8%" }} />
+      <div aria-hidden="true" className="bg-glow bg-glow-red bg-glow-sm" style={{ right: "-3%", bottom: "-4%", opacity: 0.6 }} />
+      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
       <h1 className="text-2xl font-semibold tracking-tight text-[var(--text)]">Council Teams</h1>
-      <p className="mt-1 text-sm text-muted">Nine standing committees that run the council's day-to-day operations.</p>
+      <p className="mt-1 text-sm text-muted">Nine standing committees that run the council&apos;s day-to-day operations.</p>
 
       {teams.length === 0 ? (
         <div className="mt-8"><EmptyState icon={<Users2 className="h-6 w-6" />} title="No teams yet" /></div>
@@ -31,6 +34,7 @@ export default async function TeamsPage() {
           ))}
         </div>
       )}
+      </div>
     </div>
   );
 }

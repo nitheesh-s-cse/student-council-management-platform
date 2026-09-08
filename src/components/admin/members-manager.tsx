@@ -56,24 +56,24 @@ export function MembersManager({ initialMembers }: { initialMembers: Member[] })
 
   return (
     <div>
-      <div className="flex flex-wrap items-center justify-between gap-3">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between w-full">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight text-[var(--text)]">Members</h1>
           <p className="mt-1 text-sm text-muted">{members.length} council members on record.</p>
         </div>
-        <div className="flex flex-wrap gap-2">
-          <Button variant="outline" size="sm" onClick={exportCsv}><Download className="h-4 w-4" /> Export CSV</Button>
-          <Button variant="outline" size="sm" onClick={() => setImporting(true)}><Upload className="h-4 w-4" /> Import CSV / PDF Roster</Button>
-          <Button size="sm" onClick={() => setCreating(true)}><Plus className="h-4 w-4" /> Add Member</Button>
+        <div className="flex flex-wrap gap-2 w-full sm:w-auto">
+          <Button variant="outline" size="sm" onClick={exportCsv} className="flex-1 sm:flex-initial justify-center"><Download className="h-4 w-4" /> Export CSV</Button>
+          <Button variant="outline" size="sm" onClick={() => setImporting(true)} className="flex-1 sm:flex-initial justify-center"><Upload className="h-4 w-4" /> Import</Button>
+          <Button size="sm" onClick={() => setCreating(true)} className="w-full sm:w-auto justify-center"><Plus className="h-4 w-4" /> Add Member</Button>
         </div>
       </div>
 
-      <div className="mt-6 flex flex-wrap items-center gap-3">
-        <div className="relative flex-1 min-w-[200px]">
+      <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full">
+        <div className="relative flex-1 min-w-0 w-full">
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
-          <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search members…" className="focus-ring h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] pl-9 pr-3 text-sm" />
+          <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search members…" className="focus-ring h-10 w-full rounded-xl border border-[var(--border)] bg-white pl-9 pr-3 text-sm" />
         </div>
-        <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)} className="focus-ring h-10 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm">
+        <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)} className="focus-ring h-10 w-full sm:w-auto rounded-xl border border-[var(--border)] bg-white px-3 text-sm">
           <option value="">All categories</option>
           <option value="board">Board</option>
           <option value="executive">Executive</option>
@@ -81,30 +81,31 @@ export function MembersManager({ initialMembers }: { initialMembers: Member[] })
         </select>
       </div>
 
-      <Card className="mt-6 overflow-x-auto">
-        <table className="w-full min-w-[720px] text-sm">
-          <thead>
-            <tr className="border-b border-[var(--border)] text-left text-xs uppercase tracking-wide text-muted">
-              <th className="px-4 py-3 font-medium">Member</th>
-              <th className="px-4 py-3 font-medium">Department</th>
-              <th className="px-4 py-3 font-medium">Category</th>
-              <th className="px-4 py-3 font-medium">Status</th>
-              <th className="px-4 py-3 font-medium text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.map((m) => (
-              <tr key={m.id} className="border-b border-[var(--border)] last:border-0">
+      <Card className="mt-6 overflow-hidden w-full max-w-full">
+        <div className="w-full max-w-full overflow-x-auto -webkit-overflow-scrolling-touch">
+          <table className="w-full min-w-[640px] text-sm">
+            <thead>
+              <tr className="bg-brand-gradient text-left text-xs uppercase tracking-wide text-white">
+                <th className="px-4 py-3 font-bold">Member</th>
+                <th className="px-4 py-3 font-bold">Department</th>
+                <th className="px-4 py-3 font-bold">Category</th>
+                <th className="px-4 py-3 font-bold">Status</th>
+                <th className="px-4 py-3 font-bold text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map((m) => (
+              <tr key={m.id} className="border-b border-[var(--border)] transition-colors last:border-0 hover:bg-[#fff7ed]">
                 <td className="px-4 py-3">
-                  <div className="flex items-center gap-2.5">
+                  <div className="flex items-center gap-2.5 min-w-0">
                     <Avatar name={m.fullName} src={m.photoUrl} size={32} />
-                    <div>
-                      <p className="font-medium text-[var(--text)]">{m.fullName}</p>
-                      <p className="text-xs text-muted">{m.position ?? "—"}</p>
+                    <div className="min-w-0">
+                      <p className="font-medium text-[var(--text)] truncate max-w-[180px]">{m.fullName}</p>
+                      <p className="text-xs text-muted truncate max-w-[180px]">{m.position ?? "—"}</p>
                     </div>
                   </div>
                 </td>
-                <td className="px-4 py-3 text-muted">{m.department} · Year {m.year}</td>
+                <td className="px-4 py-3 text-muted truncate max-w-[180px]">{m.department} · Year {m.year}</td>
                 <td className="px-4 py-3"><Badge tone="brand">{CATEGORY_LABEL[m.category]}</Badge></td>
                 <td className="px-4 py-3">
                   <Badge tone={m.isActive ? "success" : "neutral"}>{m.isActive ? "Active" : "Disabled"}</Badge>
@@ -122,6 +123,7 @@ export function MembersManager({ initialMembers }: { initialMembers: Member[] })
           </tbody>
         </table>
         {filtered.length === 0 && <p className="p-8 text-center text-sm text-muted">No members match your filters.</p>}
+        </div>
       </Card>
 
       {editing && (
@@ -365,8 +367,8 @@ function ImportModal({ onClose, onImported }: { onClose: () => void; onImported:
 
 function Modal({ title, onClose, children, wide }: { title: string; onClose: () => void; children: React.ReactNode; wide?: boolean }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-      <Card className={`w-full ${wide ? "max-w-2xl" : "max-w-lg"} max-h-[90vh] overflow-y-auto p-6`}>
+    <div className="modal-overlay fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-3 sm:p-4">
+      <Card className={`w-full ${wide ? "max-w-2xl" : "max-w-lg"} max-w-full max-h-[90vh] overflow-y-auto p-4 sm:p-6 box-border`}>
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold text-[var(--text)]">{title}</h2>
           <button onClick={onClose} className="focus-ring rounded-lg p-1 text-muted hover:bg-[var(--surface-muted)]"><X className="h-4 w-4" /></button>

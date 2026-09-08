@@ -26,13 +26,13 @@ export function NotificationsList({ initialNotifications }: { initialNotificatio
 
   return (
     <div>
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight text-[var(--text)]">Notifications</h1>
           <p className="mt-1 text-sm text-muted">{unreadCount > 0 ? `${unreadCount} unread` : "You're all caught up"}</p>
         </div>
         {unreadCount > 0 && (
-          <Button variant="outline" size="sm" onClick={markAllRead}><CheckCheck className="h-4 w-4" /> Mark all read</Button>
+          <Button variant="outline" size="sm" onClick={markAllRead} className="shrink-0 self-start sm:self-auto"><CheckCheck className="h-4 w-4" /> Mark all read</Button>
         )}
       </div>
 
@@ -42,14 +42,16 @@ export function NotificationsList({ initialNotifications }: { initialNotificatio
         <div className="mt-8 space-y-2">
           {items.map((n) => {
             const content = (
-              <Card className={`flex items-start gap-3 p-4 transition-colors ${!n.isRead ? "border-brand-200 bg-brand-50/40 dark:bg-brand-900/10" : ""}`}>
-                {!n.isRead && <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-brand-500" />}
-                <div className="min-w-0 flex-1">
-                  <p className="text-sm font-medium text-[var(--text)]">{n.title}</p>
-                  {n.body && <p className="mt-0.5 text-sm text-muted">{n.body}</p>}
-                  <p className="mt-1 text-xs text-muted">{relativeTime(n.createdAt)}</p>
+              <Card className={`flex flex-col sm:flex-row sm:items-start gap-3 p-3.5 sm:p-4 transition-colors ${!n.isRead ? "border-brand-200 bg-brand-50/40 dark:bg-brand-900/10" : ""}`}>
+                <div className="flex items-start gap-2.5 min-w-0 flex-1">
+                  {!n.isRead && <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-brand-500" />}
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-medium text-[var(--text)]">{n.title}</p>
+                    {n.body && <p className="mt-0.5 text-sm text-muted">{n.body}</p>}
+                    <p className="mt-1 text-xs text-muted">{relativeTime(n.createdAt)}</p>
+                  </div>
                 </div>
-                <Badge tone="neutral">{n.type.replace(/_/g, " ")}</Badge>
+                <Badge tone="neutral" className="shrink-0 self-start sm:self-auto">{n.type.replace(/_/g, " ")}</Badge>
               </Card>
             );
             return n.link ? (

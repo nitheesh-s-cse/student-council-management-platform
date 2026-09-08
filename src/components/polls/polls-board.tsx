@@ -90,13 +90,13 @@ function PollCard({ item, onVoted }: { item: PollItem; onVoted: (item: PollItem)
   }
 
   return (
-    <Card className="p-6">
-      <div className="flex flex-wrap items-start justify-between gap-2">
-        <div>
+    <Card className="p-4.5 sm:p-6">
+      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 sm:gap-4">
+        <div className="min-w-0 flex-1">
           <p className="text-[15px] font-semibold text-[var(--text)]">{poll.question}</p>
           {poll.description && <p className="mt-1 text-sm text-muted">{poll.description}</p>}
         </div>
-        <div className="flex gap-1.5">
+        <div className="flex flex-wrap gap-1.5 shrink-0 self-start sm:self-auto">
           {poll.anonymous && <Badge tone="neutral">Anonymous</Badge>}
           {closed && <Badge tone="danger">Closed</Badge>}
         </div>
@@ -189,7 +189,7 @@ function CreatePollModal({ onClose, onCreated }: { onClose: () => void; onCreate
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+    <div className="modal-overlay fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
       <Card className="w-full max-w-lg max-h-[90vh] overflow-y-auto p-6">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold text-[var(--text)]">Create poll</h2>
@@ -198,11 +198,11 @@ function CreatePollModal({ onClose, onCreated }: { onClose: () => void; onCreate
         <form onSubmit={submit} className="mt-5 space-y-4">
           <div>
             <label className="text-xs font-medium text-muted">Question</label>
-            <input required value={question} onChange={(e) => setQuestion(e.target.value)} className="focus-ring mt-1.5 h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm" />
+            <input required value={question} onChange={(e) => setQuestion(e.target.value)} className="focus-ring mt-1.5 h-10 w-full rounded-xl border border-[var(--border)] bg-white px-3 text-sm" />
           </div>
           <div>
             <label className="text-xs font-medium text-muted">Poll type</label>
-            <select value={type} onChange={(e) => setType(e.target.value as typeof type)} className="focus-ring mt-1.5 h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-2 text-sm">
+            <select value={type} onChange={(e) => setType(e.target.value as typeof type)} className="focus-ring mt-1.5 h-10 w-full rounded-xl border border-[var(--border)] bg-white px-2 text-sm">
               <option value="single">Single choice</option>
               <option value="multiple">Multiple choice</option>
               <option value="yes_no">Yes / No</option>
@@ -218,7 +218,7 @@ function CreatePollModal({ onClose, onCreated }: { onClose: () => void; onCreate
                     value={o}
                     onChange={(e) => setOptions((prev) => prev.map((x, idx) => (idx === i ? e.target.value : x)))}
                     placeholder={`Option ${i + 1}`}
-                    className="focus-ring h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm"
+                    className="focus-ring h-10 w-full rounded-xl border border-[var(--border)] bg-white px-3 text-sm"
                   />
                 ))}
                 <button type="button" onClick={() => setOptions((prev) => [...prev, ""])} className="text-xs font-medium text-brand-600 hover:underline">+ Add option</button>
@@ -231,7 +231,7 @@ function CreatePollModal({ onClose, onCreated }: { onClose: () => void; onCreate
           </div>
           <div>
             <label className="text-xs font-medium text-muted">Closes at (optional)</label>
-            <input type="datetime-local" value={closesAt} onChange={(e) => setClosesAt(e.target.value)} className="focus-ring mt-1.5 h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm" />
+            <input type="datetime-local" value={closesAt} onChange={(e) => setClosesAt(e.target.value)} className="focus-ring mt-1.5 h-10 w-full rounded-xl border border-[var(--border)] bg-white px-3 text-sm" />
           </div>
           {error && <p className="text-xs font-medium text-rose-600">{error}</p>}
           <Button type="submit" className="w-full" disabled={loading}>{loading && <Loader2 className="h-4 w-4 animate-spin" />} Publish poll</Button>

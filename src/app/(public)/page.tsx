@@ -1,193 +1,248 @@
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Users, ListChecks, MessagesSquare, CalendarDays, ShieldCheck, Vote } from "lucide-react";
+import { ArrowRight, Users, ListChecks, MessagesSquare, CalendarDays, ShieldCheck } from "lucide-react";
 import { db } from "@/db";
-import { members, teams, announcements, events } from "@/db/schema";
+import { members, announcements, events } from "@/db/schema";
 import { and, desc, eq, gte } from "drizzle-orm";
 import { LinkButton, Card, Badge, SectionHeading, Avatar } from "@/components/ui/primitives";
-import { ACADEMIC_YEAR } from "@/lib/constants";
-import { formatDate } from "@/lib/utils";
+import {
+  ScrollProgressBar,
+  ScrollReveal,
+  ScrollCard,
+  TiltCard,
+  AnimationScope,
+} from "@/components/ui/animated-container";
+import { HeroSection } from "@/components/public/hero-section";
+import { formatDate, cn } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
+const TICKER = [
+  "Integrated Governance",
+  "Committee Operations",
+  "Real-Time Chat",
+  "Task Execution",
+  "Campus Events",
+  "Polling & Voting",
+  "Executive Leadership",
+];
+
 export default async function HomePage() {
-  const [memberCount, teamCount, board, latestAnnouncements, upcomingEvents] = await Promise.all([
-    db.$count(members, eq(members.isActive, true)),
-    db.$count(teams),
+  const [board, latestAnnouncements, upcomingEvents] = await Promise.all([
     db.select().from(members).where(eq(members.category, "board")).orderBy(members.id),
     db
       .select()
       .from(announcements)
       .where(eq(announcements.audience, "everyone"))
       .orderBy(desc(announcements.publishAt))
-      .limit(3),
+      .limit(4),
     db
       .select()
       .from(events)
       .where(and(eq(events.isPublic, true), gte(events.date, new Date())))
       .orderBy(events.date)
-      .limit(3),
+      .limit(4),
   ]);
 
   return (
-    <div>
-      {/* Hero */}
-      <section className="relative overflow-hidden border-b border-[var(--border)]">
-        <div className="absolute inset-0 -z-10">
-          <Image src="/images/hero-pattern.jpg" alt="" fill priority className="object-cover opacity-[0.14] dark:opacity-[0.22]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--bg)]/60 to-[var(--bg)]" />
-        </div>
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-          <Badge tone="brand" className="mb-6">Academic Year {ACADEMIC_YEAR}</Badge>
-          <h1 className="max-w-3xl text-[clamp(2.25rem,6vw,4rem)] font-semibold leading-[1.05] tracking-tight text-[var(--text)]">
-            PPG Institute of Technology
-            <span className="mt-2 block text-brand-600">Student Council</span>
-          </h1>
-          <p className="mt-6 max-w-xl text-[16px] leading-relaxed text-muted">
-            The elected student body that represents every department at PPGIT — running events, resolving
-            student concerns and coordinating campus life. This is our operating system: one place to manage
-            council teams, tasks, communication and records.
-          </p>
-          <div className="mt-9 flex flex-wrap gap-3">
-            <LinkButton href="/about" size="lg">
-              Explore Council <ArrowRight className="h-4 w-4" />
-            </LinkButton>
-            <LinkButton href="/members" variant="outline" size="lg">
-              Member Directory
-            </LinkButton>
-          </div>
+    <AnimationScope>
+      <div className="relative overflow-x-clip">
+        {/* Scroll Progress Bar at top of viewport */}
+        <ScrollProgressBar />
 
-          <dl className="mt-16 grid max-w-2xl grid-cols-3 gap-6 border-t border-[var(--border)] pt-8">
-            <div>
-              <dt className="text-xs uppercase tracking-wide text-muted">Members</dt>
-              <dd className="mt-1 text-2xl font-semibold text-[var(--text)]">{memberCount}+</dd>
-            </div>
-            <div>
-              <dt className="text-xs uppercase tracking-wide text-muted">Council Teams</dt>
-              <dd className="mt-1 text-2xl font-semibold text-[var(--text)]">{teamCount}</dd>
-            </div>
-            <div>
-              <dt className="text-xs uppercase tracking-wide text-muted">Departments</dt>
-              <dd className="mt-1 text-2xl font-semibold text-[var(--text)]">10</dd>
-            </div>
-          </dl>
-        </div>
-      </section>
+        {/* Section 1: Hero with Campus Background & Scroll Parallax Animation */}
+        <HeroSection announcementsCount={latestAnnouncements.length || 1} />
 
-      {/* What the platform does */}
-      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <SectionHeading
-          eyebrow="One council, one platform"
-          title="Everything the council runs on, in a single workspace"
-          description="From task assignment to team chat, event planning to internal polls — the platform mirrors exactly how the council already works, just faster and more organized."
-        />
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {[
-            { icon: ListChecks, title: "Task Management", desc: "Assign work to teams or individuals, track progress and review submissions before sign-off." },
-            { icon: MessagesSquare, title: "Council Chat", desc: "Direct messages, team channels and a dedicated thread for every task and event." },
-            { icon: Users, title: "Teams & Roles", desc: "Nine standing committees, clear leads and role-based access for every member." },
-            { icon: CalendarDays, title: "Events & Meetings", desc: "Plan council events end-to-end with agendas, attendance and shared documents." },
-            { icon: Vote, title: "Polls & Decisions", desc: "Run quick single-choice, multi-choice or anonymous polls for council decisions." },
-            { icon: ShieldCheck, title: "Secure by Design", desc: "Role-based permissions, audit trails and admin-only visibility for sensitive records." },
-          ].map((f) => (
-            <Card key={f.title} className="p-6">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-50 text-brand-600 dark:bg-brand-900/30 dark:text-brand-300">
-                <f.icon className="h-5 w-5" />
+        {/* Premium marquee ticker with scroll reveal */}
+        <section className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <ScrollReveal direction="up" distance={20} duration={0.5}>
+            <div className="marquee-mask overflow-hidden rounded-full border border-[#ffe7d2] bg-white py-3.5 shadow-sm">
+              <div className="marquee-track">
+                {[...TICKER, ...TICKER, ...TICKER, ...TICKER].map((k, i) => (
+                  <span
+                    key={i}
+                    className="mx-6 inline-flex items-center gap-4 text-[11px] font-bold uppercase tracking-[0.32em] text-[#18243a]/60"
+                  >
+                    {k}
+                    <span aria-hidden="true" className="text-[#ff7a00]">✦</span>
+                  </span>
+                ))}
               </div>
-              <p className="mt-4 text-[15px] font-semibold text-[var(--text)]">{f.title}</p>
-              <p className="mt-1.5 text-sm leading-relaxed text-muted">{f.desc}</p>
-            </Card>
-          ))}
-        </div>
-      </section>
+            </div>
+          </ScrollReveal>
+        </section>
 
-      {/* Leadership preview */}
-      <section className="border-y border-[var(--border)] bg-[var(--surface)]">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <SectionHeading eyebrow="Council leadership" title="Meet the board" />
-            <LinkButton href="/members" variant="outline" size="sm">View all members</LinkButton>
-          </div>
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {board.map((m) => (
-              <Link key={m.id} href={`/members/${m.slug}`}>
-                <Card className="flex items-center gap-4 p-5 transition-transform hover:-translate-y-0.5 hover:shadow-[var(--shadow-card-lg)]">
-                  <Avatar name={m.fullName} src={m.photoUrl} size={52} />
-                  <div className="min-w-0">
-                    <p className="truncate text-[15px] font-semibold text-[var(--text)]">{m.fullName}</p>
-                    <p className="text-sm text-brand-600">{m.position}</p>
-                    <p className="text-xs text-muted">{m.department} · Year {m.year}</p>
-                  </div>
-                </Card>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+        {/* Section 2: Board Leadership with independent scroll cards */}
+        <section className="section-gradient border-b border-[#ffe7d2] py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-wrap items-end justify-between gap-6">
+              <ScrollReveal direction="up" distance={24}>
+                <SectionHeading eyebrow="Council Executive Board" title="Distinguished Leadership" />
+              </ScrollReveal>
+            </div>
 
-      {/* Announcements + events */}
-      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-2">
-          <div>
-            <SectionHeading eyebrow="Stay informed" title="Latest announcements" />
-            <div className="mt-6 space-y-4">
-              {latestAnnouncements.length === 0 && (
-                <p className="text-sm text-muted">No public announcements yet. Check back soon.</p>
-              )}
-              {latestAnnouncements.map((a) => (
-                <Card key={a.id} className="p-5">
-                  <div className="flex items-center justify-between gap-2">
-                    <p className="text-[15px] font-semibold text-[var(--text)]">{a.title}</p>
-                    {a.priority !== "normal" && (
-                      <Badge tone={a.priority === "urgent" ? "danger" : "warning"}>{a.priority}</Badge>
-                    )}
-                  </div>
-                  <p className="mt-1.5 line-clamp-2 text-sm text-muted">{a.content}</p>
-                  <p className="mt-3 text-xs text-muted">{formatDate(a.publishAt)}</p>
-                </Card>
+            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {board.map((m, idx) => (
+                <ScrollCard key={m.id} delay={(idx % 3) * 0.08} className="h-full">
+                  <TiltCard className="h-full rounded-3xl">
+                    <Link href={`/members/${m.slug}`} className="block h-full">
+                      <Card className="flex h-full items-center gap-5 p-6 transition-all duration-300 hover:border-[#ff9a47] hover:shadow-[0_12px_28px_rgba(255,122,0,0.12)]">
+                        <Avatar name={m.fullName} src={m.photoUrl} size={62} />
+                        <div className="min-w-0">
+                          <p className="truncate text-lg font-bold text-[#18243a] transition-colors group-hover:text-[#f97316]">{m.fullName}</p>
+                          <p className="mt-0.5 text-xs font-bold uppercase tracking-wider text-[#f97316]">{m.position}</p>
+                          <p className="mt-1 text-xs text-muted">{m.department} – {m.year}</p>
+                        </div>
+                      </Card>
+                    </Link>
+                  </TiltCard>
+                </ScrollCard>
               ))}
             </div>
-            <LinkButton href="/announcements" variant="ghost" size="sm" className="mt-4">
-              View all announcements <ArrowRight className="h-3.5 w-3.5" />
-            </LinkButton>
           </div>
-          <div>
-            <SectionHeading eyebrow="What's coming up" title="Upcoming events" />
-            <div className="mt-6 space-y-4">
-              {upcomingEvents.length === 0 && (
-                <p className="text-sm text-muted">No upcoming public events scheduled right now.</p>
-              )}
-              {upcomingEvents.map((e) => (
-                <Card key={e.id} className="flex gap-4 p-5">
-                  <div className="flex h-12 w-12 shrink-0 flex-col items-center justify-center rounded-lg bg-brand-50 text-brand-700 dark:bg-brand-900/30 dark:text-brand-200">
-                    <span className="text-[10px] font-semibold uppercase">{new Date(e.date).toLocaleString("en-IN", { month: "short" })}</span>
-                    <span className="text-base font-bold leading-none">{new Date(e.date).getDate()}</span>
-                  </div>
-                  <div className="min-w-0">
-                    <p className="truncate text-[15px] font-semibold text-[var(--text)]">{e.title}</p>
-                    <p className="mt-0.5 line-clamp-2 text-sm text-muted">{e.description}</p>
-                    {e.venue && <p className="mt-1 text-xs text-muted">{e.venue}</p>}
-                  </div>
-                </Card>
+        </section>
+
+        {/* Section 3: Announcements & Events — individual cards trigger as scrolled on mobile */}
+        <section className="section-soft border-b border-[#ffe7d2]">
+          <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+            <div className="grid gap-12 lg:grid-cols-2">
+              {/* Bulletins */}
+              <div>
+                <ScrollReveal direction="up" distance={22}>
+                  <SectionHeading eyebrow="Official Bulletins" title="Latest Announcements" />
+                </ScrollReveal>
+
+                <div className="mt-8 space-y-4">
+                  {latestAnnouncements.length === 0 && (
+                    <p className="text-sm text-muted">No public announcements posted yet.</p>
+                  )}
+                  {latestAnnouncements.map((a, idx) => (
+                    <ScrollCard key={a.id} delay={idx * 0.08} yOffset={20}>
+                      <Card className="p-4.5 sm:p-6 transition-all duration-300 hover:border-[#ff9a47] hover:shadow-[0_10px_24px_rgba(24,36,58,0.08)]">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4">
+                          <p className="text-base sm:text-lg font-bold text-[#18243a] min-w-0 flex-1">{a.title}</p>
+                          {a.priority !== "normal" && (
+                            <Badge tone={a.priority === "urgent" ? "danger" : "warning"} className="shrink-0 self-start sm:self-auto">{a.priority}</Badge>
+                          )}
+                        </div>
+                        <p className="mt-2.5 line-clamp-2 text-sm text-muted leading-relaxed">{a.content}</p>
+                        <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-[#f97316]/90">{formatDate(a.publishAt)}</p>
+                      </Card>
+                    </ScrollCard>
+                  ))}
+                </div>
+
+                <ScrollReveal direction="up" distance={16} delay={0.15}>
+                  <LinkButton href="/announcements" variant="ghost" size="sm" className="mt-6">
+                    View All Bulletins <ArrowRight className="h-4 w-4" />
+                  </LinkButton>
+                </ScrollReveal>
+              </div>
+
+              {/* Events */}
+              <div>
+                <ScrollReveal direction="up" distance={22}>
+                  <SectionHeading eyebrow="Upcoming Agenda" title="Council Events & Fests" />
+                </ScrollReveal>
+
+                <div className="mt-8 space-y-4">
+                  {upcomingEvents.length === 0 && (
+                    <p className="text-sm text-muted">No public events scheduled currently.</p>
+                  )}
+                  {upcomingEvents.map((e, idx) => {
+                    const isSymposium = e.title.toLowerCase().includes("symposium");
+                    const cardContent = (
+                      <Card
+                        className={cn(
+                          "flex gap-4 sm:gap-5 p-4.5 sm:p-6 transition-all duration-300 hover:border-[#ff9a47] hover:shadow-[0_10px_24px_rgba(24,36,58,0.08)]",
+                          isSymposium && "border-[#fed7aa] bg-gradient-to-r from-white via-[#fffaf5] to-white",
+                        )}
+                      >
+                        <div className="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-2xl bg-brand-gradient text-white shadow-sm">
+                          <span className="text-[10px] font-bold uppercase tracking-widest">{new Date(e.date).toLocaleString("en-IN", { month: "short" })}</span>
+                          <span className="text-lg font-bold leading-none mt-0.5">{new Date(e.date).getDate()}</span>
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center justify-between gap-2">
+                            <p className="truncate text-base sm:text-lg font-bold text-[#18243a]">{e.title}</p>
+                            {isSymposium && (
+                              <span className="shrink-0 rounded-full border border-[#fed7aa] bg-[#fff7ed] px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-[#ea580c]">
+                                Flagship
+                              </span>
+                            )}
+                          </div>
+                          <p className="mt-1 line-clamp-2 text-sm text-muted">{e.description}</p>
+                          <div className="mt-2 flex items-center justify-between gap-2">
+                            {e.venue && <p className="text-xs font-semibold text-[#f97316]">📍 {e.venue}</p>}
+                            {isSymposium && (
+                              <span className="text-xs font-bold text-[#ea580c] flex items-center gap-1 hover:underline ml-auto">
+                                Details & Notice <ArrowRight className="h-3 w-3" />
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </Card>
+                    );
+
+                    return (
+                      <ScrollCard key={e.id} delay={idx * 0.08} yOffset={20}>
+                        {isSymposium ? (
+                          <Link href="/events/symposium" className="block focus-ring rounded-3xl">
+                            {cardContent}
+                          </Link>
+                        ) : (
+                          cardContent
+                        )}
+                      </ScrollCard>
+                    );
+                  })}
+                </div>
+
+                <ScrollReveal direction="up" distance={16} delay={0.15}>
+                  <LinkButton href="/events" variant="ghost" size="sm" className="mt-6">
+                    Full Event Calendar <ArrowRight className="h-4 w-4" />
+                  </LinkButton>
+                </ScrollReveal>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 4: Platform Features Grid */}
+        <section className="section-warm">
+          <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+            <ScrollReveal direction="up" distance={26}>
+              <SectionHeading
+                eyebrow="Integrated Governance"
+                title="Designed for Executive Efficiency"
+                description="From task execution to real-time committee communications and campus decisions — engineered for maximum precision."
+                className="text-center mx-auto"
+              />
+            </ScrollReveal>
+
+            <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                { icon: ListChecks, title: "Task & Project Hub", desc: "Assign deliverables to committee members, track Kanban milestones and review sign-offs." },
+                { icon: MessagesSquare, title: "Real-Time Council Chat", desc: "Encrypted direct messaging, standing team rooms and dedicated discussion threads for every initiative." },
+                { icon: Users, title: "Committee Governance", desc: "Nine specialized committees with clear team leads and role-based operational permissions." },
+                { icon: CalendarDays, title: "Events & Agenda Planner", desc: "Plan flagship campus fests and board meetings end-to-end with verified documentation." },
+                { icon: ShieldCheck, title: "Enterprise Grade Security", desc: "Multi-level authorization, audit logging and secure record keeping for council operations." },
+              ].map((f, idx) => (
+                <ScrollCard key={f.title} delay={(idx % 3) * 0.08} className="h-full">
+                  <TiltCard className="h-full rounded-3xl">
+                    <Card className="h-full p-8 transition-all duration-300 hover:border-[#ff9a47] hover:shadow-[0_14px_30px_rgba(255,122,0,0.12)]">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#fff7ed] text-[#f97316] border border-[#ffd6b0] transition-transform duration-300 group-hover:scale-110">
+                        <f.icon className="h-6 w-6" />
+                      </div>
+                      <p className="mt-6 text-xl font-bold text-[#18243a] transition-colors group-hover:text-[#f97316]">{f.title}</p>
+                      <p className="mt-2 text-sm leading-relaxed text-muted">{f.desc}</p>
+                    </Card>
+                  </TiltCard>
+                </ScrollCard>
               ))}
             </div>
-            <LinkButton href="/events" variant="ghost" size="sm" className="mt-4">
-              View full calendar <ArrowRight className="h-3.5 w-3.5" />
-            </LinkButton>
           </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
-        <Card className="flex flex-col items-start gap-6 overflow-hidden p-10 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <p className="text-lg font-semibold text-[var(--text)]">Already a council member?</p>
-            <p className="mt-1 text-sm text-muted">Sign in to see your tasks, chats and team dashboard.</p>
-          </div>
-          <LinkButton href="/login" size="lg">Member Sign In</LinkButton>
-        </Card>
-      </section>
-    </div>
+        </section>
+      </div>
+    </AnimationScope>
   );
 }

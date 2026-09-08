@@ -6,7 +6,6 @@ import Link from "next/link";
 import { Loader2, Lock, Mail } from "lucide-react";
 import { CouncilWordmark } from "@/components/ui/logo";
 import { Button } from "@/components/ui/primitives";
-import { DEMO_PASSWORD } from "@/lib/constants";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -40,13 +39,23 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[var(--bg)] px-4 py-12">
-      <div className="w-full max-w-sm">
+    <div className="relative flex min-h-[calc(100vh-140px)] items-center justify-center overflow-hidden px-4 py-12">
+      <div
+        aria-hidden="true"
+        className="background-glow background-glow-orange bg-glow-lg"
+        style={{ left: "-6%", top: "-10%" }}
+      />
+      <div
+        aria-hidden="true"
+        className="background-glow background-glow-red bg-glow-md"
+        style={{ right: "-4%", bottom: "4%" }}
+      />
+      <div className="relative z-10 w-full max-w-[420px] mx-auto">
         <div className="mb-8 flex justify-center">
           <CouncilWordmark />
         </div>
-        <div className="surface rounded-2xl p-8 shadow-[var(--shadow-card-lg)]">
-          <h1 className="text-xl font-semibold text-[var(--text)]">Member sign in</h1>
+        <div className="gold-glass-card rounded-3xl p-7 sm:p-8 shadow-[0_10px_30px_rgba(24,36,58,0.08)] border border-[#ffd6b0] w-full max-w-[420px] mx-auto">
+          <h1 className="text-xl font-bold text-[#18243a]">Member sign in</h1>
           <p className="mt-1.5 text-sm text-muted">Access your council dashboard, tasks and chat.</p>
 
           <form onSubmit={onSubmit} className="mt-6 space-y-4">
@@ -62,7 +71,7 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@council.ppgit.edu.in"
-                  className="focus-ring h-11 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] pl-9 pr-3 text-sm"
+                  className="focus-ring h-11 w-full rounded-xl border border-[var(--border)] bg-white pl-9 pr-3 text-sm"
                 />
               </div>
             </div>
@@ -78,13 +87,13 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="focus-ring h-11 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] pl-9 pr-3 text-sm"
+                  className="focus-ring h-11 w-full rounded-xl border border-[var(--border)] bg-white pl-9 pr-3 text-sm"
                 />
               </div>
             </div>
 
             {error && (
-              <p role="alert" className="rounded-lg bg-rose-50 px-3 py-2 text-xs font-medium text-rose-700 dark:bg-rose-900/20 dark:text-rose-300">
+              <p role="alert" className="rounded-xl bg-red-50 px-3 py-2 text-xs font-medium text-red-600 ring-1 ring-red-100">
                 {error}
               </p>
             )}
@@ -99,12 +108,6 @@ export default function LoginPage() {
             <Link href="/forgot-password" className="text-brand-600 hover:underline">Forgot password?</Link>
             <Link href="/" className="text-muted hover:text-[var(--text)]">Back to site</Link>
           </div>
-        </div>
-
-        <div className="mt-6 rounded-xl border border-dashed border-[var(--border)] p-4 text-xs text-muted">
-          <p className="font-medium text-[var(--text)]">Demo access</p>
-          <p className="mt-1">Every seeded council account uses the password <code className="rounded bg-[var(--surface-muted)] px-1 py-0.5">{DEMO_PASSWORD}</code>.</p>
-          <p className="mt-1">Try <code className="rounded bg-[var(--surface-muted)] px-1 py-0.5">superadmin@council.ppgit.edu.in</code> for full admin access.</p>
         </div>
       </div>
     </div>

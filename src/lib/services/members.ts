@@ -17,7 +17,7 @@ export async function listPublicMembers(params: { q?: string; category?: string;
     .select()
     .from(members)
     .where(and(...conditions))
-    .orderBy(members.fullName);
+    .orderBy(members.id);
 }
 
 export async function getMemberBySlug(slug: string) {

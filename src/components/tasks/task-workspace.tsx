@@ -108,7 +108,7 @@ export function TaskWorkspace({
           <select
             value={task.status}
             onChange={(e) => changeStatus(e.target.value)}
-            className="focus-ring h-10 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm font-medium"
+            className="focus-ring h-10 rounded-xl border border-[var(--border)] bg-white px-3 text-sm font-medium"
           >
             {TASK_STATUSES.map((s) => (
               <option key={s} value={s}>{TASK_STATUS_LABELS[s]}</option>
@@ -156,26 +156,26 @@ export function TaskWorkspace({
             </div>
           </Card>
 
-          <Card className="p-6">
+          <Card className="p-4 sm:p-6">
             <p className="text-sm font-semibold text-[var(--text)]">Post a progress update</p>
             <textarea
               value={updateText}
               onChange={(e) => setUpdateText(e.target.value)}
               placeholder="e.g. Poster first draft completed."
               rows={3}
-              className="focus-ring mt-3 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm"
+              className="focus-ring mt-3 w-full max-w-full rounded-xl border border-[var(--border)] bg-white px-3 py-2 text-sm"
             />
-            <div className="mt-3 flex items-center gap-3">
+            <div className="mt-3 flex flex-wrap sm:flex-nowrap items-center gap-3 w-full">
               <input
                 type="range"
                 min={0}
                 max={100}
                 value={updateProgress}
                 onChange={(e) => setUpdateProgress(Number(e.target.value))}
-                className="flex-1"
+                className="flex-1 min-w-[140px]"
               />
               <span className="w-10 text-right text-sm font-medium text-[var(--text)]">{updateProgress}%</span>
-              <button onClick={postUpdate} disabled={posting} className="focus-ring inline-flex h-9 items-center gap-1.5 rounded-lg bg-brand-600 px-3 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50">
+              <button onClick={postUpdate} disabled={posting} className="focus-ring inline-flex h-9 shrink-0 items-center justify-center gap-1.5 rounded-lg bg-brand-600 px-3 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50">
                 {posting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-3.5 w-3.5" />} Post
               </button>
             </div>
@@ -198,7 +198,7 @@ export function TaskWorkspace({
             </div>
           </Card>
 
-          <Card className="p-6">
+          <Card className="p-4 sm:p-6">
             <p className="text-sm font-semibold text-[var(--text)]">Comments</p>
             <div className="mt-3 space-y-3">
               {comments.length === 0 && <p className="text-sm text-muted">Be the first to comment on this task.</p>}
@@ -221,9 +221,9 @@ export function TaskWorkspace({
                 onChange={(e) => setComment(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && postComment()}
                 placeholder="Write a comment…"
-                className="focus-ring h-10 flex-1 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm"
+                className="focus-ring h-10 flex-1 min-w-0 rounded-xl border border-[var(--border)] bg-white px-3 text-sm"
               />
-              <button onClick={postComment} disabled={posting} className="focus-ring inline-flex h-10 items-center gap-1.5 rounded-lg bg-brand-600 px-3 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50">
+              <button onClick={postComment} disabled={posting} className="focus-ring inline-flex h-10 shrink-0 items-center justify-center gap-1.5 rounded-lg bg-brand-600 px-3 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50">
                 <Send className="h-3.5 w-3.5" />
               </button>
             </div>

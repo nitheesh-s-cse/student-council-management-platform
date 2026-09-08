@@ -1,40 +1,55 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-// Original crest mark for the PPGIT Student Council — inspired by the
-// institute's heraldic shield (book, signal dish, molecule, gear) but
-// redrawn as a simplified geometric monogram for a digital product.
+// Council logo mark rendered from the official shield logo image (public/images/council-logo.png).
+// The intrinsic width/height match the source asset (640x605); object-contain preserves natural aspect ratio.
 export function CouncilMark({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 40 44" className={cn("h-8 w-8", className)} fill="none" aria-hidden="true">
-      <path
-        d="M20 1 L37 7 V21 C37 32 30 40 20 43 C10 40 3 32 3 21 V7 Z"
-        fill="url(#ppgc-shield)"
-        stroke="var(--color-brand-700)"
-        strokeWidth="1"
-      />
-      <path d="M20 5 L33 9.5 V21 C33 30 27.5 36.5 20 39 C12.5 36.5 7 30 7 21 V9.5 Z" fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="0.6" />
-      <path d="M13 17 h14 M13 21 h14 M13 25 h9" stroke="white" strokeWidth="1.6" strokeLinecap="round" opacity="0.92" />
-      <circle cx="20" cy="12.5" r="2.1" fill="white" opacity="0.92" />
-      <defs>
-        <linearGradient id="ppgc-shield" x1="3" y1="1" x2="37" y2="43" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="var(--color-brand-500)" />
-          <stop offset="1" stopColor="var(--color-brand-700)" />
-        </linearGradient>
-      </defs>
-    </svg>
+    <Image
+      src="/images/council-logo.png"
+      alt="PPG Institute of Technology"
+      width={640}
+      height={605}
+      priority
+      className={cn("h-12 w-12 shrink-0 object-contain", className)}
+    />
   );
 }
 
-export function CouncilWordmark({ className, subtitleClassName }: { className?: string; subtitleClassName?: string }) {
+export function CouncilWordmark({
+  className,
+  subtitleClassName,
+  tone = "default",
+}: {
+  className?: string;
+  subtitleClassName?: string;
+  tone?: "default" | "inverse";
+}) {
   return (
-    <div className={cn("flex items-center gap-2.5", className)}>
-      <CouncilMark />
-      <div className="leading-tight">
-        <p className="text-[13px] font-bold tracking-tight text-[var(--text)]">PPG Institute of Technology</p>
-        <p className={cn("text-[11px] font-medium uppercase tracking-[0.14em] text-muted", subtitleClassName)}>
-          Student Council
+    <div className={cn("flex items-center gap-2.5 sm:gap-3", className)}>
+      <CouncilMark className="h-10 w-10 sm:h-11 sm:w-11" />
+      <div className="min-w-0 leading-tight">
+        <p
+          className={cn(
+            "truncate text-[14px] sm:text-[15px] font-extrabold tracking-tight",
+            tone === "inverse" ? "text-white" : "text-[#18243a]",
+          )}
+        >
+          PPG Institute of Technology
+        </p>
+        <p
+          className={cn(
+            "max-w-full text-[8.5px] sm:text-[9px] font-bold uppercase tracking-[0.08em] sm:tracking-[0.12em] leading-[1.25] sm:leading-normal sm:truncate",
+            tone === "inverse" ? "text-white/70" : "text-[#64748b]",
+            subtitleClassName,
+          )}
+        >
+          <span className="block sm:inline truncate">An Autonomous Institution</span>
+          <span className="hidden sm:inline"> · </span>
+          <span className="block sm:inline truncate">Affiliated to Anna University</span>
         </p>
       </div>
     </div>
   );
 }
+

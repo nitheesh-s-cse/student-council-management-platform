@@ -39,14 +39,14 @@ function ResetPasswordForm() {
   }
 
   return (
-    <div className="surface rounded-2xl p-8 shadow-[var(--shadow-card-lg)]">
+    <div className="gold-glass-card rounded-3xl p-7 sm:p-8 shadow-[0_10px_30px_rgba(24,36,58,0.08)] border border-[#ffd6b0] w-full max-w-[420px] mx-auto">
       {done ? (
         <p className="text-sm text-emerald-600">Password updated. Redirecting you to sign in…</p>
       ) : !token ? (
         <p className="text-sm text-rose-600">Missing or invalid reset token. Please request a new link.</p>
       ) : (
         <>
-          <h1 className="text-xl font-semibold text-[var(--text)]">Choose a new password</h1>
+          <h1 className="text-xl font-bold text-[#18243a]">Choose a new password</h1>
           <form onSubmit={onSubmit} className="mt-6 space-y-4">
             <input
               type="password"
@@ -55,7 +55,7 @@ function ResetPasswordForm() {
               placeholder="New password (min. 8 characters)"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="focus-ring h-11 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 text-sm"
+              className="focus-ring h-11 w-full rounded-xl border border-[#ffe7d2] bg-white px-3 text-sm text-[#18243a]"
             />
             {error && <p className="text-xs font-medium text-rose-600">{error}</p>}
             <Button type="submit" className="w-full" size="lg" disabled={loading}>
@@ -65,15 +65,25 @@ function ResetPasswordForm() {
           </form>
         </>
       )}
-      <Link href="/login" className="mt-5 inline-block text-xs text-brand-600 hover:underline">Back to sign in</Link>
+      <Link href="/login" className="mt-5 inline-block text-xs font-semibold text-[#f97316] hover:underline">Back to sign in</Link>
     </div>
   );
 }
 
 export default function ResetPasswordPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[var(--bg)] px-4 py-12">
-      <div className="w-full max-w-sm">
+    <div className="relative flex min-h-[calc(100vh-140px)] items-center justify-center overflow-hidden px-4 py-12">
+      <div
+        aria-hidden="true"
+        className="background-glow background-glow-orange bg-glow-lg"
+        style={{ left: "-6%", top: "-10%" }}
+      />
+      <div
+        aria-hidden="true"
+        className="background-glow background-glow-red bg-glow-md"
+        style={{ right: "-4%", bottom: "4%" }}
+      />
+      <div className="relative z-10 w-full max-w-[420px] mx-auto">
         <div className="mb-8 flex justify-center"><CouncilWordmark /></div>
         <Suspense fallback={null}>
           <ResetPasswordForm />

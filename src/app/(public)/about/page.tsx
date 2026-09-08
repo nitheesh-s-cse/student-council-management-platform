@@ -1,11 +1,16 @@
-import Image from "next/image";
-import { ShieldCheck, Handshake, Megaphone, GraduationCap } from "lucide-react";
+import { ShieldCheck, Handshake, Megaphone, GraduationCap, ArrowRight } from "lucide-react";
 import { db } from "@/db";
 import { members } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { Card, SectionHeading, Avatar } from "@/components/ui/primitives";
+import { Card, SectionHeading, LinkButton } from "@/components/ui/primitives";
 import Link from "next/link";
 import { ACADEMIC_YEAR } from "@/lib/constants";
+import {
+  ScrollProgressBar,
+  ScrollReveal,
+  ScrollCard,
+  AnimationScope,
+} from "@/components/ui/animated-container";
 
 export const dynamic = "force-dynamic";
 
@@ -22,13 +27,13 @@ const PILLARS = [
   },
   {
     icon: GraduationCap,
-    title: "Peer Support",
-    desc: "Student welfare, discipline coordination and mentoring — the council supports peers through every semester.",
+    title: "Peer Support & Mentorship",
+    desc: "Student welfare, discipline coordination and academic mentoring — supporting peers through every semester.",
   },
   {
     icon: ShieldCheck,
     title: "Accountable Governance",
-    desc: "Transparent elections, documented decisions and a clear chain of responsibility across nine committees.",
+    desc: "Transparent elections, documented decisions and a clear chain of operational responsibility.",
   },
 ];
 
@@ -36,59 +41,152 @@ export default async function AboutPage() {
   const board = await db.select().from(members).where(eq(members.category, "board")).orderBy(members.id);
 
   return (
-    <div>
-      <section className="relative overflow-hidden border-b border-[var(--border)]">
-        <div className="absolute inset-0 -z-10">
-          <Image src="/images/about-pattern.jpg" alt="" fill className="object-cover opacity-[0.12] dark:opacity-[0.2]" />
-        </div>
-        <div className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6 lg:px-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-600">About the Council</p>
-          <h1 className="mt-3 text-[clamp(2rem,5vw,3rem)] font-semibold tracking-tight text-[var(--text)]">
-            Who we are, and what we stand for
-          </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-relaxed text-muted">
-            The PPG Institute of Technology Student Council is the elected representative body of the student
-            community for the {ACADEMIC_YEAR} academic year. We work alongside the administration to shape a
-            campus that is engaging, inclusive and well organized — across academics, culture, sports and
-            student welfare.
-          </p>
-        </div>
-      </section>
+    <AnimationScope>
+      <div className="relative overflow-x-clip">
+        {/* Scroll Progress Bar at top of viewport */}
+        <ScrollProgressBar />
 
-      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <SectionHeading eyebrow="Our mission" title="Why the council exists" description="Four responsibilities guide everything we do." />
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {PILLARS.map((p) => (
-            <Card key={p.title} className="p-6">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-50 text-brand-600 dark:bg-brand-900/30 dark:text-brand-300">
-                <p.icon className="h-5 w-5" />
+        {/* Section 1: Hero with scroll reveal */}
+        <section className="section-hero border-b border-[#ffe7d2] px-4 pt-20 pb-24 sm:px-6 sm:pt-28 sm:pb-28 lg:px-8">
+          <div className="mx-auto max-w-4xl text-left sm:text-center">
+            {/* Pill Badge */}
+            <ScrollReveal direction="up" distance={16}>
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#ffd6b0] bg-[#fff7ed] px-4 py-1.5 text-xs font-black tracking-widest text-[#c2410c] uppercase shadow-xs">
+                <span role="img" aria-label="college">🏛️</span> ABOUT THE COLLEGE & COUNCIL
               </div>
-              <p className="mt-4 text-[15px] font-semibold text-[var(--text)]">{p.title}</p>
-              <p className="mt-1.5 text-sm leading-relaxed text-muted">{p.desc}</p>
-            </Card>
-          ))}
-        </div>
-      </section>
+            </ScrollReveal>
 
-      <section className="border-t border-[var(--border)] bg-[var(--surface)]">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <SectionHeading eyebrow="Structure" title="How the council is organized" description="A six-member board oversees the council, supported by 25 executive members and nine standing committees that run day-to-day operations." />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {board.map((m) => (
-              <Link key={m.id} href={`/members/${m.slug}`}>
-                <Card className="flex items-center gap-4 p-5 transition-transform hover:-translate-y-0.5 hover:shadow-[var(--shadow-card-lg)]">
-                  <Avatar name={m.fullName} src={m.photoUrl} size={52} />
-                  <div className="min-w-0">
-                    <p className="truncate text-[15px] font-semibold text-[var(--text)]">{m.fullName}</p>
-                    <p className="text-sm text-brand-600">{m.position}</p>
-                    <p className="text-xs text-muted">{m.department} · Year {m.year}</p>
-                  </div>
-                </Card>
-              </Link>
-            ))}
+            {/* Heading */}
+            <ScrollReveal direction="up" distance={24} delay={0.08}>
+              <h1 className="mt-5 text-[clamp(2.25rem,5.5vw,4.25rem)] font-black tracking-tight leading-[1.08] text-[#0f172a]">
+                PPG <span className="text-[#ea580c]">Institute of Technology</span>
+              </h1>
+            </ScrollReveal>
+
+            {/* Description */}
+            <ScrollReveal direction="up" distance={20} delay={0.16}>
+              <p className="mt-5 text-base sm:text-lg leading-relaxed text-[#4b5563] max-w-2xl sm:mx-auto font-normal">
+                Empowering students in <strong className="font-bold text-[#0f172a]">Coimbatore, Tamil Nadu</strong> with world-class technical
+                education, real-world skills, and an executive culture of continuous growth, integrity, and student leadership.
+              </p>
+            </ScrollReveal>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+
+        {/* Section 2: Mission Pillars with staggered scroll cards */}
+        <section className="section-warm border-b border-[#ffe7d2]">
+          <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+            <ScrollReveal direction="up" distance={24}>
+              <SectionHeading
+                eyebrow="Our Mission & Purpose"
+                title="Why the Council Exists"
+                description="Four fundamental responsibilities guide every committee, operation, and resolution."
+              />
+            </ScrollReveal>
+
+            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {PILLARS.map((p, idx) => (
+                <ScrollCard key={p.title} delay={(idx % 4) * 0.08} yOffset={24} className="h-full">
+                  <Card className="h-full p-6 transition-all duration-300 hover:border-[#ff9a47] hover:shadow-[0_12px_28px_rgba(255,122,0,0.12)]">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#fff7ed] text-[#ea580c] border border-[#ffd6b0] shadow-xs transition-transform duration-300 group-hover:scale-110">
+                      <p.icon className="h-6 w-6" />
+                    </div>
+                    <p className="mt-5 text-lg font-bold text-[#18243a] transition-colors group-hover:text-[#ea580c]">{p.title}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-muted">{p.desc}</p>
+                  </Card>
+                </ScrollCard>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Section 3: Leadership Structure — white */}
+        <section className="section-gradient border-b border-[#ffe7d2]">
+          <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+              <ScrollReveal direction="up" distance={24}>
+                <SectionHeading
+                  eyebrow="Executive Governance"
+                  title="Council Executive Board"
+                  description={`The six elected student leaders presiding over the PPGIT student body for the ${ACADEMIC_YEAR} academic term.`}
+                />
+              </ScrollReveal>
+              <ScrollReveal direction="up" distance={16} delay={0.1}>
+                <LinkButton href="/members" variant="secondary" size="md">
+                  View All Members <ArrowRight className="h-4 w-4" />
+                </LinkButton>
+              </ScrollReveal>
+            </div>
+
+            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {board.map((m, idx) => (
+                <ScrollCard key={m.id} delay={(idx % 3) * 0.08} yOffset={22}>
+                  <Link href={`/members/${m.slug}`} className="group block h-full">
+                    <div className="flex h-full items-center gap-4 rounded-3xl border border-[#fed7aa] bg-white p-5 shadow-sm transition-all duration-300 group-hover:border-[#ea580c] group-hover:shadow-[0_12px_28px_rgba(24,36,58,0.08)]">
+                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#f97316] to-[#ea580c] text-lg font-black text-white ring-2 ring-[#ffedd5] shadow-xs">
+                        {m.fullName
+                          .split(" ")
+                          .filter(Boolean)
+                          .slice(0, 2)
+                          .map((n) => n[0].toUpperCase())
+                          .join("")}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-base font-bold text-[#18243a] transition-colors group-hover:text-[#ea580c]">
+                          {m.fullName}
+                        </p>
+                        <p className="mt-0.5 truncate text-xs font-bold uppercase tracking-wider text-[#ea580c]">
+                          {m.position}
+                        </p>
+                        <p className="mt-1 truncate text-xs text-[#6b7280]">
+                          {m.department} – {m.year}
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                </ScrollCard>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Section 4: Institution Snapshot — very light warm background #FFFCF8 */}
+        <section className="section-soft py-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <ScrollReveal direction="up" distance={28}>
+              <div className="rounded-[32px] border border-[#ffd6b0] bg-white/90 p-8 sm:p-12 shadow-sm backdrop-blur-xl">
+                <div className="grid gap-8 lg:grid-cols-3">
+                  <ScrollCard delay={0} yOffset={18}>
+                    <div>
+                      <span className="text-xs font-bold uppercase tracking-widest text-[#ea580c]">Campus Heritage</span>
+                      <h3 className="mt-2 text-2xl font-black text-[#0f172a]">PPG Institute of Technology</h3>
+                      <p className="mt-3 text-sm leading-relaxed text-[#4b5563]">
+                        An autonomous engineering institution recognized for academic excellence, state-of-the-art laboratories, and an active student council body driving campus culture.
+                      </p>
+                    </div>
+                  </ScrollCard>
+
+                  <ScrollCard delay={0.1} yOffset={18}>
+                    <div className="h-full rounded-2xl border border-[#fed7aa] bg-[#fff7ed] p-6 transition-all duration-300 hover:border-[#ea580c] hover:shadow-[0_10px_24px_rgba(234,88,12,0.12)]">
+                      <p className="text-xs font-bold uppercase tracking-widest text-[#ea580c]">Counselling Code</p>
+                      <p className="mt-2 text-4xl font-black text-[#ea580c]">7125</p>
+                      <p className="mt-2 text-xs text-[#4b5563]">Anna University Autonomous Admissions</p>
+                    </div>
+                  </ScrollCard>
+
+                  <ScrollCard delay={0.2} yOffset={18}>
+                    <div className="h-full rounded-2xl border border-[#fed7aa] bg-[#fff7ed] p-6 transition-all duration-300 hover:border-[#ea580c] hover:shadow-[0_10px_24px_rgba(234,88,12,0.12)]">
+                      <p className="text-xs font-bold uppercase tracking-widest text-[#ea580c]">Campus Location</p>
+                      <p className="mt-2 text-xl font-bold text-[#0f172a]">Saravanampatti, Coimbatore</p>
+                      <p className="mt-2 text-xs text-[#4b5563]">Tamil Nadu 641035, India</p>
+                    </div>
+                  </ScrollCard>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+      </div>
+    </AnimationScope>
   );
 }
