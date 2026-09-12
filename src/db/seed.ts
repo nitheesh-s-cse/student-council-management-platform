@@ -419,16 +419,6 @@ async function main() {
       isPublic: true,
     },
     {
-      title: "Council Orientation & Induction",
-      description: "Welcome session introducing the 2025-26 Student Council to the campus.",
-      date: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
-      venue: "Main Auditorium",
-      organizerUserId: secretaryUserId,
-      teamId: eventTeamId,
-      status: "confirmed",
-      isPublic: true,
-    },
-    {
       title: "Board Strategy Meeting",
       description: "Internal planning meeting for the board on Q2 initiatives.",
       date: new Date(Date.now() + 1000 * 60 * 60 * 24 * 3),
