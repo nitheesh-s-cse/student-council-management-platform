@@ -5,6 +5,7 @@ import { Plus, Search, Upload, Ban, RotateCcw, Pencil, X, Loader2, Download } fr
 import { Card, Badge, Button, Avatar } from "@/components/ui/primitives";
 import { useToast } from "@/components/providers/toast-provider";
 import type { members as membersTable } from "@/db/schema";
+import { sortBoardMembers } from "@/lib/constants";
 
 type Member = typeof membersTable.$inferSelect;
 
@@ -20,11 +21,15 @@ export function MembersManager({ initialMembers }: { initialMembers: Member[] })
   const { push } = useToast();
 
   const filtered = useMemo(() => {
-    return members.filter((m) => {
+    const list = members.filter((m) => {
       if (categoryFilter && m.category !== categoryFilter) return false;
       if (query && !`${m.fullName} ${m.department}`.toLowerCase().includes(query.toLowerCase())) return false;
       return true;
     });
+    if (categoryFilter === "board") {
+      return sortBoardMembers(list);
+    }
+    return list;
   }, [members, query, categoryFilter]);
 
   async function toggleActive(member: Member) {

@@ -16,8 +16,8 @@ export type SeedMember = {
 
 export const BOARD_MEMBERS: SeedMember[] = [
   { fullName: "Tameema Naazmi M.R.", department: "BME", year: "IV", category: "board", position: "President" },
-  { fullName: "Rahul Krishnith", department: "AIDS", year: "IV", category: "board", position: "Vice President" },
   { fullName: "Mohammed Jubair A", department: "CSE", year: "III", category: "board", position: "Secretary" },
+  { fullName: "Rahul Krishnith", department: "AIDS", year: "IV", category: "board", position: "Vice President" },
   { fullName: "Priya .T", department: "BME", year: "II", category: "board", position: "Joint Secretary" },
   { fullName: "Sandhya Raga", department: "CSE", year: "III", category: "board", position: "Treasurer" },
   { fullName: "Priya Dharshini", department: "AIML", year: "II", category: "board", position: "Joint Treasurer" },

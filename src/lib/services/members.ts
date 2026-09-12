@@ -2,6 +2,7 @@ import "server-only";
 import { db } from "@/db";
 import { members, teamMembers, teams, taskAssignees, tasks, eventParticipants, events } from "@/db/schema";
 import { and, eq, ilike, or, desc } from "drizzle-orm";
+import { sortBoardMembers } from "@/lib/constants";
 
 export async function listPublicMembers(params: { q?: string; category?: string; department?: string } = {}) {
   const conditions = [eq(members.isActive, true)];
@@ -13,11 +14,16 @@ export async function listPublicMembers(params: { q?: string; category?: string;
   if (params.category) conditions.push(eq(members.category, params.category as "board" | "executive" | "committee"));
   if (params.department) conditions.push(eq(members.department, params.department));
 
-  return db
+  const rows = await db
     .select()
     .from(members)
     .where(and(...conditions))
     .orderBy(members.id);
+
+  if (params.category === "board") {
+    return sortBoardMembers(rows);
+  }
+  return rows;
 }
 
 export async function getMemberBySlug(slug: string) {

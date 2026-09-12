@@ -13,16 +13,9 @@ import {
   AnimationScope,
 } from "@/components/ui/animated-container";
 
-export const dynamic = "force-dynamic";
+import { BOARD_ORDER, sortBoardMembers } from "@/lib/constants";
 
-const BOARD_ORDER = [
-  "President",
-  "Vice President",
-  "Secretary",
-  "Joint Secretary",
-  "Treasurer",
-  "Joint Treasurer",
-];
+export const dynamic = "force-dynamic";
 
 const COMMITTEE_ORDER = [
   "Web Ops",
@@ -436,7 +429,7 @@ export default async function MembersPage({
                   />
                 ) : (
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {list.map((m, idx) => (
+                    {(activeCategory === "board" ? sortBoardMembers(list) : list).map((m, idx) => (
                       <ScrollCard key={m.id} delay={(idx % 3) * 0.05} yOffset={20}>
                         <Link href={`/members/${m.slug}`} className="group block h-full">
                           <div className="flex h-full flex-col justify-between rounded-2xl border border-[#fed7aa] bg-white p-4 sm:p-5 shadow-sm transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-[#ea580c] group-hover:shadow-[0_10px_24px_rgba(24,36,58,0.08)]">

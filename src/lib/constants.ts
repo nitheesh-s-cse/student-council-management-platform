@@ -77,3 +77,22 @@ export const DOCUMENT_CATEGORY_LABELS: Record<string, string> = {
 };
 
 export const DEMO_PASSWORD = "Ppgit@2026";
+
+export const BOARD_ORDER = [
+  "President",
+  "Secretary",
+  "Vice President",
+  "Joint Secretary",
+  "Treasurer",
+  "Joint Treasurer",
+] as const;
+
+export function getBoardPositionRank(position?: string | null): number {
+  if (!position) return 99;
+  const idx = BOARD_ORDER.indexOf(position as (typeof BOARD_ORDER)[number]);
+  return idx === -1 ? 99 : idx;
+}
+
+export function sortBoardMembers<T extends { position?: string | null }>(membersList: T[]): T[] {
+  return [...membersList].sort((a, b) => getBoardPositionRank(a.position) - getBoardPositionRank(b.position));
+}

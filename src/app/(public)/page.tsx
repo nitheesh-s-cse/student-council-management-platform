@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/animated-container";
 import { HeroSection } from "@/components/public/hero-section";
 import { formatDate, cn } from "@/lib/utils";
+import { sortBoardMembers } from "@/lib/constants";
 
 export const dynamic = "force-dynamic";
 
@@ -27,8 +28,8 @@ const TICKER = [
 ];
 
 export default async function HomePage() {
-  const [board, latestAnnouncements, upcomingEvents] = await Promise.all([
-    db.select().from(members).where(eq(members.category, "board")).orderBy(members.id),
+  const [boardRaw, latestAnnouncements, upcomingEvents] = await Promise.all([
+    db.select().from(members).where(eq(members.category, "board")),
     db
       .select()
       .from(announcements)
@@ -42,6 +43,8 @@ export default async function HomePage() {
       .orderBy(events.date)
       .limit(4),
   ]);
+
+  const board = sortBoardMembers(boardRaw);
 
   return (
     <AnimationScope>

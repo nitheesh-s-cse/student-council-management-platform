@@ -389,15 +389,6 @@ async function main() {
   const secretaryUserId = insertedMembers.find((m) => m.seed.position === "Secretary")?.userId ?? superAdmin.id;
   await db.insert(announcements).values([
     {
-      title: "CSE Department Inauguration",
-      content:
-        "Welcome to the official PPGIT Student Council! We are pleased to announce that the CSE Department Inauguration will be held on 17th September 2026. Join us as we inaugurate the new academic term, celebrate student leadership, and launch an inspiring year of technical excellence, seminars, and departmental initiatives. All students and faculty are warmly invited.",
-      authorUserId: secretaryUserId,
-      priority: "important",
-      audience: "everyone",
-      publishAt: new Date(),
-    },
-    {
       title: "PPGIT College Symposium 2026",
       content:
         "The PPGIT College Symposium will be held on 25th September 2026! This premier gathering provides students an exceptional platform to showcase their knowledge, innovation, technical skills, and creative talent across coding hackathons, paper presentations, and project expos. Stay tuned for registration details and competition tracks.",
@@ -417,16 +408,6 @@ async function main() {
 
   // --- Events ----------------------------------------------------------
   await db.insert(events).values([
-    {
-      title: "CSE Department Inauguration",
-      description: "Official inauguration ceremony of the Department of Computer Science and Engineering for the 2026-27 academic term.",
-      date: new Date("2026-09-17T10:00:00.000Z"),
-      venue: "Dr. APJ Abdul Kalam Auditorium",
-      organizerUserId: secretaryUserId,
-      teamId: eventTeamId,
-      status: "confirmed",
-      isPublic: true,
-    },
     {
       title: "PPGIT College Symposium 2026",
       description: "Annual flagship inter-collegiate symposium providing students an exceptional platform to showcase knowledge, innovation, skills, and creative talent.",

@@ -4,7 +4,7 @@ import { members } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { Card, SectionHeading, LinkButton } from "@/components/ui/primitives";
 import Link from "next/link";
-import { ACADEMIC_YEAR } from "@/lib/constants";
+import { ACADEMIC_YEAR, sortBoardMembers } from "@/lib/constants";
 import {
   ScrollProgressBar,
   ScrollReveal,
@@ -16,17 +16,17 @@ export const dynamic = "force-dynamic";
 
 const PILLARS = [
   {
-    icon: Handshake,
+    icon: GraduationCap,
     title: "Student Representation",
-    desc: "We carry student feedback to the administration and ensure every department has a voice in campus decisions.",
+    desc: "Active liaison with PPGIT leadership, academic deans and department heads to advocate for student excellence.",
   },
   {
     icon: Megaphone,
-    title: "Campus Life & Events",
-    desc: "From Tech Fest to Freshers' Day, the council plans and runs the events that define the PPGIT experience.",
+    title: "Events & Cultural Platform",
+    desc: "Organizing flagship fests, technical symposiums, hackathons and departmental inaugurations across the year.",
   },
   {
-    icon: GraduationCap,
+    icon: Handshake,
     title: "Peer Support & Mentorship",
     desc: "Student welfare, discipline coordination and academic mentoring — supporting peers through every semester.",
   },
@@ -38,7 +38,8 @@ const PILLARS = [
 ];
 
 export default async function AboutPage() {
-  const board = await db.select().from(members).where(eq(members.category, "board")).orderBy(members.id);
+  const boardRaw = await db.select().from(members).where(eq(members.category, "board"));
+  const board = sortBoardMembers(boardRaw);
 
   return (
     <AnimationScope>
