@@ -55,12 +55,7 @@ export default async function MembersPage({
   const departments = Array.from(deptCountMap.keys()).sort();
 
   // Tier groupings
-  const boardMembers = allMembers.filter((m) => m.category === "board");
-  boardMembers.sort((a, b) => {
-    const idxA = BOARD_ORDER.indexOf(a.position ?? "");
-    const idxB = BOARD_ORDER.indexOf(b.position ?? "");
-    return (idxA === -1 ? 99 : idxA) - (idxB === -1 ? 99 : idxB);
-  });
+  const boardMembers = sortBoardMembers(allMembers.filter((m) => m.category === "board"));
 
   const executiveMembers = allMembers.filter((m) => m.category === "executive");
   const committeeMembers = allMembers.filter((m) => m.category === "committee");
